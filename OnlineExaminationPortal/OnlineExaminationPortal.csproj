@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20200128105014_RemoveIsEnabledColumnFromQuestion.Designer.cs" />
     <Compile Remove="Migrations\20200128111501_AddCandidateTable.cs" />
     <Compile Remove="Migrations\20200128111501_AddCandidateTable.Designer.cs" />
+    <Compile Remove="Migrations\20200128133954_AddExamSubmissionResult.cs" />
+    <Compile Remove="Migrations\20200128133954_AddExamSubmissionResult.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
