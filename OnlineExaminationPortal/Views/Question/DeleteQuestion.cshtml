@@ -1,0 +1,76 @@
+﻿@model OnlineExaminationPortal.Models.Question
+
+@{
+    ViewData["Title"] = "DeleteQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>DeleteQuestion</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.QuestionDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.QuestionDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Marks)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Marks)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExperienceId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExperienceId)
+        </dd>
+        @*<dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IsEnabled)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.IsEnabled)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LastUpdatedOn)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.LastUpdatedOn)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.LastUpdatedBy)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.LastUpdatedBy)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>*@
+    </dl>
+
+    <form asp-action="DeleteQuestion">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

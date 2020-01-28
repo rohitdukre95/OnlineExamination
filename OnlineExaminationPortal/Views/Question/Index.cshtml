@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Question>
+
+@{
+    ViewBag.Title = "Question List";
+}
+
+<div class="top-buffer"></div>
+<div class="card">
+    <div class="card-header bg-primary text-white">Questions</div>
+    <div class="card-body">
+        <div class="btn-group">
+
+            <a id="createEditQuestionModal" asp-action="AddQuestion" class="btn btn-primary" style="width:auto">
+                <i class="glyphicon glyphicon-plus"></i>  Add Question
+            </a>
+
+        </div>
+        
+       @*// <div class="top-buffer"></div>*@
+        <table class="table table-bordered table-striped table-condensed mt-1">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Marks</th>
+                    <th>Experience(In Years)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.QuestionDescription</td>
+                        <td>@item.Marks</td>
+                        <td>@item.Experience</td>
+                        <td>
+                            <a id="editUserModal" asp-controller="Question" asp-action="EditQuestion" asp-route-id="@item.Id"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>  
