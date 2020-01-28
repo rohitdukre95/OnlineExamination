@@ -62,7 +62,6 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="obj\Debug\" />
   </ItemGroup>
 
 </Project>

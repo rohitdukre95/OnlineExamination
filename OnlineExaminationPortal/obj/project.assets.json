@@ -13050,11 +13050,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OnlineExamOnGit\\OnlineExam\\OnlineExaminationPortal\\OnlineExaminationPortal.csproj",
+      "projectUniqueName": "C:\\OnlineExamGitLatest\\OnlineExaminationPortal\\OnlineExaminationPortal.csproj",
       "projectName": "OnlineExaminationPortal",
-      "projectPath": "C:\\OnlineExamOnGit\\OnlineExam\\OnlineExaminationPortal\\OnlineExaminationPortal.csproj",
+      "projectPath": "C:\\OnlineExamGitLatest\\OnlineExaminationPortal\\OnlineExaminationPortal.csproj",
       "packagesPath": "C:\\Users\\rohit.dukre\\.nuget\\packages\\",
-      "outputPath": "C:\\OnlineExamOnGit\\OnlineExam\\OnlineExaminationPortal\\obj\\",
+      "outputPath": "C:\\OnlineExamGitLatest\\OnlineExaminationPortal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
