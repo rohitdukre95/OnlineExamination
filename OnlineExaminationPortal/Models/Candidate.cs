@@ -13,12 +13,17 @@ namespace OnlineExaminationPortal.Models
         public string Name { get; set; }
         public string Email { get; set; }
         [Required]
+        [Display(Name = "Date Of Birth")]
         public DateTime DateOfBirth { get; set; }
         [Required]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string Mobile { get; set; }
+        [Display(Name = "Current Company")]
         public string CurrentCompany { get; set; }
-        [Required]      
+       
+        [Display(Name = "Experience(In Years)")]
+        [Required(ErrorMessage = "Experience is required.")]
         public float ExperienceId { get; set; }
     }
 }
