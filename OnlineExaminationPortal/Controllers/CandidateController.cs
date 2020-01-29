@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using NLog;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 using OnlineExaminationPortal.ViewModels;
@@ -16,11 +20,13 @@ namespace OnlineExaminationPortal.Controllers
     {
         private readonly IRepository<CandidateAddEditViewModel> candidateRepository;
         private readonly IRepository<Experience> expRepository;
+        private readonly ILogger<CandidateController> logger;
 
-        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository)
+        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger)
         {
             this.candidateRepository = candidateRepository;
             this.expRepository = expRepository;
+            this.logger = logger;
         }
         public IActionResult Index()
         {
@@ -65,7 +71,28 @@ namespace OnlineExaminationPortal.Controllers
                 };
 
                 candidateRepository.Insert(candidate);
-                return RedirectToAction("index","home");
+                var candidateRegConfirmationLink = Url.Action("Candidate", "CheckCandidateDetailsToStartExam", new { }, Request.Scheme);
+
+                logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
+                try
+                {
+                    MailMessage message = new MailMessage();
+                    SmtpClient smtp = new SmtpClient();
+                    message.From = new MailAddress("rohit.dukre@atidan.com");
+                    message.To.Add(new MailAddress(model.Email));
+                    message.Subject = "Link to start online exam";
+                    message.IsBodyHtml = true; //to make message body as html  
+                    message.Body ="<h1>Click on below link to start your online coding exam<br/>"+candidateRegConfirmationLink+" </h1>";
+                    smtp.Port = 587;
+                    smtp.Host = "smtp.outlook.com"; //for outlook host  
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("rohit.dukre@atidan.com", "R0h!t@123");
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.Send(message);
+                }
+                catch (Exception ex) { }
+                return View("SubmitCandidateDetails");
             }
 
             return View(model);
