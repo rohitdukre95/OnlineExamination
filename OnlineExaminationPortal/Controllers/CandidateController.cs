@@ -20,16 +20,15 @@ namespace OnlineExaminationPortal.Controllers
     {
         private readonly IRepository<CandidateAddEditViewModel> candidateRepository;
         private readonly IRepository<Experience> expRepository;
-        private readonly ILogger<CandidateController> logger;
         private readonly AppDbContext context;
-
-        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger)
-        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository, AppDbContext context)
+        private readonly ILogger<CandidateController> logger;
+     
+        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context)
         {
             this.candidateRepository = candidateRepository;
             this.expRepository = expRepository;
-            this.logger = logger;
             this.context = context;
+            this.logger = logger;
         }
         public IActionResult Index()
         {
