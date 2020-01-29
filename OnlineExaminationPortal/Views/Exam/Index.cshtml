@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Exam Start Page";
+    ViewBag.Title = "Exam Start Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <h1>Exam Start Page</h1>
+<a asp-controller="Exam" asp-action="StartExam"
+   class="btn btn-info mt-2" style="width:auto">Start Exam</a>
 

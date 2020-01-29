@@ -73,7 +73,7 @@ namespace OnlineExaminationPortal.Controllers
                 };
 
                 candidateRepository.Insert(candidate);
-                var candidateRegConfirmationLink = Url.Action("Candidate", "CheckCandidateDetailsToStartExam", new { }, Request.Scheme);
+                var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new { }, Request.Scheme);
 
                 logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
                 try
