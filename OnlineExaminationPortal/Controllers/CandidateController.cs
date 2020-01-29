@@ -70,5 +70,11 @@ namespace OnlineExaminationPortal.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult CheckCandidateDetailsToStartExam()
+        {
+            return View();
+        }
     }
 }
