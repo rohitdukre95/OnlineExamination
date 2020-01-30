@@ -47,6 +47,7 @@
   <ItemGroup>
     <None Include="obj\OnlineExaminationPortal.csproj.nuget.g.props" />
     <None Include="obj\OnlineExaminationPortal.csproj.nuget.g.targets" />
+    <None Include="wwwroot\third_party\download.js" />
   </ItemGroup>
 
   <ItemGroup>

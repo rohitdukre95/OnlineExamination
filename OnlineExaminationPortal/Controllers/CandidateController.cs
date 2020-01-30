@@ -117,7 +117,7 @@ namespace OnlineExaminationPortal.Controllers
                 }
                 if(candidate != null)
                 { 
-                    return RedirectToAction("index", "exam");
+                    return RedirectToAction("index", "exam",new { experienceId=candidate.ExperienceId});
                 }
             }
 

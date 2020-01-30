@@ -5,5 +5,5 @@
 }
 
 <a asp-controller="Exam" asp-action="StartExam"
-   class="btn btn-info mt-2" style="width:auto">Start Exam</a>
+   class="btn btn-info mt-2" asp-route-pageNumber="1" asp-route-experienceId="@ViewBag.ExperienceId" style="width:auto">Start Exam</a>
 
