@@ -34,7 +34,14 @@ namespace OnlineExaminationPortal.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = candidateRepository.GetAll().Where(ques => ques.IsActive == true);
+            var posList = posRepository.GetAll();
+            foreach (var item in model)
+            {
+                var pos = posList.Where(x => x.Id == item.PositionId).FirstOrDefault();
+                item.Position = pos;
+            }
+            return View(model);
         }
         public IActionResult Register()
         {

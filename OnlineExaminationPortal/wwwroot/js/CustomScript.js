@@ -10,3 +10,7 @@
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+$(document).ready(function () {
+    $('#candidateList').DataTable();
+});
