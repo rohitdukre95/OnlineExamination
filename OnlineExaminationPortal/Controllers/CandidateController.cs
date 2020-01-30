@@ -18,16 +18,18 @@ namespace OnlineExaminationPortal.Controllers
     [AllowAnonymous]
     public class CandidateController : Controller
     {
-        private readonly IRepository<CandidateAddEditViewModel> candidateRepository;
+        private readonly IRepository<Candidate> candidateRepository;
         private readonly IRepository<Experience> expRepository;
         private readonly AppDbContext context;
+        private readonly IRepository<Position> posRepository;
         private readonly ILogger<CandidateController> logger;
      
-        public CandidateController(IRepository<CandidateAddEditViewModel> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context)
+        public CandidateController(IRepository<Candidate> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context, IRepository<Position> posRepository)
         {
             this.candidateRepository = candidateRepository;
             this.expRepository = expRepository;
             this.context = context;
+            this.posRepository = posRepository;
             this.logger = logger;
         }
         public IActionResult Index()
@@ -44,11 +46,19 @@ namespace OnlineExaminationPortal.Controllers
         {
             CandidateAddEditViewModel model = new CandidateAddEditViewModel();
             var expList = expRepository.GetAll();
+            var posList = posRepository.GetAll();
             model.ExperienceList = expList.Select(r => new SelectListItem
             {
                 Text = r.ExperienceDescription,
                 Value = r.ExperienceId.ToString()
             }).ToList();
+
+            model.PositionList = posList.Select(r => new SelectListItem
+            {
+                Text = r.PositionDescription,
+                Value = r.Id.ToString()
+            }).ToList();
+
             return View(model);
         }
 
@@ -57,7 +67,7 @@ namespace OnlineExaminationPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                CandidateAddEditViewModel candidate = new CandidateAddEditViewModel
+                Candidate candidate = new Candidate
                 {
                     Name = model.Name,
                     Email = model.Email,
@@ -69,7 +79,8 @@ namespace OnlineExaminationPortal.Controllers
                     CreatedOn = DateTime.Now,
                     IsActive = true,
                     LastUpdatedBy=1,
-                    LastUpdatedOn=DateTime.Now
+                    LastUpdatedOn=DateTime.Now,
+                    PositionId=model.PositionId
                 };
 
                 candidateRepository.Insert(candidate);
