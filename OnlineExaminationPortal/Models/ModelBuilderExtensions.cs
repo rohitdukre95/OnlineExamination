@@ -81,6 +81,28 @@ namespace OnlineExaminationPortal.Models
                          LastUpdatedOn = DateTime.Now
                      }
                 );
+            modelBuilder.Entity<Position>().HasData(
+                    new Position
+                    {
+                        Id=1,
+                       PositionDescription="Trainee Software Developer",
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        IsActive = true,
+                        LastUpdatedBy = 1,
+                        LastUpdatedOn = DateTime.Now
+                    },
+                     new Position
+                     {
+                         Id=2,
+                         PositionDescription = "Software Developer",
+                         CreatedBy = 1,
+                         CreatedOn = DateTime.Now,
+                         IsActive = true,
+                         LastUpdatedBy = 1,
+                         LastUpdatedOn = DateTime.Now
+                     }
+               );
         }
     }
 }

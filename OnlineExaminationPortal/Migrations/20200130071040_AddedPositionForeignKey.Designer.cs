@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineExaminationPortal.Models;
 
 namespace OnlineExaminationPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200130071040_AddedPositionForeignKey")]
+    partial class AddedPositionForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,34 +321,34 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 796, DateTimeKind.Local).AddTicks(3631),
+                            CreatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 977, DateTimeKind.Local).AddTicks(6850),
                             ExperienceDescription = "< 2",
                             ExperienceId = 1,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(1267)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(4408)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(1735),
+                            CreatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(4881),
                             ExperienceDescription = "2 OR < 4",
                             ExperienceId = 2,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(1749)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(4895)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(1753),
+                            CreatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(4899),
                             ExperienceDescription = "4 OR < 6",
                             ExperienceId = 3,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(1755)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(4900)
                         });
                 });
 
@@ -372,28 +374,6 @@ namespace OnlineExaminationPortal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Positions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(5812),
-                            IsActive = true,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(5814),
-                            PositionDescription = "Trainee Software Developer"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(5829),
-                            IsActive = true,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(5830),
-                            PositionDescription = "Software Developer"
-                        });
                 });
 
             modelBuilder.Entity("OnlineExaminationPortal.Models.Question", b =>
@@ -432,12 +412,12 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(4617),
+                            CreatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(7749),
                             ExperienceId = 1,
                             IsActive = true,
                             IsEnabled = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 47, 39, 797, DateTimeKind.Local).AddTicks(4621),
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 12, 40, 39, 978, DateTimeKind.Local).AddTicks(7752),
                             Marks = 4f,
                             QuestionDescription = "Write a program for print given number is even or odd."
                         });

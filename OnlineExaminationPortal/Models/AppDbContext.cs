@@ -19,6 +19,7 @@ namespace OnlineExaminationPortal.Models
         public DbSet<Experience> Experience { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<ExamSubmissionResult> ExamSubmissionResults { get; set; }
+        public DbSet<Position> Positions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

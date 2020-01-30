@@ -38,6 +38,14 @@
     <Compile Remove="Migrations\20200128111501_AddCandidateTable.Designer.cs" />
     <Compile Remove="Migrations\20200128133954_AddExamSubmissionResult.cs" />
     <Compile Remove="Migrations\20200128133954_AddExamSubmissionResult.Designer.cs" />
+    <Compile Remove="Migrations\20200130064844_AddedPositionForeignKey.cs" />
+    <Compile Remove="Migrations\20200130064844_AddedPositionForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200130065723_AddedPositionForeignKey.cs" />
+    <Compile Remove="Migrations\20200130065723_AddedPositionForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200130065927_AddedPositionForeignKey.cs" />
+    <Compile Remove="Migrations\20200130065927_AddedPositionForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200130070750_AddedPositionForeignKey.cs" />
+    <Compile Remove="Migrations\20200130070750_AddedPositionForeignKey.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
