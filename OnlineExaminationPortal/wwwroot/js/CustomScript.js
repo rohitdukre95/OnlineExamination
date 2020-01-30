@@ -12,5 +12,12 @@
 }
 
 $(document).ready(function () {
-    $('#candidateList').DataTable();
+    
+        $('#candidateList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
 });
+
