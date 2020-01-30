@@ -65,6 +65,7 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="wwwroot\service\" />
   </ItemGroup>
 
 </Project>
