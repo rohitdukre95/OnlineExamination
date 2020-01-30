@@ -27,5 +27,8 @@ namespace OnlineExaminationPortal.Models
         [Display(Name = "Experience(In Years)")]
         [Required(ErrorMessage = "Experience is required.")]
         public float ExperienceId { get; set; }
+
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
     }
 }
