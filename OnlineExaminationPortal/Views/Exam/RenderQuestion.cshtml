@@ -15,7 +15,8 @@
 <div class="row ml-0">
     @if (backPageNumber > 0)
     {
-        <a asp-route-pageNumber="@backPageNumber" asp-route-positionId="@Model.PositionId" class="btn btn-primary m-1" style="width:auto" }> Previous Question</a>
+        @*<a asp-route-pageNumber="@backPageNumber" asp-route-positionId="@Model.PositionId" class="btn btn-primary m-1" style="width:auto" }> Previous Question</a>*@
+        <a class="btn btn-primary m-1" style="width:auto" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId)> Previous Question</a>
     }
     <button type="submit" class="btn btn-success mt-1"
             style="width:auto">
