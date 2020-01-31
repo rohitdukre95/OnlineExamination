@@ -9,9 +9,9 @@ namespace OnlineExaminationPortal.ViewModels
 {
     public class CandidateAddEditViewModel : Candidate
     {
-        public List<SelectListItem> ExperienceYear { get; set; }
+        public List<SelectListItem> ExperienceYearList { get; set; }
 
-        public List<SelectListItem> ExperienceMonth { get; set; }
+        public List<SelectListItem> ExperienceMonthList { get; set; }
 
         public List<SelectListItem> PositionList { get; set; }
     }

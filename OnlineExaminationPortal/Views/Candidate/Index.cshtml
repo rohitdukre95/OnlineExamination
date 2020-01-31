@@ -21,31 +21,33 @@
                 <th>Current Company</th>
                 <th>Experience</th>
                 <th>Applied Position</th>
+                <th>Application Date</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.Email</td>
-                    <td>@item.DateOfBirth</td>
-                    <td>@item.Mobile</td>
-                    <td>@item.CurrentCompany</td>
-                    <td>@item.ExperienceYear +" "+@item.ExperienceMonth </td>
-                    <td>@item.Position.PositionDescription</td>
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                <td>@item.Mobile</td>
+                <td>@item.CurrentCompany</td>
+                <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
+                <td>@item.Position.PositionDescription</td>
+                <td>@item.CreatedOn</td>
 
-                    <td>
-                        <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
-                           class="btn btn-info" style="width:auto">
-                            <i class="glyphicon glyphicon-pencil"></i>  Allow For Exam
-                        </a>
-                        @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-trash"></i>  Delete
-                        </a>*@
-        </td>
-        </tr>
+                <td>
+                    <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                       class="btn btn-info" style="width:auto">
+                        <i class="glyphicon glyphicon-pencil"></i>  Allow For Exam
+                    </a>
+                    @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i>  Delete
+            </a>*@
+                </td>
+            </tr>
         }
         </tbody>
         </table>

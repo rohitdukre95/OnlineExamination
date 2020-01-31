@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using NLog;
+using OnlineExaminationPortal.Common;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 using OnlineExaminationPortal.ViewModels;
@@ -59,7 +60,16 @@ namespace OnlineExaminationPortal.Controllers
             //    Text = r.ExperienceDescription,
             //    Value = r.ExperienceId.ToString()
             //}).ToList();
-
+            model.ExperienceYearList = StaticData.Year.Select(year => new SelectListItem
+            {
+                Text = year.ToString(),
+                Value = year.ToString()
+            }).ToList();
+            model.ExperienceMonthList = StaticData.Month.Select(month => new SelectListItem
+            {
+                Text = month.ToString(),
+                Value = month.ToString()
+            }).ToList();
             model.PositionList = posList.Select(r => new SelectListItem
             {
                 Text = r.PositionDescription,
@@ -82,6 +92,8 @@ namespace OnlineExaminationPortal.Controllers
                     Mobile = model.Mobile,
                     CurrentCompany = model.CurrentCompany,
                  //   ExperienceId = model.ExperienceId,
+                    ExperienceYear=model.ExperienceYear,
+                    ExperienceMonth=model.ExperienceMonth,
                     CreatedBy = 1,
                     CreatedOn = DateTime.Now,
                     IsActive = true,
