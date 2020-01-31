@@ -12,5 +12,6 @@ namespace OnlineExaminationPortal.ViewModels
        public int QuestionNumber { get; set; }
        public int ExperienceId { get; set; }
        public int PageNumber { get; set; }
+       public int CandidateId { get; set; }
     }
 }

@@ -103,6 +103,64 @@ namespace OnlineExaminationPortal.Models
                          LastUpdatedOn = DateTime.Now
                      }
                );
+            modelBuilder.Entity<LanguageMaster>().HasData(
+                 new LanguageMaster
+                 {
+                     Id = 1,
+                     LanguageId = 51,
+                     Language = "C#",
+                     CreatedBy = 1,
+                     CreatedOn = DateTime.Now,
+                     IsActive = true,
+                     LastUpdatedBy = 1,
+                     LastUpdatedOn = DateTime.Now
+                 },
+                 new LanguageMaster
+                 {
+                     Id = 2,
+                     LanguageId = 50,
+                     Language = "C",
+                     CreatedBy = 1,
+                     CreatedOn = DateTime.Now,
+                     IsActive = true,
+                     LastUpdatedBy = 1,
+                     LastUpdatedOn = DateTime.Now
+                 },
+                    new LanguageMaster
+                    {
+                        Id = 3,
+                        LanguageId = 54,
+                        Language = "C++",
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        IsActive = true,
+                        LastUpdatedBy = 1,
+                        LastUpdatedOn = DateTime.Now
+                    },
+                  new LanguageMaster
+                  {
+                      Id = 4,
+                      LanguageId = 62,
+                      Language = "Java",
+                      CreatedBy = 1,
+                      CreatedOn = DateTime.Now,
+                      IsActive = true,
+                      LastUpdatedBy = 1,
+                      LastUpdatedOn = DateTime.Now
+                  },
+                  new LanguageMaster
+                  {
+                      Id = 5,
+                      LanguageId = 71,
+                      Language = "Python",
+                      CreatedBy = 1,
+                      CreatedOn = DateTime.Now,
+                      IsActive = true,
+                      LastUpdatedBy = 1,
+                      LastUpdatedOn = DateTime.Now
+                  }
+            );
+           
         }
     }
 }

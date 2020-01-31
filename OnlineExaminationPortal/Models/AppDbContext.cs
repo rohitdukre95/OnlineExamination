@@ -20,7 +20,7 @@ namespace OnlineExaminationPortal.Models
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<ExamSubmissionResult> ExamSubmissionResults { get; set; }
         public DbSet<Position> Positions { get; set; }
-
+        public DbSet<LanguageMaster> LanguageList { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

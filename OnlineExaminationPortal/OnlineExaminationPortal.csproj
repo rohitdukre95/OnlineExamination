@@ -46,6 +46,8 @@
     <Compile Remove="Migrations\20200130065927_AddedPositionForeignKey.Designer.cs" />
     <Compile Remove="Migrations\20200130070750_AddedPositionForeignKey.cs" />
     <Compile Remove="Migrations\20200130070750_AddedPositionForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200130140522_removecolumncodefromsubmission.cs" />
+    <Compile Remove="Migrations\20200130140522_removecolumncodefromsubmission.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -73,7 +75,6 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="wwwroot\service\" />
   </ItemGroup>
 
 </Project>

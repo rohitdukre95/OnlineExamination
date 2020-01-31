@@ -24,7 +24,7 @@ using System.Threading.Tasks;
         /// <summary>
         /// Gets or sets the user id who had created the entity instance.
         /// </summary>
-        public int CreatedBy { get; set; }
+        public int CreatedBy { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the date/timw when the entity instance was last updated.
@@ -34,7 +34,7 @@ using System.Threading.Tasks;
         /// <summary>
         /// Gets or sets the user id who has last updated the entity instance.
         /// </summary>
-        public int LastUpdatedBy { get; set; }
+        public int LastUpdatedBy { get; set; } = 1;
 
         public bool IsActive { get; set; }
        
