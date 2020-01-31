@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Position>
+
+@{
+    ViewBag.Title = "Position List";
+}
+
+<div class="top-buffer"></div>
+<div class="card">
+    <div class="card-header bg-primary text-white">Positions</div>
+    <div class="card-body">
+        <div class="btn-group">
+
+            <a id="addPosition" asp-action="AddPosition" class="btn btn-primary" style="width:auto">
+                <i class="glyphicon glyphicon-plus"></i>  Add Position
+            </a>
+
+        </div>
+
+        @*// <div class="top-buffer"></div>*@
+        <table class="table table-bordered table-striped table-condensed mt-1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Position Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.PositionDescription</td>
+                        <td>
+                            <a id="editUserModal" asp-controller="Position" asp-action="EditPosition" asp-route-id="@item.Id"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>  
