@@ -10,3 +10,14 @@
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+$(document).ready(function () {
+    
+        $('#candidateList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+});
+

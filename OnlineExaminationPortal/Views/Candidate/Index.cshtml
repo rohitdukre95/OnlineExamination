@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Candidate>
+
+@{
+    ViewBag.Title = "Candidate List";
+}
+    <script src="~/js/CustomScript.js"></script>
+
+
+<div class="top-buffer"></div>
+<div class="card">
+    <div class="card-header bg-primary text-white">Candidate List</div>
+    <div class="card-body">
+
+         <table id="candidateList" class="table table-bordered table-striped table-condensed mt-1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Mobile</th>
+                <th>Current Company</th>
+                <th>Experience(In Years)</th>
+                <th>Applied Position</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.DateOfBirth</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.CurrentCompany</td>
+                    <td>@item.ExperienceId</td>
+                    <td>@item.Position.PositionDescription</td>
+
+                    <td>
+                        <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                           class="btn btn-info" style="width:auto">
+                            <i class="glyphicon glyphicon-pencil"></i>  Allow For Exam
+                        </a>
+                        @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-trash"></i>  Delete
+                        </a>*@
+        </td>
+        </tr>
+        }
+        </tbody>
+        </table>
+    </div>
+</div>  
