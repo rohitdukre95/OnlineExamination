@@ -25,7 +25,7 @@
         SaveExamSubmissionOfCandidate: function (QuestionSubmission) {
             var deferred = new jQuery.Deferred();
             $.ajax({
-                url: commonModel.getUrlPath('/Exam/SaveDataOnNextAndBack'),              
+                url: commonModel.getUrlPath('/Exam/SaveDataOnNextAndBack'),
                 data: JSON.stringify(QuestionSubmission),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -38,6 +38,25 @@
                 }
             });
             return deferred.promise();
+        },
+
+        GetQuestionsAlreadySavedData: function (Params) {
+            var deferred = new jQuery.Deferred();
+            $.ajax({
+                url: commonModel.getUrlPath('/Exam/GetQuestionsAlreadySavedData'),
+                data: JSON.stringify(Params),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                error: function (xhr) {
+                    return deferred.reject(xhr.responseText);
+                },
+                success: function (response) {
+                    return deferred.resolve(response);
+                }
+            });
+            return deferred.promise();
         }
+
     }
 }

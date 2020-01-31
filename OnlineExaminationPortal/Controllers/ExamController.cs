@@ -112,7 +112,8 @@ namespace OnlineExaminationPortal.Controllers
                 }
             }
 
-            return RedirectToAction("RenderQuestion", "Exam", new { pageNumber = model.PageNumber, positionId = model.PositionId, candidateId = model.CandidateId });
+            //return RedirectToAction("RenderQuestion", "Exam", new { pageNumber = model.PageNumber, positionId = model.PositionId, candidateId = model.CandidateId });
+            return Json(model);
         }
 
     }
