@@ -84,6 +84,7 @@ namespace OnlineExaminationPortal.Controllers
             model.PositionId = positionId;
             model.PageNumber = pageNumber;
             model.CandidateId = candidateId;
+            model.SubmissonResult =context.ExamSubmissionResults.Where(x => x.CandidateId == model.CandidateId && x.QuestionNumber == model.QuestionNumber).FirstOrDefault();
             return View("RenderQuestion",model);
         }
 
@@ -116,5 +117,16 @@ namespace OnlineExaminationPortal.Controllers
             return Json(model);
         }
 
+        [HttpGet]
+        public IActionResult GetQuestionsAlreadySavedData(ExamQuestionsViewModel model)
+        {
+            var submission = submissionRepository.GetAll().Where(x => x.CandidateId == model.CandidateId && x.QuestionNumber == model.QuestionNumber).FirstOrDefault();
+            if (submission != null)
+            {
+                return Json(submission);
+            }
+
+            return View("RenderQuestion", model);
+        }
     }
 }
