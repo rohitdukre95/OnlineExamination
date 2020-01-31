@@ -23,6 +23,7 @@ namespace OnlineExaminationPortal.ViewModels
         public string CompileTimeOutput { get; set; }
         public string SandboxMessage { get; set; }
         public string StatusLine { get; set; }
-       
+        public int PositionId { get; set; }
+
     }
 }

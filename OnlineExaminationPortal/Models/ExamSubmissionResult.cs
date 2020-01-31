@@ -16,8 +16,7 @@ namespace OnlineExaminationPortal.Models
         [Required]
         public int QuestionNumber { get; set;}      
         public string QuestionDescription { get; set; }      
-        [ForeignKey("experienceRef")]
-        public int ExperienceId { get; set; }
+       
         public int PageNumber { get; set; }
         public string SourceCode { get; set; }
         public string CompilerOptions { get; set; }
@@ -31,7 +30,10 @@ namespace OnlineExaminationPortal.Models
         [ForeignKey("LanguageRef")]    
         public int LanguageId { get; set; }         
         public LanguageMaster LanguageRef { get; set; }
-        public Experience ExperienceRef { get; set; }
+     
+        [ForeignKey("PositionRef")]
+        public int PositionId { get; set; }
+        public Position PositionRef { get; set; }
 
         public static implicit operator ExamSubmissionResult(ExamSubmissionViewModel v)
         {

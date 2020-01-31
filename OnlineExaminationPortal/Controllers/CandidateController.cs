@@ -54,11 +54,11 @@ namespace OnlineExaminationPortal.Controllers
             CandidateAddEditViewModel model = new CandidateAddEditViewModel();
             var expList = expRepository.GetAll();
             var posList = posRepository.GetAll();
-            model.ExperienceList = expList.Select(r => new SelectListItem
-            {
-                Text = r.ExperienceDescription,
-                Value = r.ExperienceId.ToString()
-            }).ToList();
+            //model.ExperienceList = expList.Select(r => new SelectListItem
+            //{
+            //    Text = r.ExperienceDescription,
+            //    Value = r.ExperienceId.ToString()
+            //}).ToList();
 
             model.PositionList = posList.Select(r => new SelectListItem
             {
@@ -81,7 +81,7 @@ namespace OnlineExaminationPortal.Controllers
                     DateOfBirth = model.DateOfBirth,
                     Mobile = model.Mobile,
                     CurrentCompany = model.CurrentCompany,
-                    ExperienceId = model.ExperienceId,
+                 //   ExperienceId = model.ExperienceId,
                     CreatedBy = 1,
                     CreatedOn = DateTime.Now,
                     IsActive = true,
@@ -135,7 +135,7 @@ namespace OnlineExaminationPortal.Controllers
                 }
                 if(candidate != null)
                 { 
-                    return RedirectToAction("index", "exam",new { experienceId=candidate.ExperienceId,candidateId=candidate.Id});
+                    return RedirectToAction("index", "exam",new { positionId=candidate.PositionId,candidateId=candidate.Id});
                 }
             }
 

@@ -25,8 +25,12 @@ namespace OnlineExaminationPortal.Models
         public string CurrentCompany { get; set; }
        
         [Display(Name = "Experience(In Years)")]
-        [Required(ErrorMessage = "Experience is required.")]
-        public float ExperienceId { get; set; }
+        [Required(ErrorMessage = "Year required.")]
+        public int ExperienceYear { get; set; }
+
+        [Display(Name = "Experience(In Months)")]
+        [Required(ErrorMessage = "Month required.")]
+        public int ExperienceMonth { get; set; }
 
         public int PositionId { get; set; }
         public Position Position { get; set; }

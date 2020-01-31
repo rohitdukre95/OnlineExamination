@@ -16,14 +16,14 @@ namespace OnlineExaminationPortal.Models
         [Required]
         public float? Marks { get; set; }
        
-        [Display(Name = "Experience")]
+        [Display(Name = "Position")]
         [Required(ErrorMessage = "{0} is required.")]
-        public int? ExperienceId { get; set; }
+        public int PositionId { get; set; }
         public bool IsEnabled { get; set; }
         [NotMapped]
-        public string Experience { get; set; }
+        public string Position { get; set; }
         
         [NotMapped]       
-        public List<SelectListItem> ExperienceList { get; set; }   
+        public List<SelectListItem> PositionList { get; internal set; }
     }
 }

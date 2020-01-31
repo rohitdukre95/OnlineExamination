@@ -66,21 +66,7 @@ namespace OnlineExaminationPortal.Models
                     }
                );
 
-            modelBuilder.Entity<Question>().HasData(
-                     new Question
-                     {
-                         Id = 1,
-                         QuestionDescription = "Write a program for print given number is even or odd.",
-                         Marks = 4,
-                         ExperienceId = 1,
-                         IsEnabled = true,
-                         CreatedBy = 1,
-                         CreatedOn = DateTime.Now,
-                         IsActive = true,
-                         LastUpdatedBy = 1,
-                         LastUpdatedOn = DateTime.Now
-                     }
-                );
+           
             modelBuilder.Entity<Position>().HasData(
                     new Position
                     {

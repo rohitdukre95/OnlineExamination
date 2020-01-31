@@ -37,11 +37,18 @@
                     <span asp-validation-for="CurrentCompany" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ExperienceId"></label>
-                    <select asp-for="ExperienceId" asp-items="@Model.ExperienceList" class="form-control">
+                    <label asp-for="ExperienceYear"></label>
+                    <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYear" class="form-control">
                         <option>Please select</option>
                     </select>
-                    <span asp-validation-for="ExperienceId" class="text-danger"></span>
+                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExperienceMonth"></label>
+                    <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonth" class="form-control">
+                        <option>Please select</option>
+                    </select>
+                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="PositionId"></label>

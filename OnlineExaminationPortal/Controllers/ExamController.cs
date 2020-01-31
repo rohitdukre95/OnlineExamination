@@ -28,15 +28,15 @@ namespace OnlineExaminationPortal.Controllers
             this.submissionRepository = submissionRepository;
             this.context = context;
         }
-        public IActionResult Index(int experienceId,int candidateId)
+        public IActionResult Index(int positionId,int candidateId)
         {
-            ViewBag.ExperienceId = experienceId;
+            ViewBag.PositionId = positionId;
             ViewBag.CandidateId = candidateId;
             return View();
         }
 
         [HttpGet]
-        public IActionResult StartExam(int pageNumber,int experienceId,int candidateId)
+        public IActionResult StartExam(int pageNumber,int positionId, int candidateId)
         {
             try
             {
@@ -46,13 +46,13 @@ namespace OnlineExaminationPortal.Controllers
                     var examSubmissionResults = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).ToList();
                     if (examSubmissionResults == null || examSubmissionResults.Count == 0)
                     {
-                        var candidateQuestions = queRepository.GetAll().Where(x => x.ExperienceId == experienceId).OrderBy(q => q.Id).Take(4);
+                        var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).Take(4);
                         foreach (var question in candidateQuestions)
                         {
                             ExamSubmissionResult obj = new ExamSubmissionResult
                             {
                                 CandidateId = candidate.Id,
-                                ExperienceId = experienceId,
+                                PositionId = question.PositionId,
                                 QuestionNumber = question.Id,
                                 QuestionDescription = question.QuestionDescription,
                                 CreatedOn = DateTime.Now,
@@ -70,18 +70,18 @@ namespace OnlineExaminationPortal.Controllers
             {
 
             }
-            return RedirectToAction("RenderQuestion",new { pageNumber = pageNumber, experienceId = experienceId, candidateId=candidateId } );
+            return RedirectToAction("RenderQuestion",new { pageNumber = pageNumber, positionId = positionId, candidateId=candidateId } );
         }
 
       
-        public IActionResult RenderQuestion(int pageNumber, int experienceId, int candidateId)
+        public IActionResult RenderQuestion(int pageNumber, int positionId, int candidateId)
         {
             ExamQuestionsViewModel model = new ExamQuestionsViewModel();
-            var allQuestions = queRepository.GetAll().Where(x => x.ExperienceId == experienceId).OrderBy(q => q.Id);
+            var allQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id);
             var question = allQuestions.Skip(pageNumber - 1).Take(1).FirstOrDefault();
             model.QuestionDescription = question.QuestionDescription;
             model.QuestionNumber = question.Id;
-            model.ExperienceId = experienceId;
+            model.PositionId = positionId;
             model.PageNumber = pageNumber;
             model.CandidateId = candidateId;
             return View("RenderQuestion",model);
@@ -112,7 +112,7 @@ namespace OnlineExaminationPortal.Controllers
                 }
             }
 
-            return RedirectToAction("RenderQuestion", "Exam", new { pageNumber = model.PageNumber, experienceId = model.ExperienceId, candidateId = model.CandidateId });
+            return RedirectToAction("RenderQuestion", "Exam", new { pageNumber = model.PageNumber, positionId = model.PositionId, candidateId = model.CandidateId });
         }
 
     }

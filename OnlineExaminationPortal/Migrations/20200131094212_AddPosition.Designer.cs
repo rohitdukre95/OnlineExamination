@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineExaminationPortal.Models;
 
 namespace OnlineExaminationPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200131094212_AddPosition")]
+    partial class AddPosition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,6 +282,8 @@ namespace OnlineExaminationPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
+                    b.Property<int>("ExperienceId");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<int>("LanguageId");
@@ -309,6 +313,8 @@ namespace OnlineExaminationPortal.Migrations
                     b.Property<string>("StatusLine");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("LanguageId");
 
@@ -347,34 +353,34 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 180, DateTimeKind.Local).AddTicks(5060),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 512, DateTimeKind.Local).AddTicks(8225),
                             ExperienceDescription = "< 2",
                             ExperienceId = 1,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(2136)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 516, DateTimeKind.Local).AddTicks(7263)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(2667),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 516, DateTimeKind.Local).AddTicks(8192),
                             ExperienceDescription = "2 OR < 4",
                             ExperienceId = 2,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(2681)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 516, DateTimeKind.Local).AddTicks(8219)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(2685),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 516, DateTimeKind.Local).AddTicks(8227),
                             ExperienceDescription = "4 OR < 6",
                             ExperienceId = 3,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(2686)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 516, DateTimeKind.Local).AddTicks(8229)
                         });
                 });
 
@@ -407,56 +413,56 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5802),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3712),
                             IsActive = true,
                             Language = "C#",
                             LanguageId = 51,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5805)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3716)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5823),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3748),
                             IsActive = true,
                             Language = "C",
                             LanguageId = 50,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5824)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3750)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5825),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3752),
                             IsActive = true,
                             Language = "C++",
                             LanguageId = 54,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5826)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3754)
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5827),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3755),
                             IsActive = true,
                             Language = "Java",
                             LanguageId = 62,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5828)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3757)
                         },
                         new
                         {
                             Id = 5,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5829),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3758),
                             IsActive = true,
                             Language = "Python",
                             LanguageId = 71,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(5829)
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(3760)
                         });
                 });
 
@@ -488,20 +494,20 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(4240),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(972),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(4243),
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(977),
                             PositionDescription = "Trainee Software Developer"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(4257),
+                            CreatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(1002),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 33, 58, 181, DateTimeKind.Local).AddTicks(4258),
+                            LastUpdatedOn = new DateTime(2020, 1, 31, 15, 12, 12, 517, DateTimeKind.Local).AddTicks(1004),
                             PositionDescription = "Software Developer"
                         });
                 });
@@ -592,6 +598,11 @@ namespace OnlineExaminationPortal.Migrations
 
             modelBuilder.Entity("OnlineExaminationPortal.Models.ExamSubmissionResult", b =>
                 {
+                    b.HasOne("OnlineExaminationPortal.Models.Experience", "ExperienceRef")
+                        .WithMany()
+                        .HasForeignKey("ExperienceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("OnlineExaminationPortal.Models.LanguageMaster", "LanguageRef")
                         .WithMany()
                         .HasForeignKey("LanguageId")

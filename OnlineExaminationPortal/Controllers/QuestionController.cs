@@ -12,21 +12,21 @@ namespace OnlineExaminationPortal.Controllers
     public class QuestionController : Controller
     {
         private readonly IRepository<Question> queRepository;
-        private readonly IRepository<Experience> expRepository;
+        private readonly IRepository<Position> posRepository;
 
-        public QuestionController(IRepository<Question> queRepository, IRepository<Experience> expRepository)
+        public QuestionController(IRepository<Question> queRepository, IRepository<Position> posRepository)
         {
             this.queRepository = queRepository;
-            this.expRepository = expRepository;
+            this.posRepository = posRepository;
         }
         public IActionResult Index()
         {
             var model = queRepository.GetAll().Where(ques => ques.IsActive == true); 
-            var expList = expRepository.GetAll();
+            var posList = posRepository.GetAll();
             foreach(var item in model)
             {
-                var exp = expList.Where(x => x.ExperienceId == item.ExperienceId).FirstOrDefault();
-                item.Experience = exp.ExperienceDescription;
+                var pos = posList.Where(x => x.Id == item.PositionId).FirstOrDefault();
+                item.Position = pos.PositionDescription;
             }
             return View(model);
         }
@@ -43,11 +43,11 @@ namespace OnlineExaminationPortal.Controllers
             {
                 question = new Question();
             }
-            var expList = expRepository.GetAll();
-            question.ExperienceList = expList.Select(r => new SelectListItem
+            var posList = posRepository.GetAll();
+            question.PositionList = posList.Select(r => new SelectListItem
             {
-                Text = r.ExperienceDescription,
-                Value = r.ExperienceId.ToString()
+                Text = r.PositionDescription,
+                Value = r.Id.ToString()
             }).ToList();
             return View(question);
         }
@@ -60,7 +60,7 @@ namespace OnlineExaminationPortal.Controllers
                 var question = queRepository.Get(id);
                 if (question != null)
                 {
-                    question.ExperienceId = model.ExperienceId;
+                    question.PositionId = model.PositionId;
                     question.QuestionDescription = model.QuestionDescription;
                     question.Marks = model.Marks;
                     question.IsActive = true;
@@ -76,11 +76,11 @@ namespace OnlineExaminationPortal.Controllers
         public ViewResult AddQuestion()
         {
             Question model = new Question();
-            var expList = expRepository.GetAll();
-            model.ExperienceList = expList.Select(r => new SelectListItem
+            var posList = posRepository.GetAll();
+            model.PositionList = posList.Select(r => new SelectListItem
             {
-                Text = r.ExperienceDescription,
-                Value = r.ExperienceId.ToString()
+                Text = r.PositionDescription,
+                Value = r.Id.ToString()
             }).ToList();
             return View(model);
         }
@@ -93,7 +93,7 @@ namespace OnlineExaminationPortal.Controllers
                 Question question = new Question
                 {
                     QuestionDescription = model.QuestionDescription,
-                    ExperienceId = model.ExperienceId,
+                    PositionId = model.PositionId,
                     Marks = model.Marks,
                     CreatedBy = 1,
                     CreatedOn = DateTime.Now,
@@ -121,11 +121,11 @@ namespace OnlineExaminationPortal.Controllers
             {
                 question = new Question();
             }
-            var expList = expRepository.GetAll();
-            question.ExperienceList = expList.Select(r => new SelectListItem
+            var posList = posRepository.GetAll();
+            question.PositionList = posList.Select(r => new SelectListItem
             {
-                Text = r.ExperienceDescription,
-                Value = r.ExperienceId.ToString()
+                Text = r.PositionDescription,
+                Value = r.Id.ToString()
             }).ToList();
             return View(question);
         }
