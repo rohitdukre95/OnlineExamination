@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineExaminationPortal.Models;
 
 namespace OnlineExaminationPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200130095049_addlanguageTable")]
+    partial class addlanguageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,17 +270,11 @@ namespace OnlineExaminationPortal.Migrations
 
                     b.Property<int>("CandidateId");
 
-                    b.Property<string>("CommandLineArguments");
-
-                    b.Property<string>("CompileTimeOutput");
-
-                    b.Property<string>("CompilerOptions");
+                    b.Property<string>("Code");
 
                     b.Property<int>("CreatedBy");
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<int>("ExperienceId");
 
                     b.Property<bool>("IsActive");
 
@@ -288,27 +284,11 @@ namespace OnlineExaminationPortal.Migrations
 
                     b.Property<DateTime>("LastUpdatedOn");
 
-                    b.Property<int>("PageNumber");
-
-                    b.Property<string>("QuestionDescription");
+                    b.Property<string>("Output");
 
                     b.Property<int>("QuestionNumber");
 
-                    b.Property<string>("SandboxMessage");
-
-                    b.Property<string>("SourceCode");
-
-                    b.Property<string>("StandardError");
-
-                    b.Property<string>("StandardInput");
-
-                    b.Property<string>("StandardOutput");
-
-                    b.Property<string>("StatusLine");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ExperienceId");
 
                     b.HasIndex("LanguageId");
 
@@ -345,34 +325,34 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(2859),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 888, DateTimeKind.Local).AddTicks(9106),
                             ExperienceDescription = "< 2",
                             ExperienceId = 1,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(8797)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(5041)
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(9185),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(5435),
                             ExperienceDescription = "2 OR < 4",
                             ExperienceId = 2,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(9195)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(5448)
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(9201),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(5451),
                             ExperienceDescription = "4 OR < 6",
                             ExperienceId = 3,
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 144, DateTimeKind.Local).AddTicks(9201)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(5451)
                         });
                 });
 
@@ -405,56 +385,12 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3645),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(9872),
                             IsActive = true,
                             Language = "C#",
                             LanguageId = 51,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3648)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3661),
-                            IsActive = true,
-                            Language = "C",
-                            LanguageId = 50,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3661)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3664),
-                            IsActive = true,
-                            Language = "C++",
-                            LanguageId = 54,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3664)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3664),
-                            IsActive = true,
-                            Language = "Java",
-                            LanguageId = 62,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3664)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3664),
-                            IsActive = true,
-                            Language = "Python",
-                            LanguageId = 71,
-                            LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(3667)
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(9875)
                         });
                 });
 
@@ -486,20 +422,20 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(2384),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(8621),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(2384),
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(8621),
                             PositionDescription = "Trainee Software Developer"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(2396),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(8634),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(2396),
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(8634),
                             PositionDescription = "Software Developer"
                         });
                 });
@@ -540,12 +476,12 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(1434),
+                            CreatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(7671),
                             ExperienceId = 1,
                             IsActive = true,
                             IsEnabled = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 1, 30, 19, 39, 40, 145, DateTimeKind.Local).AddTicks(1437),
+                            LastUpdatedOn = new DateTime(2020, 1, 30, 15, 20, 48, 889, DateTimeKind.Local).AddTicks(7671),
                             Marks = 4f,
                             QuestionDescription = "Write a program for print given number is even or odd."
                         });
@@ -606,11 +542,6 @@ namespace OnlineExaminationPortal.Migrations
 
             modelBuilder.Entity("OnlineExaminationPortal.Models.ExamSubmissionResult", b =>
                 {
-                    b.HasOne("OnlineExaminationPortal.Models.Experience", "ExperienceRef")
-                        .WithMany()
-                        .HasForeignKey("ExperienceId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("OnlineExaminationPortal.Models.LanguageMaster", "LanguageRef")
                         .WithMany()
                         .HasForeignKey("LanguageId")

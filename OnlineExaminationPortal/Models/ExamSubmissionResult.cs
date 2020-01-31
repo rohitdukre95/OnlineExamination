@@ -1,7 +1,9 @@
 ﻿using OnlineExaminationPortal.Common;
+using OnlineExaminationPortal.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,8 +14,28 @@ namespace OnlineExaminationPortal.Models
         [Required]
         public int CandidateId { get; set; }
         [Required]
-        public int QuestionNumber { get; set;}
-        public string Code { get; set; }
-        public string Output { get; set; }
+        public int QuestionNumber { get; set;}      
+        public string QuestionDescription { get; set; }      
+        [ForeignKey("experienceRef")]
+        public int ExperienceId { get; set; }
+        public int PageNumber { get; set; }
+        public string SourceCode { get; set; }
+        public string CompilerOptions { get; set; }
+        public string CommandLineArguments { get; set; }
+        public string StandardInput { get; set; }
+        public string StandardOutput { get; set; }
+        public string StandardError { get; set; }
+        public string CompileTimeOutput { get; set; }
+        public string SandboxMessage { get; set; }
+        public string StatusLine { get; set; }
+        [ForeignKey("LanguageRef")]    
+        public int LanguageId { get; set; }         
+        public LanguageMaster LanguageRef { get; set; }
+        public Experience ExperienceRef { get; set; }
+
+        public static implicit operator ExamSubmissionResult(ExamSubmissionViewModel v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
