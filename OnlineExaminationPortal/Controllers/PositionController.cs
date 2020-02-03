@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nancy.Json;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 
@@ -23,30 +24,43 @@ namespace OnlineExaminationPortal.Controllers
             var model = posRepository.GetAll().Where(pos => pos.IsActive == true);
             return View(model);
         }
-
-        [HttpGet]
-        public IActionResult DeletePosition(int id)
+        [HttpPost]
+        public JsonResult AddModel(string data)
         {
-            Position position = null;
-            if (id != 0)
-            {
-                position = posRepository.Get(id);
-            }
+            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
 
-            return View(position);
+            Position pos = new Position{
+                CreatedBy = 1,
+                CreatedOn = DateTime.Now,
+                IsActive = true,
+                LastUpdatedBy = 1,
+                LastUpdatedOn = DateTime.Now,
+                PositionDescription = editData[1]
+            };
+        
+            posRepository.Insert(pos);
+
+
+            return Json(new { success = true, responseText = "Position Added Successfully." });
         }
+        [HttpPost]
+        public JsonResult EditModel(string data)
+        {
+            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
+            Position pos = posRepository.Get(Int32.Parse(editData[0]));
+            pos.PositionDescription = editData[1];
+            posRepository.Update(pos);
 
-        //[HttpPost]
-        //public IActionResult DeletePosition(int id)
-        //{
-        //    Position position = posRepository.Get(id);
-        //    if (position != null)
-        //    {
-        //        position.IsActive = false;
-        //        posRepository.Update(position);
-        //    }
+            return Json(new { success = true, responseText = "Position Edited Successfully." });
+        }
+        [HttpPost]
+        public JsonResult DeleteModel(string data)
+        {
+            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
+            Position pos = posRepository.Get(Int32.Parse(editData[0]));
+            posRepository.Delete(pos);
 
-        //    return RedirectToAction("Index");
-        //}
+            return Json(new { success = true, responseText = "Position Deleted Successfully." });
+        }
     }
 }

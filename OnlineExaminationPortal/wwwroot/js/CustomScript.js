@@ -21,3 +21,60 @@ $(document).ready(function () {
         });
 });
 
+function ShowModal(id, flag) {
+    if ($("#" + id).val() != undefined) {
+        var dataStr = $("#" + id).val();
+        var dataArray = dataStr.split("|");
+        var Id = dataArray[0];
+        var PositionDescription = dataArray[1];
+        $("#" + flag + "_Id").val(Id);
+        $("#" + flag + "_PositionDescription").val(PositionDescription);
+    }    
+    $('#' + flag).modal('show');
+}
+function UpdateModel(actionName) {
+    var flag = "";
+    var Id = "";
+    var PositionDescription = "";
+
+    //urls = '@Url.Action("EditModel","Position")';
+    var urls = "/Position/EditModel";
+    if (actionName == "AddModel") {
+        flag = "AddModal";
+        //urls = '@Url.Action("DeleteModel","Position")';
+        var urls = "/Position/AddModel";
+    }
+    if (actionName == "EditModel") {
+        flag = "EditModal";
+        //urls = '@Url.Action("DeleteModel","Position")';
+        var urls = "/Position/EditModel";
+    }
+    if (actionName == "DeleteModel") {
+        flag = "DeleteModal";
+        //urls = '@Url.Action("DeleteModel","Position")';
+        var urls = "/Position/DeleteModel";
+    }
+   
+    if ($("#" + flag + "_Id").val() != undefined) {
+        Id = $("#" + flag + "_Id").val();
+    }    
+    PositionDescription = $("#" + flag + "_PositionDescription").val();
+    var data = new Array();
+    data.push(Id, PositionDescription);
+    var jsonData = JSON.stringify(data);
+
+    $.ajax({
+        type: "POST",
+        url: urls,
+        data: {
+            "data": jsonData
+        },
+        success: function (r) {
+            alert(r.responseText);
+        },
+        error: function () {
+            alert("Error");
+        }
+    });
+}
+   

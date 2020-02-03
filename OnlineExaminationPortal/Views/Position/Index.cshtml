@@ -10,9 +10,10 @@
     <div class="card-body">
         <div class="btn-group">
 
-            <a id="addPosition" asp-action="AddPosition" class="btn btn-primary" style="width:auto">
+            @*<a id="addPosition" asp-action="AddPosition" class="btn btn-primary" style="width:auto">
                 <i class="glyphicon glyphicon-plus"></i>  Add Position
-            </a>
+            </a>*@
+            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowModal('0','AddModal')">Add Position</button>
 
         </div>
 
@@ -31,18 +32,91 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.PositionDescription</td>
+                        @*<td>
+                                <a id="editUserModal" asp-controller="Position" asp-action="EditPosition" asp-route-id="@item.Id"
+                                   class="btn btn-info">
+                                    <i class="glyphicon glyphicon-pencil"></i>  Edit
+                                </a>
+                                <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-trash"></i>  Delete
+                                </a>
+                            </td>*@
                         <td>
-                            <a id="editUserModal" asp-controller="Position" asp-action="EditPosition" asp-route-id="@item.Id"
-                               class="btn btn-info">
-                                <i class="glyphicon glyphicon-pencil"></i>  Edit
-                            </a>
-                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
-                                <i class="glyphicon glyphicon-trash"></i>  Delete
-                            </a>
+                            <button type="button" class="btn btn-primary" onclick="ShowModal(@item.Id,'EditModal')">Edit</button>
+                            <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
+                            <button type="button" class="btn btn-primary" onclick="ShowModal(@item.Id,'DeleteModal')">Delete</button>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-</div>  
+
+    <!--AddModal-->
+    <div class="modal fade" id="AddModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                     @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "AddModal_PositionDescription" })
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('AddModel');">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--EditModal-->
+    <div class="modal fade" id="EditModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        @Html.TextBox("Id", "", new { @class = "form-control", id = "EditModal_Id" })
+                        <br />
+                        @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "EditModal_PositionDescription" })
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('EditModel');">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--DeleteModal-->
+    <div class="modal fade" id="DeleteModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        @Html.TextBox("Id", "", new { @class = "form-control", id = "DeleteModal_Id" })
+                        <br />
+                        @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "DeleteModal_PositionDescription" })
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('DeleteModel');">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/CustomScript.js"></script>
