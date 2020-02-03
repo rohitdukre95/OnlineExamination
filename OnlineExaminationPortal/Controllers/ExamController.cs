@@ -128,5 +128,9 @@ namespace OnlineExaminationPortal.Controllers
 
             return View("RenderQuestion", model);
         }
+        public IActionResult TestSubmit()
+        {
+            return View();
+        }
     }
 }

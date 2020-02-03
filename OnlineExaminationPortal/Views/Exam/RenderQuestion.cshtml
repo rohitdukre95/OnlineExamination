@@ -9,10 +9,20 @@
 }
 
 @Html.Hidden("SubmissionResult_ID", SubmitResult, new { id = "SubmissionResult_ID" })
+    <div class="row">
+        <div class="col-md-11">
+            <p class="text-info mt-2" style="font-size:30px">
+                @Model.PageNumber )@Model.QuestionDescription
+            </p>
+        </div>
+        <div class="col-md-1">
+            <p class="text-info mt-2" style="font-size:30px">
+                <a class="btn btn-primary m-1" style="width:auto" id="SubmitTest" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"SubmitTest")>Submit Test</a>
+            </p>
+        </div>
+    </div>
 
-<p class="text-info mt-2" style="font-size:30px">
-    @Model.QuestionDescription
-</p>
+
 @{await Html.RenderPartialAsync("_CodeEditor"); }
 
 
@@ -20,15 +30,12 @@
     @if (backPageNumber > 0)
     {
         @*<a asp-route-pageNumber="@backPageNumber" asp-route-positionId="@Model.PositionId" class="btn btn-primary m-1" style="width:auto" }> Previous Question</a>*@
-        <a class="btn btn-primary m-1" style="width:auto" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId)> Previous Question</a>
+        <a class="btn btn-primary m-1" style="width:auto" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</a>
     }
-    <button type="submit" class="btn btn-success mt-1"
-            style="width:auto">
-        Submit
-    </button>
+        <a class="btn btn-primary ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save</a>
     @if (nextPageNumber < 5)
     {
-        <a class="btn btn-primary ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId)> Next Question</a>
+        <a class="btn btn-primary ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</a>
     }
 </div>
 

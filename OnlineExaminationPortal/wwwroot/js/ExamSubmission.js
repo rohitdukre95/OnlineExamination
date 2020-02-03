@@ -57,7 +57,7 @@ function callonload() {
     }
 }
 
-function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId) {
+function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId, requestFrom) {
 
     var CandidateQuestionData = new Object();
     CandidateQuestionData.CandidateId = candidateId;
@@ -79,7 +79,16 @@ function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId) {
 
     examSubmissionService.SaveExamSubmissionOfCandidate(CandidateQuestionData).then(function (response) {
         console.log(response);
-        window.location.href = '/Exam/RenderQuestion?pageNumber=' + response.pageNumber + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
+        if (requestFrom == "SubmitTest") {
+            window.location.href = '/Exam/TestSubmit';
+        }
+        else if (requestFrom == "Save"){
+            window.location.href = '/Exam/RenderQuestion?pageNumber=' + (response.pageNumber-1) + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
+
+        }
+        else {
+            window.location.href = '/Exam/RenderQuestion?pageNumber=' + response.pageNumber + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
+        }
     });
 
 }
