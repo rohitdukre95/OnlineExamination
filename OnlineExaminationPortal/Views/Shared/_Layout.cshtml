@@ -83,6 +83,16 @@
                     @if (signInManager.IsSignedIn(User))
                     {
                         <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Candidate" class="nav-link">Candidate List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Position" class="nav-link">Positions</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
+                        </li>
+                        <li class="nav-item">
                             <form method="post" asp-action="logout" asp-controller="account">
                                 <button type="submit" class="nav-link btn btn-link py-0"
                                         style="width:auto">
