@@ -71,6 +71,7 @@ function UpdateModel(actionName) {
         },
         success: function (r) {
             alert(r.responseText);
+            location.reload(true);
         },
         error: function () {
             alert("Error");
