@@ -44,7 +44,7 @@
                         <td>
                             <button type="button" class="btn btn-primary" onclick="ShowModal(@item.Id,'EditModal')">Edit</button>
                             <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
-                            <button type="button" class="btn btn-primary" onclick="ShowModal(@item.Id,'DeleteModal')">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="ShowModal(@item.Id,'DeleteModal')">Delete</button>
                         </td>
                     </tr>
                 }
@@ -66,8 +66,8 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('AddModel');">Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('AddModel');">Add</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -91,8 +91,8 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('EditModel');">Edit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('EditModel');">Edit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -114,8 +114,8 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="UpdateModel('DeleteModel');">Delete</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('DeleteModel');">Delete</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
