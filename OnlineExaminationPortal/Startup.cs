@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 using OnlineExaminationPortal.Security;
+using Rotativa.AspNetCore;
 
 namespace OnlineExaminationPortal
 {
@@ -114,6 +115,7 @@ namespace OnlineExaminationPortal
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
+            RotativaConfiguration.Setup(env);
         }
     }
 }

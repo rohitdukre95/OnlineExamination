@@ -5,3 +5,9 @@
     height:200px;
     width:auto;
 }
+#logo {
+    width: 150px;
+    height: 100px;
+    display: block;
+    text-indent: -9999px;
+}
