@@ -1,4 +1,5 @@
 ﻿@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
 
 <html>
 <head>
@@ -93,19 +94,21 @@
                             <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
                         </li>
                         <li class="nav-item">
+                            <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
+                        </li>
+                        <li class="nav-item">
                             <form method="post" asp-action="logout" asp-controller="account">
                                 <button type="submit" class="nav-link btn btn-link py-0"
                                         style="width:auto">
-                                    Logout @User.Identity.Name
+                                    @{ var userObj=await userManager.FindByNameAsync(User.Identity.Name);}
+                                    Logout @userObj.FirstName @userObj.LastName
                                 </button>
                             </form>
                         </li>
                     }
                     else
                     {
-                        <li class="nav-item">
-                            <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
-                        </li>
+
                         <li class="nav-item">
                             <a asp-action="register" asp-controller="account" class="nav-link">Register</a>
                         </li>

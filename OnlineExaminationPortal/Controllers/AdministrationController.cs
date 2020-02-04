@@ -334,6 +334,8 @@ namespace OnlineExaminationPortal.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 City = user.City,
                 Claims = userClaims.Select(c => c.Type + " : " + c.Value).ToList(),
                 Roles = userRoles
@@ -357,6 +359,8 @@ namespace OnlineExaminationPortal.Controllers
                 user.Email = model.Email;
                 user.UserName = model.UserName;
                 user.City = model.City;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
 
                 var result = await userManager.UpdateAsync(user);
 

@@ -231,7 +231,9 @@ namespace OnlineExaminationPortal.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    City = model.City
+                    City = model.City,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
