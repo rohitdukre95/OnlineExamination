@@ -164,7 +164,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
-        public IActionResult CheckCandidateDetailsToStartExam()
+        public IActionResult CheckCandidateDetailsToStartExam(int canId)
         {
             return View();
         }
@@ -186,14 +186,44 @@ namespace OnlineExaminationPortal.Controllers
 
             return RedirectToAction("CheckCandidateDetailsToStartExam", "candidate");
         }
-        public JsonResult EditCandidate(string data)
+        [HttpGet]
+        public IActionResult SendExamLink(int canId)
         {
-            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
-            Candidate can = candidateRepository.Get(Int32.Parse(editData[0]));
-            can.IsExamCleared = Int32.Parse(editData[1]);
-            candidateRepository.Update(can);
+            if (canId != 0)
+            {
+                try
+                {
+                    var candidate = context.Candidates.Where(x => x.Id == canId).FirstOrDefault();
+                    if(candidate!=null)
+                    {
+                        var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new {canId =canId}, Request.Scheme);
 
-            return Json(new { success = true, responseText = "Position Edited Successfully." });
+                        logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
+                        MailMessage message = new MailMessage();
+                        SmtpClient smtp = new SmtpClient();
+                        message.From = new MailAddress("rohit.dukre@atidan.com");
+                        message.To.Add(new MailAddress(candidate.Email));
+                        message.Subject = "Link to start online exam";
+                        message.IsBodyHtml = true; //to make message body as html  
+                        message.Body = "<h3>Click on below link to start your online coding exam<br/> "+ candidateRegConfirmationLink + "</h3>";
+                        smtp.Port = 587;
+                        smtp.Host = "smtp.outlook.com"; //for outlook host  
+                        smtp.EnableSsl = true;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential("rohit.dukre@atidan.com", "R0h!t@123");
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.Send(message);
+
+                        candidate.CandidateStatus = 2;
+                        candidateRepository.Update(candidate);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }              
+            }
+            return View("ExamLinkSuccess");
         }
     }
 }

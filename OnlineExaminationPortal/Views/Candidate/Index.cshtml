@@ -57,15 +57,14 @@
                         <td>
                             @if (@item.CandidateStatus == 1)
                             {
-                                <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                                <a id="allowForExam" asp-controller="Candidate" asp-action="SendExamLink" asp-route-canId="@item.Id"
                                    class="btn btn-info" style="width:auto">
                                     Send Exam Link
                                 </a>
                             }
                             else
                             {
-                                <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
-                                   class="btn btn-info disabled" style="width:auto">
+                                <a id="allowForExam" class="btn btn-info disabled" style="width:auto">
                                     Send Exam Link
                                 </a>
                             }

@@ -54,6 +54,7 @@ function callonload() {
         var SubmissionData = $('#SubmissionResult_ID').val();
         var obj = JSON.parse(SubmissionData);
         sourceEditor.setValue(obj.sourceCode);
+        stdoutEditor.setValue(obj.standardOutput);
     }
 }
 
@@ -80,7 +81,7 @@ function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId, r
     examSubmissionService.SaveExamSubmissionOfCandidate(CandidateQuestionData).then(function (response) {
         console.log(response);
         if (requestFrom == "SubmitTest") {
-            window.location.href = '/Exam/TestSubmit';
+            window.location.href = '/Exam/TestSubmit?canId=' + response.candidateId;
         }
         else if (requestFrom == "Save"){
             window.location.href = '/Exam/RenderQuestion?pageNumber=' + (response.pageNumber-1) + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
