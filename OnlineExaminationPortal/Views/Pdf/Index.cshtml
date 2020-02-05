@@ -10,20 +10,22 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-   
+
+</head>
+<body>
     <div class="row" style="margin-top:30px; border-bottom:solid;border-top:solid">
         <div class="offset-md-2 col-md-2">
             <img id="logo" src="~/images/logo.jpg" alt="Logo" />
         </div>
-            <div class="col-md-2">
-                Candidate Name   : @Model.Candidate.Name<br>
-                Position Applied : @Model.Candidate.Position.PositionDescription<br>
-                Email Id         : @Model.Candidate.Email<br>
-
-            </div>
+        <div class="col-md-2">
+            Candidate Name   : @Model.Candidate.Name<br>
+            Position Applied : @Model.Candidate.Position.PositionDescription<br>
+            Email Id         : @Model.Candidate.Email<br>
 
         </div>
+
     </div>
+   
     <div class="offset-md-2 col-md-8">
         @foreach (var item in Model.ExamSubmissionResults)
         {
@@ -32,9 +34,7 @@
             Output :@item.StandardOutput</pre>
             <hr style="border: 2px solid black">
         }
-        <div>
-</head>
-<body>
+    </div>
 </body>
 </html>
 
