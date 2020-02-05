@@ -23,7 +23,7 @@
                 <th>Applied Position</th>
                 <th>Application Date</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style="width:150px">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,13 +41,16 @@
                 <td>@item.StatusString</td>
 
                 <td>
-                    <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
-                       class="btn btn-info" style="width:auto">
-                        <i class="glyphicon glyphicon-pencil"></i>  Allow For Exam
-                    </a>
+                    @if (@item.CandidateStatus == 1)
+                    {
+                        <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                           class="btn btn-info"  style="width:auto">
+                             Send Exam Link
+                        </a>
+                    }
                     @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
-                <i class="glyphicon glyphicon-trash"></i>  Delete
-            </a>*@
+            <i class="glyphicon glyphicon-trash"></i>  Delete
+        </a>*@
                 </td>
             </tr>
         }
