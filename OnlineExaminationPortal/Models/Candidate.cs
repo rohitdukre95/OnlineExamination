@@ -32,7 +32,7 @@ namespace OnlineExaminationPortal.Models
         [Display(Name = "Experience(In Months)")]
         [Required(ErrorMessage = "Month required.")]
         public int ExperienceMonth { get; set; }
-
+        [Display(Name = "Apply for Position")]
         public int PositionId { get; set; }
         public Position Position { get; set; }
         public bool IsExamCleared { get; set; }

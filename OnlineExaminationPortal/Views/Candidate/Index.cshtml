@@ -3,58 +3,68 @@
 @{
     ViewBag.Title = "Candidate List";
 }
-    <script src="~/js/CustomScript.js"></script>
+<script src="~/js/CustomScript.js"></script>
 
 
 <div class="top-buffer"></div>
 <div class="card">
-    <div class="card-header bg-primary text-white">Candidate List</div>
+    <div class="card-header bg-primary text-white">
+        Candidate List
+        <a asp-action="AddCandidate" asp-controller="Candidate" class="btn btn-success ml-1 float-md-right" style="width:auto">Register New Candidate</a>
+    </div>
     <div class="card-body">
 
-         <table id="candidateList" class="table table-bordered table-striped table-condensed mt-1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
-                <th>Mobile</th>
-                <th>Current Company</th>
-                <th>Experience</th>
-                <th>Applied Position</th>
-                <th>Application Date</th>
-                <th>Status</th>
-                <th style="width:150px">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Email</td>
-                <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
-                <td>@item.Mobile</td>
-                <td>@item.CurrentCompany</td>
-                <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
-                <td>@item.Position.PositionDescription</td>
-                <td>@item.CreatedOn</td>
-                <td>@item.StatusString</td>
+        <table id="candidateList" class="table table-bordered table-striped table-condensed mt-1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Mobile</th>
+                    <th>Current Company</th>
+                    <th>Experience</th>
+                    <th>Applied Position</th>
+                    <th>Application Date</th>
+                    <th>Status</th>
+                    <th style="width:150px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                        <td>@item.Mobile</td>
+                        <td>@item.CurrentCompany</td>
+                        <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
+                        <td>@item.Position.PositionDescription</td>
+                        <td>@item.CreatedOn</td>
+                        <td>@item.StatusString</td>
 
-                <td>
-                    @if (@item.CandidateStatus == 1)
-                    {
-                        <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
-                           class="btn btn-info"  style="width:auto">
-                             Send Exam Link
-                        </a>
-                    }
-                    @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                        <td>
+                            @if (@item.CandidateStatus == 1)
+                            {
+                                <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                                   class="btn btn-info" style="width:auto">
+                                    Send Exam Link
+                                </a>
+                            }
+                            else
+                            {
+                                <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
+                                   class="btn btn-info disabled" style="width:auto">
+                                    Send Exam Link
+                                </a>
+                            }
+                            @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
             <i class="glyphicon glyphicon-trash"></i>  Delete
         </a>*@
-                </td>
-            </tr>
-        }
-        </tbody>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </div>  

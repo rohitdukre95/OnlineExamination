@@ -11,51 +11,76 @@
         <div class="row">
             <div class="col-md-12">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth"></label>
+                            <input type="date" asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Mobile"></label>
+                            <input asp-for="Mobile" class="form-control" />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="DateOfBirth"></label>
-                    <input type="date" asp-for="DateOfBirth" class="form-control" />
-                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ExperienceYear"></label>
+                            <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYearList" class="form-control">
+                                <option>Please select</option>
+                            </select>
+                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ExperienceMonth"></label>
+                            <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonthList" class="form-control">
+                                <option>Please select</option>
+                            </select>
+                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Mobile"></label>
-                    <input asp-for="Mobile" class="form-control" />
-                    <span asp-validation-for="Mobile" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CurrentCompany"></label>
-                    <input asp-for="CurrentCompany" class="form-control" />
-                    <span asp-validation-for="CurrentCompany" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExperienceYear"></label>
-                    <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYearList" class="form-control">
-                        <option>Please select</option>
-                    </select>
-                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ExperienceMonth"></label>
-                    <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonthList" class="form-control">
-                        <option>Please select</option>
-                    </select>
-                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PositionId"></label>
-                    <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
-                        <option>Please select</option>
-                    </select>
-                    <span asp-validation-for="PositionId" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PositionId"></label>
+                            <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
+                                <option>Please select</option>
+                            </select>
+                            <span asp-validation-for="PositionId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="CurrentCompany"></label>
+                            <input asp-for="CurrentCompany" class="form-control" />
+                            <span asp-validation-for="CurrentCompany" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

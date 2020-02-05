@@ -97,48 +97,51 @@ namespace OnlineExaminationPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                Candidate candidate = new Candidate
-                {
-                    Name = model.Name,
-                    Email = model.Email,
-                    DateOfBirth = model.DateOfBirth,
-                    Mobile = model.Mobile,
-                    CurrentCompany = model.CurrentCompany,
-                    //   ExperienceId = model.ExperienceId,
-                    ExperienceYear = model.ExperienceYear,
-                    ExperienceMonth = model.ExperienceMonth,
-                    CreatedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    IsActive = true,
-                    LastUpdatedBy = 1,
-                    LastUpdatedOn = DateTime.Now,
-                    PositionId = model.PositionId,
-                    CandidateStatus = 1
-                };
-
-                candidateRepository.Insert(candidate);
-                var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new { }, Request.Scheme);
-
-                logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
                 try
                 {
-                    MailMessage message = new MailMessage();
-                    SmtpClient smtp = new SmtpClient();
-                    message.From = new MailAddress("rohit.dukre@atidan.com");
-                    message.To.Add(new MailAddress(model.Email));
-                    message.Subject = "Link to start online exam";
-                    message.IsBodyHtml = true; //to make message body as html  
-                    message.Body ="<h1>Click on below link to start your online coding exam<br/>"+candidateRegConfirmationLink+" </h1>";
-                    smtp.Port = 587;
-                    smtp.Host = "smtp.outlook.com"; //for outlook host  
-                    smtp.EnableSsl = true;
-                    smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential("rohit.dukre@atidan.com", "R0h!t@123");
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtp.Send(message);
+                    Candidate candidate = new Candidate
+                    {
+                        Name = model.Name,
+                        Email = model.Email,
+                        DateOfBirth = model.DateOfBirth,
+                        Mobile = model.Mobile,
+                        CurrentCompany = model.CurrentCompany,
+                        //   ExperienceId = model.ExperienceId,
+                        ExperienceYear = model.ExperienceYear,
+                        ExperienceMonth = model.ExperienceMonth,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        IsActive = true,
+                        LastUpdatedBy = 1,
+                        LastUpdatedOn = DateTime.Now,
+                        PositionId = model.PositionId,
+                        CandidateStatus = 1
+                    };
+
+                    candidateRepository.Insert(candidate);
                 }
-                catch (Exception ex) { }
-                return View("SubmitCandidateDetails");
+                //var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new { }, Request.Scheme);
+
+                //logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
+                //try
+                //{
+                //    MailMessage message = new MailMessage();
+                //    SmtpClient smtp = new SmtpClient();
+                //    message.From = new MailAddress("rohit.dukre@atidan.com");
+                //    message.To.Add(new MailAddress(model.Email));
+                //    message.Subject = "Link to start online exam";
+                //    message.IsBodyHtml = true; //to make message body as html  
+                //    message.Body ="<h1>Click on below link to start your online coding exam<br/>"+candidateRegConfirmationLink+" </h1>";
+                //    smtp.Port = 587;
+                //    smtp.Host = "smtp.outlook.com"; //for outlook host  
+                //    smtp.EnableSsl = true;
+                //    smtp.UseDefaultCredentials = false;
+                //    smtp.Credentials = new NetworkCredential("rohit.dukre@atidan.com", "R0h!t@123");
+                //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //    smtp.Send(message);
+                //}
+                catch (Exception ) { }
+                return View("SubmitCandidateDetails");              
             }
 
             return View(model);
