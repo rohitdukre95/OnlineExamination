@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,10 +24,10 @@ namespace OnlineExaminationPortal.Models
         public string Mobile { get; set; }
         [Display(Name = "Current Company")]
         public string CurrentCompany { get; set; }
-       
+
         [Display(Name = "Experience(In Years)")]
         [Required(ErrorMessage = "Year required.")]
-        public int ExperienceYear { get; set; }
+        public int ExperienceYear { get; set; } 
 
         [Display(Name = "Experience(In Months)")]
         [Required(ErrorMessage = "Month required.")]
@@ -34,5 +35,9 @@ namespace OnlineExaminationPortal.Models
 
         public int PositionId { get; set; }
         public Position Position { get; set; }
+        public bool IsExamCleared { get; set; }
+        public int CandidateStatus { get; set; }
+        [NotMapped]
+        public string StatusString { get; set; }
     }
 }

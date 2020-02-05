@@ -23,24 +23,37 @@ namespace OnlineExaminationPortal.Controllers
         private readonly IRepository<Experience> expRepository;
         private readonly AppDbContext context;
         private readonly IRepository<Position> posRepository;
+        private readonly IRepository<CandidateStatus> canStatusRepository;
         private readonly ILogger<CandidateController> logger;
      
-        public CandidateController(IRepository<Candidate> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context, IRepository<Position> posRepository)
+        public CandidateController(IRepository<Candidate> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context, IRepository<Position> posRepository,
+            IRepository<CandidateStatus> canStatusRepository)
         {
             this.candidateRepository = candidateRepository;
             this.expRepository = expRepository;
             this.context = context;
             this.posRepository = posRepository;
+            this.canStatusRepository = canStatusRepository;
             this.logger = logger;
         }
         public IActionResult Index()
         {
             var model = candidateRepository.GetAll().Where(ques => ques.IsActive == true);
             var posList = posRepository.GetAll();
+            var candStatusList = canStatusRepository.GetAll();
             foreach (var item in model)
             {
                 var pos = posList.Where(x => x.Id == item.PositionId).FirstOrDefault();
                 item.Position = pos;
+                if (item.CandidateStatus != 0)
+                {
+                    var status = candStatusList.Where(x => x.Id == item.CandidateStatus).FirstOrDefault();
+                    item.StatusString = status.Status;
+                }
+                else
+                {
+                    item.StatusString = "";
+                }
             }
             return View(model);
         }
@@ -91,15 +104,16 @@ namespace OnlineExaminationPortal.Controllers
                     DateOfBirth = model.DateOfBirth,
                     Mobile = model.Mobile,
                     CurrentCompany = model.CurrentCompany,
-                 //   ExperienceId = model.ExperienceId,
-                    ExperienceYear=model.ExperienceYear,
-                    ExperienceMonth=model.ExperienceMonth,
+                    //   ExperienceId = model.ExperienceId,
+                    ExperienceYear = model.ExperienceYear,
+                    ExperienceMonth = model.ExperienceMonth,
                     CreatedBy = 1,
                     CreatedOn = DateTime.Now,
                     IsActive = true,
-                    LastUpdatedBy=1,
-                    LastUpdatedOn=DateTime.Now,
-                    PositionId=model.PositionId
+                    LastUpdatedBy = 1,
+                    LastUpdatedOn = DateTime.Now,
+                    PositionId = model.PositionId,
+                    CandidateStatus = 1
                 };
 
                 candidateRepository.Insert(candidate);

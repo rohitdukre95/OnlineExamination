@@ -48,6 +48,8 @@
     <Compile Remove="Migrations\20200130070750_AddedPositionForeignKey.Designer.cs" />
     <Compile Remove="Migrations\20200130140522_removecolumncodefromsubmission.cs" />
     <Compile Remove="Migrations\20200130140522_removecolumncodefromsubmission.Designer.cs" />
+    <Compile Remove="Migrations\20200205062127_AddedcandidatestatusTable.cs" />
+    <Compile Remove="Migrations\20200205062127_AddedcandidatestatusTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -22,6 +22,7 @@
                 <th>Experience</th>
                 <th>Applied Position</th>
                 <th>Application Date</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,6 +38,7 @@
                 <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
                 <td>@item.Position.PositionDescription</td>
                 <td>@item.CreatedOn</td>
+                <td>@item.StatusString</td>
 
                 <td>
                     <a id="allowForExam" asp-controller="Candidate" asp-action="AllowForExam" asp-route-id="@item.Id"
