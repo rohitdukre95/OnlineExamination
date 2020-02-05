@@ -43,6 +43,8 @@ namespace OnlineExaminationPortal.Controllers
                 var candidate = candidateRepository.Get(candidateId);
                 if (candidate != null)
                 {
+                    candidate.CandidateStatus = 3;
+                    candidateRepository.Update(candidate);
                     var examSubmissionResults = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).ToList();
                     if (examSubmissionResults == null || examSubmissionResults.Count == 0)
                     {
@@ -128,8 +130,24 @@ namespace OnlineExaminationPortal.Controllers
 
             return View("RenderQuestion", model);
         }
-        public IActionResult TestSubmit()
-        {
+        public IActionResult TestSubmit(int canId)
+        {          
+            if (canId != 0)
+            {
+                try
+                {
+                    var candidate = candidateRepository.Get(canId);
+                    if (candidate != null)
+                    {
+                        candidate.CandidateStatus = 4;
+                        candidateRepository.Update(candidate);
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
             return View();
         }
     }
