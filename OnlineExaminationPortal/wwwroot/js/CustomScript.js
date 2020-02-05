@@ -12,11 +12,26 @@
 }
 
 $(document).ready(function () {
+   
+    //editor = new $.fn.datatable.Editor({
+    //    "ajax": "/candidate/editcandidate",
+    //    "table": "#candidateList",
+    //    "fields": [{
+    //        "label": "Name:",
+    //        "name": "Name"
+    //    }
+    //    ]
+    //});
+    //$('#candidateList').on('click', 'tbody td:not(:first-child)', function (e) {
+    //    editor.inline(this);
+    //});
 
     $('#candidateList thead tr').clone(true).appendTo('#candidateList thead');
     $('#candidateList thead tr:eq(1) th').each(function (i) {
+        if (i <= 8) {
         var title = $(this).text();
-        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+
 
         $('input', this).on('keyup change', function () {
             if (table.column(i).search() !== this.value) {
@@ -26,11 +41,14 @@ $(document).ready(function () {
                     .draw();
             }
         });
+        }
     });
     var table = $('#candidateList').DataTable({
         orderCellsTop: true,
         fixedHeader: true,
         dom: 'Bfrtip',
+        "scrollX": true,
+        
         buttons: [
             {
                 extend: 'copy',
@@ -66,6 +84,7 @@ $(document).ready(function () {
     });
    
 });
+
 
 function ShowModal(id, flag) {
     if ($("#" + id).val() != undefined) {
