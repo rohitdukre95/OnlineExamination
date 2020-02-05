@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Position>
 
+
 @{
     ViewBag.Title = "Position List";
 }
@@ -13,7 +14,7 @@
             @*<a id="addPosition" asp-action="AddPosition" class="btn btn-primary" style="width:auto">
                 <i class="glyphicon glyphicon-plus"></i>  Add Position
             </a>*@
-            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowModal('0','AddModal')">Add Position</button>
+            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowPositionModal('0','AddModal')">Add Position</button>
 
         </div>
 
@@ -42,9 +43,9 @@
                                 </a>
                             </td>*@
                         <td>
-                            <button type="button" class="btn btn-primary" onclick="ShowModal(@item.Id,'EditModal')">Edit</button>
+                            <button type="button" class="btn btn-primary" onclick="ShowPositionModal(@item.Id,'EditModal')">Edit</button>
                             <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
-                            <button type="button" class="btn btn-danger" onclick="ShowModal(@item.Id,'DeleteModal')">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')">Delete</button>
                         </td>
                     </tr>
                 }
@@ -66,7 +67,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('AddModel');">Add</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('AddModel');">Add</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -91,7 +92,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('EditModel');">Edit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('EditModel');">Edit</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -114,7 +115,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdateModel('DeleteModel');">Delete</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('DeleteModel');">Delete</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>

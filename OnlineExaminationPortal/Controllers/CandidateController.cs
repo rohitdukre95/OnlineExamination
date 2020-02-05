@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using Nancy.Json;
 using NLog;
 using OnlineExaminationPortal.Common;
 using OnlineExaminationPortal.Models;
@@ -54,6 +55,21 @@ namespace OnlineExaminationPortal.Controllers
                 {
                     item.StatusString = "";
                 }
+                switch (item.IsExamCleared)
+                {
+                    case 0:
+                        item.IsExamClearedString = "Fail";
+                        break;
+                    case 1:
+                        item.IsExamClearedString = "Pass";
+                        break;
+                    case 2:
+                        item.IsExamClearedString = "N.A.";
+                        break;
+                    default:
+                        break;
+                }
+
             }
             return View(model);
         }
@@ -169,6 +185,15 @@ namespace OnlineExaminationPortal.Controllers
             }
 
             return RedirectToAction("CheckCandidateDetailsToStartExam", "candidate");
+        }
+        public JsonResult EditCandidate(string data)
+        {
+            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
+            Candidate can = candidateRepository.Get(Int32.Parse(editData[0]));
+            can.IsExamCleared = Int32.Parse(editData[1]);
+            candidateRepository.Update(can);
+
+            return Json(new { success = true, responseText = "Position Edited Successfully." });
         }
     }
 }

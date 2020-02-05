@@ -12,35 +12,22 @@
 }
 
 $(document).ready(function () {
-   
-    //editor = new $.fn.datatable.Editor({
-    //    "ajax": "/candidate/editcandidate",
-    //    "table": "#candidateList",
-    //    "fields": [{
-    //        "label": "Name:",
-    //        "name": "Name"
-    //    }
-    //    ]
-    //});
-    //$('#candidateList').on('click', 'tbody td:not(:first-child)', function (e) {
-    //    editor.inline(this);
-    //});
 
     $('#candidateList thead tr').clone(true).appendTo('#candidateList thead');
     $('#candidateList thead tr:eq(1) th').each(function (i) {
-        if (i <= 8) {
-        var title = $(this).text();
+        if (i <= 9) {
+            var title = $(this).text();
             $(this).html('<input type="text" placeholder="Search ' + title + '" />');
 
 
-        $('input', this).on('keyup change', function () {
-            if (table.column(i).search() !== this.value) {
-                table
-                    .column(i)
-                    .search(this.value)
-                    .draw();
-            }
-        });
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
         }
     });
     var table = $('#candidateList').DataTable({
@@ -48,7 +35,7 @@ $(document).ready(function () {
         fixedHeader: true,
         dom: 'Bfrtip',
         "scrollX": true,
-        
+
         buttons: [
             {
                 extend: 'copy',
@@ -82,11 +69,11 @@ $(document).ready(function () {
             }
         ]
     });
-   
+
 });
 
 
-function ShowModal(id, flag) {
+function ShowPositionModal(id, flag) {
     if ($("#" + id).val() != undefined) {
         var dataStr = $("#" + id).val();
         var dataArray = dataStr.split("|");
@@ -94,10 +81,10 @@ function ShowModal(id, flag) {
         var PositionDescription = dataArray[1];
         $("#" + flag + "_Id").val(Id);
         $("#" + flag + "_PositionDescription").val(PositionDescription);
-    }    
+    }
     $('#' + flag).modal('show');
 }
-function UpdateModel(actionName) {
+function UpdatePositionModal(actionName) {
     var flag = "";
     var Id = "";
     var PositionDescription = "";
@@ -119,10 +106,10 @@ function UpdateModel(actionName) {
         //urls = '@Url.Action("DeleteModel","Position")';
         var urls = "/Position/DeleteModel";
     }
-   
+
     if ($("#" + flag + "_Id").val() != undefined) {
         Id = $("#" + flag + "_Id").val();
-    }    
+    }
     PositionDescription = $("#" + flag + "_PositionDescription").val();
     var data = new Array();
     data.push(Id, PositionDescription);
@@ -143,4 +130,61 @@ function UpdateModel(actionName) {
         }
     });
 }
-   
+
+function ShowCandidateModal(id, flag) {
+    if ($("#" + id).val() != undefined) {
+        var dataStr = $("#" + id).val();
+        var dataArray = dataStr.split("|");
+        var Id = dataArray[0];
+        var ExamStatus = dataArray[1];
+        $("#" + flag + "_Id").val(Id);
+        $("#" + flag + "_ExamStatus").val(ExamStatus);
+    }
+    $('#' + flag).modal('show');
+}
+function UpdateCandidateModal(actionName) {
+    var flag = "";
+    var Id = "";
+    var ExamStatus = "";
+
+    //urls = '@Url.Action("EditModel","Position")';
+    //var urls = "/Position/EditModel";
+    //if (actionName == "AddModel") {
+    //    flag = "AddModal";
+    //    //urls = '@Url.Action("DeleteModel","Position")';
+    //    var urls = "/Position/AddModel";
+    //}
+    if (actionName == "EditModel") {
+        flag = "EditModal";
+        //urls = '@Url.Action("DeleteModel","Position")';
+        var urls = "/Candidate/EditCandidate";
+    }
+    //if (actionName == "DeleteModel") {
+    //    flag = "DeleteModal";
+    //    //urls = '@Url.Action("DeleteModel","Position")';
+    //    var urls = "/Position/DeleteModel";
+    //}
+
+    if ($("#" + flag + "_Id").val() != undefined) {
+        Id = $("#" + flag + "_Id").val();
+    }
+    ExamStatus = $("#" + flag + "_ExamStatus").val();
+    var data = new Array();
+    data.push(Id, ExamStatus);
+    var jsonData = JSON.stringify(data);
+
+    $.ajax({
+        type: "POST",
+        url: urls,
+        data: {
+            "data": jsonData
+        },
+        success: function (r) {
+            alert(r.responseText);
+            location.reload(true);
+        },
+        error: function () {
+            alert("Error");
+        }
+    });
+}

@@ -35,9 +35,11 @@ namespace OnlineExaminationPortal.Models
         [Display(Name = "Apply for Position")]
         public int PositionId { get; set; }
         public Position Position { get; set; }
-        public bool IsExamCleared { get; set; }
+        public int IsExamCleared { get; set; } = 2;
         public int CandidateStatus { get; set; }
         [NotMapped]
         public string StatusString { get; set; }
+        [NotMapped]
+        public string IsExamClearedString { get; set; }
     }
 }
