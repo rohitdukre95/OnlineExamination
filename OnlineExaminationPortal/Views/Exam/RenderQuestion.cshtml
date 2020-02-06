@@ -8,17 +8,24 @@
     //var SubmitResult = Model.SubmissonResult;
 }
 
+@Html.Hidden("backPageNumber", backPageNumber, new { id = "back_page_number" })
 @Html.Hidden("SubmissionResult_ID", SubmitResult, new { id = "SubmissionResult_ID" })
-    <div class="row">
-        <div class="col-md-11">
-            <p class="text-info mt-2" style="font-size:30px">
-                @Model.PageNumber )@Model.QuestionDescription
-            </p>
-        </div>
-        <div class="col-md-1">     
-          <a class="btn btn-success text-white mt-1" style="width:auto" id="SubmitTest" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"SubmitTest")>Submit Test</a>   
-        </div>
+@Html.Hidden("PositionId", Model.PositionId, new { id = "position_id" })
+@Html.Hidden("QuestionNumber", Model.QuestionNumber, new { id = "question_number" })
+@Html.Hidden("CandidateId", Model.CandidateId, new { id = "candidate_id" })
+<div class="row">
+    <div class="col-md-8">
+        <p class="text-info mt-2" style="font-size:30px">
+            @Model.PageNumber )@Model.QuestionDescription
+        </p>
     </div>
+    <div class="col-md-3 mt-2">
+        <label style="font-size:20px" id="quiz-time-left"></label>
+    </div>
+    <div class="col-md-1">
+        <a class="btn btn-success text-white mt-1" style="width:auto" id="SubmitTest" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"SubmitTest")>Submit Test</a>
+    </div>
+</div>
 
 
 @{await Html.RenderPartialAsync("_CodeEditor"); }
@@ -26,11 +33,10 @@
 
 <div class="row ml-0">
     @if (backPageNumber > 0)
-    {
-        @*<a asp-route-pageNumber="@backPageNumber" asp-route-positionId="@Model.PositionId" class="btn btn-primary m-1" style="width:auto" }> Previous Question</a>*@
+    {     
         <a class="btn btn-info text-white m-1" style="width:auto" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</a>
     }
-        <a class="btn btn-primary text-white ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</a>
+    <a class="btn btn-primary text-white ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</a>
     @if (nextPageNumber < 5)
     {
         <a class="btn btn-info text-white ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</a>
