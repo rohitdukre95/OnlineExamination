@@ -6,12 +6,12 @@
 
 <div class="top-buffer"></div>
 <div class="card">
-    <div class="card-header bg-primary text-white">Questions</div>
+    <div class="card-header bg-primary text-white"><h4>Questions</h4></div>
     <div class="card-body">
         <div class="btn-group">
 
             <a id="createEditQuestionModal" asp-action="AddQuestion" class="btn btn-primary" style="width:auto">
-                <i class="glyphicon glyphicon-plus"></i>  Add Question
+                <i class="material-icons" style="font-size:18px;">add</i>  Add Question
             </a>
 
         </div>
@@ -35,11 +35,11 @@
                         <td>@item.Position</td>
                         <td>
                             <a id="editUserModal" asp-controller="Question" asp-action="EditQuestion" asp-route-id="@item.Id"
-                               class="btn btn-info">
-                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                               class="btn btn-info" style="width:auto">
+                                <i class="material-icons" style="font-size:18px">&#xE254;</i>  Edit
                             </a>
-                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
-                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger" style="width:auto">
+                                <i class="material-icons" style="font-size:18px;">delete</i>  Delete
                             </a>
                         </td>
                     </tr>
