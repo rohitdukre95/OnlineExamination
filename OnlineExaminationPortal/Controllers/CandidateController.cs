@@ -225,5 +225,15 @@ namespace OnlineExaminationPortal.Controllers
             }
             return View("ExamLinkSuccess");
         }
+        public JsonResult EditCandidate(string data)
+        {
+            var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
+            Candidate can = candidateRepository.Get(Int32.Parse(editData[0]));
+            can.Marks = Int32.Parse(editData[1]);
+            can.IsExamCleared = Int32.Parse(editData[2]);
+            candidateRepository.Update(can);
+
+            return Json(new { success = true, responseText = "Exam Status Updated Successfully." });
+        }
     }
 }

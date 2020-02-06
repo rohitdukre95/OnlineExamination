@@ -2,6 +2,7 @@
 @{
     Layout = null;
     ViewData["Title"] = "Exam Result";
+    var counter=0;
 }
 <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link href="~/css/site.css" rel="stylesheet" />
@@ -13,23 +14,26 @@
 
 </head>
 <body>
+    <div class="offset-md-2 col-md-2">
+        <img id="logo" src="~/images/logo.jpg" alt="Logo" />
+    </div>
     <div class="row" style="margin-top:30px; border-bottom:solid;border-top:solid">
         <div class="offset-md-2 col-md-2">
-            <img id="logo" src="~/images/logo.jpg" alt="Logo" />
-        </div>
-        <div class="col-md-2">
             Candidate Name   : @Model.Candidate.Name<br>
             Position Applied : @Model.Candidate.Position.PositionDescription<br>
             Email Id         : @Model.Candidate.Email<br>
-
+        </div>
+        <div class="offset-md-4 col-md-2">
+            <h3>Marks Obtained : <span style="border:1px solid black; padding-left:5px;padding-right:5px" >@Model.Candidate.Marks</span><h3/>
         </div>
 
     </div>
-   
+
     <div class="offset-md-2 col-md-8">
         @foreach (var item in Model.ExamSubmissionResults)
         {
-            <h3>@item.QuestionNumber)@item.QuestionDescription</h3>
+            counter = counter + 1;
+            <h3>@counter)@item.QuestionDescription</h3>
             <pre>@item.SourceCode
             Output :@item.StandardOutput</pre>
             <hr style="border: 2px solid black">
