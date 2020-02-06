@@ -58,8 +58,8 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
 
-                @*@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {*@
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +74,7 @@
                            asp-action="ChangePassword">Password</a>
                     </div>
                 </li>
-                @*}*@
+                }
             </ul>
             <ul class="navbar-nav ml-auto">
                 @if (signInManager.IsSignedIn(User))
