@@ -136,8 +136,10 @@ function ShowCandidateModal(id, flag) {
         var dataStr = $("#" + id).val();
         var dataArray = dataStr.split("|");
         var Id = dataArray[0];
-        var ExamStatus = dataArray[1];
+        var Marks = dataArray[1];
+        var ExamStatus = dataArray[2];
         $("#" + flag + "_Id").val(Id);
+        $("#" + flag + "_Marks").val(Marks);
         $("#" + flag + "_ExamStatus").val(ExamStatus);
     }
     $('#' + flag).modal('show');
@@ -168,9 +170,10 @@ function UpdateCandidateModal(actionName) {
     if ($("#" + flag + "_Id").val() != undefined) {
         Id = $("#" + flag + "_Id").val();
     }
+    Marks = $("#" + flag + "_Marks").val();
     ExamStatus = $("#" + flag + "_ExamStatus").val();
     var data = new Array();
-    data.push(Id, ExamStatus);
+    data.push(Id, Marks, ExamStatus);
     var jsonData = JSON.stringify(data);
 
     $.ajax({

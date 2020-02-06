@@ -41,5 +41,6 @@ namespace OnlineExaminationPortal.Models
         public string StatusString { get; set; }
         [NotMapped]
         public string IsExamClearedString { get; set; }
+        public int Marks { get; set; }
     }
 }

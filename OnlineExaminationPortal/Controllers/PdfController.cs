@@ -23,27 +23,27 @@ namespace OnlineExaminationPortal.Controllers
             this.canRepository = canRepository;
             this.posRepository = posRepository;
         }
-        public IActionResult Index()
-        {
-            //PdfData pdfData = new PdfData();
-            //pdfData.ExamSubmissionResults = examRepository.GetAll().Where(can => can.CandidateId == 1).ToList();
-            //pdfData.Candidate = canRepository.Get(1);
-            //pdfData.Candidate.Position = posRepository.Get(pdfData.Candidate.PositionId);
-            //pdfData.DocumentTitle = "Exam Result";
-
-            return View();
-
-        }
-        public ActionResult ConvertToPDF()
+        public IActionResult Index(int canId)
         {
             PdfData pdfData = new PdfData();
-            pdfData.ExamSubmissionResults = examRepository.GetAll().Where(can => can.CandidateId == 1).ToList();
-            pdfData.Candidate = canRepository.Get(1);
+            pdfData.ExamSubmissionResults = examRepository.GetAll().Where(can => can.CandidateId == canId).ToList();
+            pdfData.Candidate = canRepository.Get(canId);
+            pdfData.Candidate.Position = posRepository.Get(pdfData.Candidate.PositionId);
+            pdfData.DocumentTitle = "Exam Result";
+
+            return View(pdfData);
+
+        }
+        public ActionResult ConvertToPDF(int canId)
+        {
+            PdfData pdfData = new PdfData();
+            pdfData.ExamSubmissionResults = examRepository.GetAll().Where(can => can.CandidateId == canId).ToList();
+            pdfData.Candidate = canRepository.Get(canId);
             pdfData.Candidate.Position = posRepository.Get(pdfData.Candidate.PositionId);
             pdfData.DocumentTitle = "Exam Result";
 
             return new ViewAsPdf("Index",pdfData) { 
-                FileName = "PDF Doc.pdf",
+                FileName = pdfData.Candidate.Id+"."+pdfData.Candidate.Name+".pdf",
                 PageSize= Rotativa.AspNetCore.Options.Size.A4,
                 PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
                 PageMargins = { Left = 20, Bottom = 20, Right = 20, Top = 20 }
