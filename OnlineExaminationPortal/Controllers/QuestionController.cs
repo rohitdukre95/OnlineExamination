@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 
 namespace OnlineExaminationPortal.Controllers
 {
+    [Authorize(Roles = "Admin,HR")]
     public class QuestionController : Controller
     {
         private readonly IRepository<Question> queRepository;
         private readonly IRepository<Position> posRepository;
+        private readonly ILogger<QuestionController> logger;
 
-        public QuestionController(IRepository<Question> queRepository, IRepository<Position> posRepository)
+        public QuestionController(IRepository<Question> queRepository, IRepository<Position> posRepository,ILogger<QuestionController> logger)
         {
             this.queRepository = queRepository;
             this.posRepository = posRepository;
+            this.logger = logger;
         }
         public IActionResult Index()
         {
@@ -60,13 +65,23 @@ namespace OnlineExaminationPortal.Controllers
                 var question = queRepository.Get(id);
                 if (question != null)
                 {
-                    question.PositionId = model.PositionId;
-                    question.QuestionDescription = model.QuestionDescription;
-                    question.Marks = model.Marks;
-                    question.IsActive = true;
-                    question.LastUpdatedOn = DateTime.Now;
-                    question.LastUpdatedBy = 1;
-                    queRepository.Update(model);
+                    try
+                    {
+                        question.PositionId = model.PositionId;
+                        question.QuestionDescription = model.QuestionDescription;
+                        question.Marks = model.Marks;
+                        question.IsActive = true;
+                        question.LastUpdatedOn = DateTime.Now;
+                        question.LastUpdatedBy = 1;
+                        queRepository.Update(model);
+                    }
+                    catch(Exception ex)
+                    {
+                        logger.LogError($"Error while updating question: {ex}");
+                        ViewBag.ErrorTitle = $"Error updating question";
+                        ViewBag.ErrorMessage = $"Error while updating the question : {model.QuestionDescription}";
+                        return View("Error");
+                    }
                 }
             }
             return RedirectToAction("Index");
@@ -90,20 +105,29 @@ namespace OnlineExaminationPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                Question question = new Question
+                try
                 {
-                    QuestionDescription = model.QuestionDescription,
-                    PositionId = model.PositionId,
-                    Marks = model.Marks,
-                    CreatedBy = 1,
-                    CreatedOn = DateTime.Now,
-                    IsActive = true,
-                    LastUpdatedBy = 1,
-                    LastUpdatedOn = DateTime.Now
-                };
-
-                queRepository.Insert(question);
-                return RedirectToAction("Index");
+                    Question question = new Question
+                    {
+                        QuestionDescription = model.QuestionDescription,
+                        PositionId = model.PositionId,
+                        Marks = model.Marks,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        IsActive = true,
+                        LastUpdatedBy = 1,
+                        LastUpdatedOn = DateTime.Now
+                    };
+                    queRepository.Insert(question);
+                    return RedirectToAction("Index");
+                }
+                catch(Exception ex)
+                {
+                    logger.LogError($"Error while adding question: {ex}");
+                    ViewBag.ErrorTitle = $"Error adding question";
+                    ViewBag.ErrorMessage = $"Error while adding the question : {model.QuestionDescription}";
+                    return View("Error");
+                }
             }
 
             return View(model);
@@ -137,12 +161,20 @@ namespace OnlineExaminationPortal.Controllers
             Question question = queRepository.Get(id);
             if (question != null)
             {
-                question.IsActive = false;
-                queRepository.Update(question);
+                try
+                {
+                    question.IsActive = false;
+                    queRepository.Update(question);
+                }
+                catch(Exception ex)
+                {
+                    logger.LogError($"Error while deleting question: {ex}");
+                    ViewBag.ErrorTitle = $"Error deleting question";
+                    ViewBag.ErrorMessage = $"Error while deleting the question : {model.QuestionDescription}";
+                    return View("Error");
+                }               
             }
-
             return RedirectToAction("Index");
         }
-
     }
 }

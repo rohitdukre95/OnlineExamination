@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace OnlineExaminationPortal.Controllers
 {
     //[Authorize(Policy = "AdminRolePolicy")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -165,7 +166,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "EditRolePolicy")]
+        //[Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
             ViewBag.userId = userId;
@@ -204,7 +205,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "EditRolePolicy")]
+        //[Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
         {
             var user = await userManager.FindByIdAsync(userId);

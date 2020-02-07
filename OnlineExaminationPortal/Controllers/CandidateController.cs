@@ -17,7 +17,7 @@ using OnlineExaminationPortal.ViewModels;
 
 namespace OnlineExaminationPortal.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,HR")]
     public class CandidateController : Controller
     {
         private readonly IRepository<Candidate> candidateRepository;
@@ -79,36 +79,47 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ViewResult AddCandidate()
         {
             CandidateAddEditViewModel model = new CandidateAddEditViewModel();
-            var expList = expRepository.GetAll();
-            var posList = posRepository.GetAll();
-            //model.ExperienceList = expList.Select(r => new SelectListItem
-            //{
-            //    Text = r.ExperienceDescription,
-            //    Value = r.ExperienceId.ToString()
-            //}).ToList();
-            model.ExperienceYearList = StaticData.Year.Select(year => new SelectListItem
+            try
             {
-                Text = year.ToString(),
-                Value = year.ToString()
-            }).ToList();
-            model.ExperienceMonthList = StaticData.Month.Select(month => new SelectListItem
+                var expList = expRepository.GetAll();
+                var posList = posRepository.GetAll();
+                //model.ExperienceList = expList.Select(r => new SelectListItem
+                //{
+                //    Text = r.ExperienceDescription,
+                //    Value = r.ExperienceId.ToString()
+                //}).ToList();
+                model.ExperienceYearList = StaticData.Year.Select(year => new SelectListItem
+                {
+                    Text = year.ToString(),
+                    Value = year.ToString()
+                }).ToList();
+                model.ExperienceMonthList = StaticData.Month.Select(month => new SelectListItem
+                {
+                    Text = month.ToString(),
+                    Value = month.ToString()
+                }).ToList();
+                model.PositionList = posList.Select(r => new SelectListItem
+                {
+                    Text = r.PositionDescription,
+                    Value = r.Id.ToString()
+                }).ToList();
+            }
+            catch(Exception ex)
             {
-                Text = month.ToString(),
-                Value = month.ToString()
-            }).ToList();
-            model.PositionList = posList.Select(r => new SelectListItem
-            {
-                Text = r.PositionDescription,
-                Value = r.Id.ToString()
-            }).ToList();
-
+                logger.LogError($"Error while showing candidate registration page: {ex.StackTrace}");
+                ViewBag.ErrorTitle = $"Error Occurred";
+                ViewBag.ErrorMessage = $"Error occurred while showing candidate registration page";
+                return View("Error");
+            }
             return View(model);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult AddCandidate(CandidateAddEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -136,27 +147,14 @@ namespace OnlineExaminationPortal.Controllers
 
                     candidateRepository.Insert(candidate);
                 }
-                //var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new { }, Request.Scheme);
-
-                //logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
-                //try
-                //{
-                //    MailMessage message = new MailMessage();
-                //    SmtpClient smtp = new SmtpClient();
-                //    message.From = new MailAddress("rohit.dukre@atidan.com");
-                //    message.To.Add(new MailAddress(model.Email));
-                //    message.Subject = "Link to start online exam";
-                //    message.IsBodyHtml = true; //to make message body as html  
-                //    message.Body ="<h1>Click on below link to start your online coding exam<br/>"+candidateRegConfirmationLink+" </h1>";
-                //    smtp.Port = 587;
-                //    smtp.Host = "smtp.outlook.com"; //for outlook host  
-                //    smtp.EnableSsl = true;
-                //    smtp.UseDefaultCredentials = false;
-                //    smtp.Credentials = new NetworkCredential("rohit.dukre@atidan.com", "R0h!t@123");
-                //    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //    smtp.Send(message);
-                //}
-                catch (Exception ) { }
+               
+                catch (Exception ex)
+                {
+                    logger.LogError($"Error while adding candidate: {ex.StackTrace}");
+                    ViewBag.ErrorTitle = $"Error adding candidate";
+                    ViewBag.ErrorMessage = $"Error while adding new candidate named : {model.Name}";
+                    return View("Error");
+                }
                 return View("SubmitCandidateDetails");              
             }
 
@@ -166,26 +164,43 @@ namespace OnlineExaminationPortal.Controllers
         [HttpGet]
         public IActionResult CheckCandidateDetailsToStartExam(string cid,string tkn)
         {
-            int cId = Convert.ToInt32(Common.Common.Base64Decode(cid));
-            var candidate = candidateRepository.Get(cId);
-            //To decode the token to get the creation time:
-            byte[] data = Convert.FromBase64String(tkn);
-            DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
-            if (when < DateTime.UtcNow.AddHours(-24))
+            if (!String.IsNullOrEmpty(cid) && !String.IsNullOrEmpty(tkn))
             {
-                // too old
-            }          
-            if (candidate.Token == tkn  && candidate.IsConsumed == 0)
-            {
-                return View();
+                int cId = Convert.ToInt32(Common.Common.Base64Decode(cid));
+                var candidate = candidateRepository.Get(cId);
+                if (candidate != null)
+                {
+                    //To decode the token to get the creation time:
+                    byte[] data = Convert.FromBase64String(tkn);
+                    DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
+                    if (when < DateTime.UtcNow.AddHours(-24))
+                    {
+                        // too old
+                    }
+                    if (candidate.Token == tkn && candidate.IsConsumed == 0)
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Exam Link is Expired";
+                        return View("ExamLinkExpired");
+                    }
+                }
+                else
+                {
+                    logger.LogError($"Candidate not found with Id: {cId}");
+                    ViewBag.ErrorTitle = $"Candidate not found";
+                    ViewBag.ErrorMessage = $"Candidate not found with ID: {cId}";
+                    return View("Error");
+                }
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Exam Link is Expired";
-                return View("ExamLinkExpired");
-            }
-            
+            logger.LogError($"Parameters are not valid for the action CheckCandidateDetailsToStartExam of CandidateController");
+            ViewBag.ErrorTitle = $"Parameters are not valid";
+            ViewBag.ErrorMessage = $"Details propvided are not proper to start exam";
+            return View("Error");
         }
+
         [HttpPost]
         public IActionResult CheckCandidateDetailsToStartExam(CheckCandidateDetailsToStartExamViewModel model)
         {
@@ -246,20 +261,36 @@ namespace OnlineExaminationPortal.Controllers
                 }
                 catch (Exception ex)
                 {
-
+                    logger.LogError($"Error while Sending Exam Link: {ex}");
+                    ViewBag.ErrorTitle = $"Error while Sending Exam Link";
+                    ViewBag.ErrorMessage = $"Error while Sending Exam Link for Candidate Id: {canId}";
+                    return View("Error");
                 }              
             }
             return View("ExamLinkSuccess");
         }
 
-        public JsonResult EditCandidate(string data)
+        public IActionResult EditCandidate(string data)
         {
             var editData = new JavaScriptSerializer().Deserialize<string[]>(data);
             Candidate can = candidateRepository.Get(Int32.Parse(editData[0]));
-            can.Marks = Int32.Parse(editData[1]);
-            can.IsExamCleared = Int32.Parse(editData[2]);
-            candidateRepository.Update(can);
+            if (can != null)
+            {
+                can.Marks = Int32.Parse(editData[1]);
+                can.IsExamCleared = Int32.Parse(editData[2]);
+                try
+                {
+                    candidateRepository.Update(can);
+                }
+                catch(Exception ex)
+                {
+                    logger.LogError($"Error while Editing Candidate with Id: {Int32.Parse(editData[0])} :{ex}");
 
+                    ViewBag.ErrorTitle = $"Update Error";
+                    ViewBag.ErrorMessage = $"Error while Editing Candidate with Id: {Int32.Parse(editData[0])}";
+                    return View("Error");
+                }
+            }
             return Json(new { success = true});
         }
     }

@@ -10,12 +10,9 @@
     <div class="card-header bg-primary text-white"><h4>Positions</h4></div>
     <div class="card-body">
         <div class="btn-group">
-
-            @*<a id="addPosition" asp-action="AddPosition" class="btn btn-primary" style="width:auto">
-                <i class="glyphicon glyphicon-plus"></i>  Add Position
-            </a>*@
-            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowPositionModal('0','AddModal')">Add Position</button>
-
+            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowPositionModal('0','AddModal')">
+                <i class="material-icons" style="font-size:18px;">add</i>  Add Position
+            </button>
         </div>
 
         @*// <div class="top-buffer"></div>*@
@@ -24,7 +21,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Position Description</th>
-                    <th style="width:10%">Action</th>
+                    <th style="width:15%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,9 +40,15 @@
                                 </a>
                             </td>*@
                         <td>
-                            <button type="button" class="btn btn-primary" onclick="ShowPositionModal(@item.Id,'EditModal')">Edit</button>
+                            <button type="button" class="btn btn-primary" onclick="ShowPositionModal(@item.Id,'EditModal')" style="width:auto">
+                                <i class="material-icons" style="font-size:18px;">&#xE254;</i>
+                                Edit
+                            </button>
                             <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
-                            <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')" style="width:auto">
+                                <i class="material-icons" style="font-size:18px;">delete</i>
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 }
