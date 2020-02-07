@@ -122,8 +122,10 @@ function UpdatePositionModal(actionName) {
             "data": jsonData
         },
         success: function (r) {
-            alert(r.responseText);
-            location.reload(true);
+            bootbox.alert(r.responseText, function () {
+                location.reload(true);
+            });
+
         },
         error: function () {
             alert("Error");
@@ -182,9 +184,11 @@ function UpdateCandidateModal(actionName) {
         data: {
             "data": jsonData
         },
+
         success: function (r) {
-            alert(r.responseText);
-            location.reload(true);
+            bootbox.alert("Candidate Result Updated Successfully!", function () {
+                location.reload(true);
+            });
         },
         error: function () {
             alert("Error");

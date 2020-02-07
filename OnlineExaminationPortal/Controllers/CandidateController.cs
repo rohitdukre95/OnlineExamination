@@ -233,7 +233,7 @@ namespace OnlineExaminationPortal.Controllers
             can.IsExamCleared = Int32.Parse(editData[2]);
             candidateRepository.Update(can);
 
-            return Json(new { success = true, responseText = "Exam Status Updated Successfully." });
+            return Json(new { success = true});
         }
     }
 }
