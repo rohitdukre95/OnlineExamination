@@ -54,10 +54,12 @@
                                     <input type="hidden" value="@item.Id |@item.Marks |@item.IsExamCleared" id="@item.Id" />}
                             }
                         </td>
-                        <td><a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="Index" asp-route-canId="@item.Id"
-                                   style="width:auto"><i class="material-icons" style="font-size:20px">visibility</i></a>&nbsp;&nbsp;/&nbsp;&nbsp;
+                        <td>
+                            <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="Index" asp-route-canId="@item.Id"
+                               style="width:auto"><i class="material-icons" style="font-size:20px">visibility</i></a>&nbsp;&nbsp;/&nbsp;&nbsp;
                             <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="ConvertToPDF" asp-route-canId="@item.Id"
-                                style="width:auto"><i class="material-icons" style="font-size:20px">file_download</i></a></td>
+                               style="width:auto"><i class="material-icons" style="font-size:20px">file_download</i></a>
+                        </td>
                         <td>
                             @if (@item.CandidateStatus == 1)
                             {
@@ -96,10 +98,10 @@
                 <p>
                     @Html.Label("Candidate Id")
                     @Html.TextBox("Id", "", new { @class = "form-control", id = "EditModal_Id", disabled = "true" })
-                    <br/>
+                    <br />
                     @Html.Label("Marks Obtained")
                     @Html.TextBox("Marks", "", new { @class = "form-control", id = "EditModal_Marks" })
-                    <br/>
+                    <br />
                     @Html.Label("Exam Status Dropdown")
                     @Html.DropDownList("ExamSatus",
                             new[]{
@@ -120,3 +122,12 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+}
