@@ -10,7 +10,7 @@ using OnlineExaminationPortal.Repository;
 
 namespace OnlineExaminationPortal.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,HR")]
     public class PositionController : Controller
     {
         private readonly IRepository<Position> posRepository;

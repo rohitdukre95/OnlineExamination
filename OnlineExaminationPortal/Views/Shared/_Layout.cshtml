@@ -80,21 +80,25 @@
                 }
             </ul>
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
+                </li>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    <li class="nav-item">
-                        <a asp-action="Index" asp-controller="Candidate" class="nav-link">Candidate List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-action="Index" asp-controller="Position" class="nav-link">Positions</a>
-                    </li>
+                    @if ((User.IsInRole("Admin") || User.IsInRole("HR")))
+                    {
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Candidate" class="nav-link">Candidate List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Position" class="nav-link">Positions</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
-                    </li>
+                        <li class="nav-item">
+                            <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
+                        </li>
+                    }
+
                     <li class="nav-item">
                         <form method="post" asp-action="logout" asp-controller="account">
                             <button type="submit" class="nav-link btn btn-link py-0"
@@ -107,7 +111,6 @@
                 }
                 else
                 {
-
                     <li class="nav-item">
                         <a asp-action="register" asp-controller="account" class="nav-link">Register</a>
                     </li>

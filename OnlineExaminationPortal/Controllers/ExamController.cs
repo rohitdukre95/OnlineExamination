@@ -4,29 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OnlineExaminationPortal.Models;
 using OnlineExaminationPortal.Repository;
 using OnlineExaminationPortal.ViewModels;
 
 namespace OnlineExaminationPortal.Controllers
 {
-    [AllowAnonymous]
+   [AllowAnonymous]
     public class ExamController : Controller
     {
         private readonly IRepository<Question> queRepository;
         private readonly IRepository<Candidate> candidateRepository;
         private readonly IRepository<ExamSubmissionResult> submissionRepository;
         private readonly AppDbContext context;
+        private readonly ILogger<ExamController> logger;
 
         public ExamController(IRepository<Question> queRepository ,
             IRepository<Candidate> candidateRepository,
             IRepository<ExamSubmissionResult> submissionRepository,
-            AppDbContext context)
+            AppDbContext context,
+            ILogger<ExamController> logger)
         {
             this.queRepository = queRepository;
             this.candidateRepository = candidateRepository;
             this.submissionRepository = submissionRepository;
             this.context = context;
+            this.logger = logger;
         }
         public IActionResult Index(int positionId,int candidateId)
         {
@@ -50,7 +54,11 @@ namespace OnlineExaminationPortal.Controllers
                         var examSubmissionResults = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).ToList();
                         if (examSubmissionResults == null || examSubmissionResults.Count == 0)
                         {
-                            var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).Take(4);
+                            var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).ToList();
+                            if (candidateQuestions.Count > 4)
+                            {
+                                candidateQuestions = candidateQuestions.Take(4).ToList();
+                            }    
                             foreach (var question in candidateQuestions)
                             {
                                 ExamSubmissionResult obj = new ExamSubmissionResult
@@ -78,7 +86,10 @@ namespace OnlineExaminationPortal.Controllers
             }
             catch(Exception ex)
             {
-
+                logger.LogError($"Error while starting exam: {ex}");
+                ViewBag.ErrorTitle = $"Error";
+                ViewBag.ErrorMessage = $"Error while adding starting the exam";
+                return View("Error");
             }
             return RedirectToAction("RenderQuestion",new { pageNumber = pageNumber, positionId = positionId, candidateId=candidateId } );
         }
@@ -106,20 +117,30 @@ namespace OnlineExaminationPortal.Controllers
             {              
                 var candidateCurQuestion = context.ExamSubmissionResults.Where(x => x.CandidateId == model.CandidateId && x.QuestionNumber == model.QuestionNumber).FirstOrDefault();
                 if (candidateCurQuestion != null)
-                {                   
-                    candidateCurQuestion.SandboxMessage = model.SandboxMessage;
-                    candidateCurQuestion.SourceCode = model.SourceCode;
-                    candidateCurQuestion.StandardError = model.StandardError;
-                    candidateCurQuestion.StandardInput = model.StandardInput;
-                    candidateCurQuestion.StandardOutput = model.StandardOutput;
-                    candidateCurQuestion.StatusLine = model.StatusLine;
-                    candidateCurQuestion.CommandLineArguments = model.CommandLineArguments;
-                    candidateCurQuestion.CompilerOptions = model.CompilerOptions;
-                    candidateCurQuestion.CompileTimeOutput = model.CompileTimeOutput;
-                    candidateCurQuestion.LanguageId = 1;
-                    candidateCurQuestion.LastUpdatedBy = 1;
-                    candidateCurQuestion.LastUpdatedOn = DateTime.Now;
-                    submissionRepository.Update(candidateCurQuestion);
+                {
+                    try
+                    {
+                        candidateCurQuestion.SandboxMessage = model.SandboxMessage;
+                        candidateCurQuestion.SourceCode = model.SourceCode;
+                        candidateCurQuestion.StandardError = model.StandardError;
+                        candidateCurQuestion.StandardInput = model.StandardInput;
+                        candidateCurQuestion.StandardOutput = model.StandardOutput;
+                        candidateCurQuestion.StatusLine = model.StatusLine;
+                        candidateCurQuestion.CommandLineArguments = model.CommandLineArguments;
+                        candidateCurQuestion.CompilerOptions = model.CompilerOptions;
+                        candidateCurQuestion.CompileTimeOutput = model.CompileTimeOutput;
+                        candidateCurQuestion.LanguageId = 1;
+                        candidateCurQuestion.LastUpdatedBy = 1;
+                        candidateCurQuestion.LastUpdatedOn = DateTime.Now;
+                        submissionRepository.Update(candidateCurQuestion);
+                    }
+                    catch(Exception ex)
+                    {
+                        logger.LogError($"Error Occurred on next or back button click of exam : {ex}");
+                        ViewBag.ErrorTitle = $"Error Occurred";
+                        ViewBag.ErrorMessage = $"Error occurred";
+                        return View("Error");
+                    }
                 }
             }
 
@@ -154,7 +175,10 @@ namespace OnlineExaminationPortal.Controllers
                 }
                 catch(Exception ex)
                 {
-
+                    logger.LogError($"Error Occurred while submit the final test : {ex}");
+                    ViewBag.ErrorTitle = $"Error Occurred";
+                    //ViewBag.ErrorMessage = $"Error occurred";
+                    return View("Error");
                 }
             }
             return View();
