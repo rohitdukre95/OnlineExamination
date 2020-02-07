@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineExaminationPortal.Models;
 
 namespace OnlineExaminationPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200207061459_AddColumnExamLinkAndIsConsumedInCandidate")]
+    partial class AddColumnExamLinkAndIsConsumedInCandidate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,8 +233,6 @@ namespace OnlineExaminationPortal.Migrations
 
                     b.Property<int>("PositionId");
 
-                    b.Property<string>("Token");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PositionId");
@@ -268,40 +268,40 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 897, DateTimeKind.Local).AddTicks(6528),
+                            CreatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(872),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(1732),
+                            LastUpdatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(5913),
                             Status = "Candidate Registered"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2550),
+                            CreatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6384),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2556),
+                            LastUpdatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6391),
                             Status = "Allowed for Exam"
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2560),
+                            CreatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6394),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2560),
+                            LastUpdatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6394),
                             Status = "Exam In Progress"
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2563),
+                            CreatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6397),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 7, 12, 8, 16, 898, DateTimeKind.Local).AddTicks(2563),
+                            LastUpdatedOn = new DateTime(2020, 2, 7, 11, 44, 58, 999, DateTimeKind.Local).AddTicks(6397),
                             Status = "Exam Completed"
                         });
                 });

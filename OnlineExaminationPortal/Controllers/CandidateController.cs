@@ -164,9 +164,27 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
-        public IActionResult CheckCandidateDetailsToStartExam(int canId)
+        public IActionResult CheckCandidateDetailsToStartExam(string cid,string tkn)
         {
-            return View();
+            int cId = Convert.ToInt32(Common.Common.Base64Decode(cid));
+            var candidate = candidateRepository.Get(cId);
+            //To decode the token to get the creation time:
+            byte[] data = Convert.FromBase64String(tkn);
+            DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
+            if (when < DateTime.UtcNow.AddHours(-24))
+            {
+                // too old
+            }          
+            if (candidate.Token == tkn  && candidate.IsConsumed == 0)
+            {
+                return View();
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Exam Link is Expired";
+                return View("ExamLinkExpired");
+            }
+            
         }
         [HttpPost]
         public IActionResult CheckCandidateDetailsToStartExam(CheckCandidateDetailsToStartExamViewModel model)
@@ -183,8 +201,8 @@ namespace OnlineExaminationPortal.Controllers
                     return RedirectToAction("index", "exam",new { positionId=candidate.PositionId,candidateId=candidate.Id});
                 }
             }
-
-            return RedirectToAction("CheckCandidateDetailsToStartExam", "candidate");
+            ModelState.AddModelError("", "Candidate Details Not Found");
+            return View(model);
         }
         [HttpGet]
         public IActionResult SendExamLink(int canId)
@@ -196,7 +214,13 @@ namespace OnlineExaminationPortal.Controllers
                     var candidate = context.Candidates.Where(x => x.Id == canId).FirstOrDefault();
                     if(candidate!=null)
                     {
-                        var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new {canId =canId}, Request.Scheme);
+                        //creating a unique token containing a time stamp:
+                        byte[] time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
+                        byte[] key = Guid.NewGuid().ToByteArray();
+                        string token = Convert.ToBase64String(time.Concat(key).ToArray());
+                        //string token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                        string cid = Common.Common.Base64Encode(canId.ToString());
+                        var candidateRegConfirmationLink = Url.Action("CheckCandidateDetailsToStartExam", "Candidate", new { cid = cid,tkn= token }, Request.Scheme);
 
                         logger.Log(Microsoft.Extensions.Logging.LogLevel.Warning, candidateRegConfirmationLink);
                         MailMessage message = new MailMessage();
@@ -215,6 +239,8 @@ namespace OnlineExaminationPortal.Controllers
                         smtp.Send(message);
 
                         candidate.CandidateStatus = 2;
+                        candidate.Token = token;
+                        candidate.ExamLink = candidateRegConfirmationLink;
                         candidateRepository.Update(candidate);
                     }
                 }
@@ -225,6 +251,7 @@ namespace OnlineExaminationPortal.Controllers
             }
             return View("ExamLinkSuccess");
         }
+
         public JsonResult EditCandidate(string data)
         {
             var editData = new JavaScriptSerializer().Deserialize<string[]>(data);

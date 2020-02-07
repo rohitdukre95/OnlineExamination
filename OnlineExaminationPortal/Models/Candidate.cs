@@ -42,5 +42,8 @@ namespace OnlineExaminationPortal.Models
         [NotMapped]
         public string IsExamClearedString { get; set; }
         public int Marks { get; set; }
+        public string ExamLink { get; set; }
+        public int IsConsumed { get; set; } = 0;
+        public string Token { get; set; } 
     }
 }

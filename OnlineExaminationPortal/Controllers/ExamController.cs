@@ -43,28 +43,36 @@ namespace OnlineExaminationPortal.Controllers
                 var candidate = candidateRepository.Get(candidateId);
                 if (candidate != null)
                 {
-                    candidate.CandidateStatus = 3;
-                    candidateRepository.Update(candidate);
-                    var examSubmissionResults = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).ToList();
-                    if (examSubmissionResults == null || examSubmissionResults.Count == 0)
+                    if (candidate.CandidateStatus != 4 && candidate.IsConsumed == 0)
                     {
-                        var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).Take(4);
-                        foreach (var question in candidateQuestions)
+                        candidate.CandidateStatus = 3;
+                        candidateRepository.Update(candidate);
+                        var examSubmissionResults = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).ToList();
+                        if (examSubmissionResults == null || examSubmissionResults.Count == 0)
                         {
-                            ExamSubmissionResult obj = new ExamSubmissionResult
+                            var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).Take(4);
+                            foreach (var question in candidateQuestions)
                             {
-                                CandidateId = candidate.Id,
-                                PositionId = question.PositionId,
-                                QuestionNumber = question.Id,
-                                QuestionDescription = question.QuestionDescription,
-                                CreatedOn = DateTime.Now,
-                                CreatedBy = 1,
-                                LastUpdatedBy = 1,
-                                LastUpdatedOn = DateTime.Now,
-                                LanguageId = 1
-                            };
-                            submissionRepository.Insert(obj);
+                                ExamSubmissionResult obj = new ExamSubmissionResult
+                                {
+                                    CandidateId = candidate.Id,
+                                    PositionId = question.PositionId,
+                                    QuestionNumber = question.Id,
+                                    QuestionDescription = question.QuestionDescription,
+                                    CreatedOn = DateTime.Now,
+                                    CreatedBy = 1,
+                                    LastUpdatedBy = 1,
+                                    LastUpdatedOn = DateTime.Now,
+                                    LanguageId = 1
+                                };
+                                submissionRepository.Insert(obj);
+                            }
                         }
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Exam Link is Expired or Already Submitted the exam";
+                        return View("ExamLinkExpired");
                     }
                 }
             }
@@ -140,6 +148,7 @@ namespace OnlineExaminationPortal.Controllers
                     if (candidate != null)
                     {
                         candidate.CandidateStatus = 4;
+                        candidate.IsConsumed = 1;
                         candidateRepository.Update(candidate);
                     }
                 }
