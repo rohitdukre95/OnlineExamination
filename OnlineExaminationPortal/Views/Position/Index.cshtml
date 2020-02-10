@@ -40,9 +40,9 @@
                                 </a>
                             </td>*@
                         <td>
-                            <button type="button" class="btn btn-primary" onclick="ShowPositionModal(@item.Id,'EditModal')" style="width:auto">
+                            <button type="button" class="btn btn-info" onclick="ShowPositionModal(@item.Id,'EditModal')" style="width:auto">
                                 <i class="material-icons" style="font-size:18px;">&#xE254;</i>
-                                Edit
+                                Update
                             </button>
                             <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
                             <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')" style="width:auto">
@@ -70,7 +70,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('AddModel');">Add</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal" onclick="UpdatePositionModal('AddModel');">Add</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('EditModel');">Edit</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="UpdatePositionModal('EditModel');">Update</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
