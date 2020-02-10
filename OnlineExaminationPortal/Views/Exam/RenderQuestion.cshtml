@@ -15,9 +15,9 @@
 @Html.Hidden("CandidateId", Model.CandidateId, new { id = "candidate_id" })
 <div class="row">
     <div class="col-md-8">
-        <pre class="text-info mt-2" style="font-size:20px">
-            @Model.PageNumber )@Model.QuestionDescription
-        </pre>
+        <p style="font-size:20px;white-space:pre-wrap;">
+@Model.PageNumber )@Model.QuestionDescription.Trim()
+        </p>
     </div>
     <div class="col-md-3 mt-2">
         <label style="font-size:20px" id="quiz-time-left"></label>

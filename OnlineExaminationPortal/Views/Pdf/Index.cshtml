@@ -19,9 +19,9 @@
     </div>
     <div class="row" style="margin-top:30px; border-bottom:solid;border-top:solid">
         <div class="offset-md-2 col-md-3">
-            Candidate Name   : @Model.Candidate.Name<br>
-            Position Applied : @Model.Candidate.Position.PositionDescription<br>
-            Email Id         : @Model.Candidate.Email<br>
+        <h5><pre><b>Candidate Name   :</b> @Model.Candidate.Name</pre>
+            <pre><b>Position Applied :</b> @Model.Candidate.Position.PositionDescription</pre>
+            <pre><b>Email Id         :</b> @Model.Candidate.Email</pre></h5>
         </div>
         <div class="offset-md-3 col-md-2">
             <h3>Marks Obtained : <span style="border:1px solid black; padding-left:5px;padding-right:5px">@Model.Candidate.Marks</span></h3>
@@ -33,11 +33,12 @@
         @foreach (var item in Model.ExamSubmissionResults)
         {
             counter = counter + 1;
-            <pre> <h3>@counter)@item.QuestionDescription</h3></pre>
-<pre>@item.SourceCode
-            Output :@item.StandardOutput</pre>
-<hr style="border: 2px solid black">
-
+            <h5><b>@counter)</b><pre style="white-space:pre-wrap;">@item.QuestionDescription</pre></h5>
+            <h4><u>Source Code:</u></h4>
+            <pre>@item.SourceCode</pre>
+            <h4><u>Output:</u></h4>
+            <pre>@item.StandardOutput</pre>
+            <hr style="border: 2px solid black">
         }
     </div>
 </body>
