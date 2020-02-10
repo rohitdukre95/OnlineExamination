@@ -33,10 +33,11 @@
         @foreach (var item in Model.ExamSubmissionResults)
         {
             counter = counter + 1;
-            <h3>@counter)@item.QuestionDescription</h3>
-            <pre>@item.SourceCode
+            <pre> <h3>@counter)@item.QuestionDescription</h3></pre>
+<pre>@item.SourceCode
             Output :@item.StandardOutput</pre>
-            <hr style="border: 2px solid black">
+<hr style="border: 2px solid black">
+
         }
     </div>
 </body>
