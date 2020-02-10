@@ -99,7 +99,7 @@
                     <li class="nav-item">
                         <form method="post" asp-action="logout" asp-controller="account">
                             <button type="submit" class="nav-link btn btn-link py-0"
-                                    style="width:auto">
+                                   >
                                 @{ var userObj = await userManager.FindByNameAsync(User.Identity.Name);}
                                 Logout @userObj.FirstName @userObj.LastName
                             </button>

@@ -23,7 +23,7 @@
         <label style="font-size:20px" id="quiz-time-left"></label>
     </div>
     <div class="col-md-1">
-        <a class="btn btn-success text-white mt-1" style="width:auto" id="SubmitTest" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"SubmitTest")>Submit Test</a>
+        <a class="btn btn-success text-white mt-1" id="SubmitTest" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"SubmitTest")>Submit Test</a>
     </div>
 </div>
 
@@ -34,12 +34,12 @@
 <div class="row ml-0">
     @if (backPageNumber > 0)
     {     
-        <a class="btn btn-info text-white m-1" style="width:auto" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</a>
+        <a class="btn btn-info text-white m-1" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</a>
     }
-    <a class="btn btn-primary text-white ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</a>
+    <a class="btn btn-primary text-white ml-auto m-1" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</a>
     @if (nextPageNumber < 5)
     {
-        <a class="btn btn-info text-white ml-auto m-1" style="width:auto" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</a>
+        <a class="btn btn-info text-white ml-auto m-1" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</a>
     }
 </div>
 
