@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="btn-group">
 
-            <a id="createEditQuestionModal" asp-action="AddQuestion" class="btn btn-primary" style="width:auto">
+            <a id="createEditQuestionModal" asp-action="AddQuestion" class="btn btn-primary" >
                 <i class="material-icons" style="font-size:18px;">add</i>  Add Question
             </a>
 
@@ -22,8 +22,8 @@
                 <tr>
                     <th>Question</th>
                     <th>Marks</th>
-                    <th>Position</th>
-                    <th>Actions</th>
+                    <th width="15%">Position</th>
+                    <th width="13%">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,10 +35,10 @@
                         <td>@item.Position</td>
                         <td>
                             <a id="editUserModal" asp-controller="Question" asp-action="EditQuestion" asp-route-id="@item.Id"
-                               class="btn btn-info" style="width:auto">
-                                <i class="material-icons" style="font-size:18px">&#xE254;</i>  Edit
+                               class="btn btn-info">
+                                <i class="material-icons" style="font-size:18px">&#xE254;</i>  Update
                             </a>
-                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger" style="width:auto">
+                            <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger" >
                                 <i class="material-icons" style="font-size:18px;">delete</i>  Delete
                             </a>
                         </td>

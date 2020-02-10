@@ -9,7 +9,7 @@
 @if (Model.Any())
 {
     <a asp-action="Register" asp-controller="Account"
-       class="btn btn-primary mb-3" style="width:auto">
+       class="btn btn-primary mb-3">
         Add new user
     </a>
 
@@ -53,7 +53,7 @@ else
             <h5 class="card-title">
                 Use the button below to create a user
             </h5>
-            <a class="btn btn-primary" style="width:auto"
+            <a class="btn btn-primary" 
                asp-controller="Account" asp-action="Register">
                 Add new user
             </a>

@@ -11,7 +11,7 @@
 <div class="card">
     <div class="card-header bg-primary text-white" style="font-size:20px">
         Candidate List
-        <a asp-action="AddCandidate" asp-controller="Candidate" class="btn btn-success ml-1 float-md-right" style="width:auto">Register New Candidate</a>
+        <a asp-action="AddCandidate" asp-controller="Candidate" class="btn btn-success ml-1 float-md-right">Register New Candidate</a>
     </div>
     <div class="card-body">
 
@@ -56,21 +56,21 @@
                         </td>
                         <td>
                             <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="Index" asp-route-canId="@item.Id"
-                               style="width:auto"><i class="material-icons" style="font-size:20px">visibility</i></a>&nbsp;&nbsp;/&nbsp;&nbsp;
+                              ><i class="material-icons" style="font-size:20px">visibility</i></a>&nbsp;&nbsp;/&nbsp;&nbsp;
                             <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="ConvertToPDF" asp-route-canId="@item.Id"
-                               style="width:auto"><i class="material-icons" style="font-size:20px">file_download</i></a>
+                             ><i class="material-icons" style="font-size:20px">file_download</i></a>
                         </td>
                         <td>
                             @if (@item.CandidateStatus == 1)
                             {
                                 <a id="allowForExam" asp-controller="Candidate" asp-action="SendExamLink" asp-route-canId="@item.Id"
-                                   class="btn btn-info" style="width:auto">
+                                   class="btn btn-info" >
                                     Send Exam Link
                                 </a>
                             }
                             else
                             {
-                                <a id="allowForExam" class="btn btn-info disabled" style="width:auto">
+                                <a id="allowForExam" class="btn btn-info disabled" >
                                     Send Exam Link
                                 </a>
                             }

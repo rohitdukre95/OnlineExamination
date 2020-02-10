@@ -10,7 +10,7 @@
     <div class="card-header bg-primary text-white"><h4>Positions</h4></div>
     <div class="card-body">
         <div class="btn-group">
-            <button type="button" style="width:auto" class="btn btn-primary" onclick="ShowPositionModal('0','AddModal')">
+            <button type="button"  class="btn btn-primary" onclick="ShowPositionModal('0','AddModal')">
                 <i class="material-icons" style="font-size:18px;">add</i>  Add Position
             </button>
         </div>
@@ -40,12 +40,12 @@
                                 </a>
                             </td>*@
                         <td>
-                            <button type="button" class="btn btn-info" onclick="ShowPositionModal(@item.Id,'EditModal')" style="width:auto">
+                            <button type="button" class="btn btn-info" onclick="ShowPositionModal(@item.Id,'EditModal')" >
                                 <i class="material-icons" style="font-size:18px;">&#xE254;</i>
                                 Update
                             </button>
                             <input type="hidden" value="@item.Id |@item.PositionDescription" id="@item.Id" />
-                            <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')" style="width:auto">
+                            <button type="button" class="btn btn-danger" onclick="ShowPositionModal(@item.Id,'DeleteModal')" >
                                 <i class="material-icons" style="font-size:18px;">delete</i>
                                 Delete
                             </button>

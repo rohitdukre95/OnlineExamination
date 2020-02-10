@@ -12,7 +12,7 @@
 
 @if (Model.Any())
 {
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
+    <a class="btn btn-primary mb-3" asp-action="CreateRole"
        asp-controller="administration">Add new role</a>
 
     foreach (var role in Model)
@@ -27,13 +27,13 @@
             <div class="card-footer">
                 <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
 
-                    @if ((await authorizationService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
-                    {
+                    @*@if ((await authorizationService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
+                    {*@
                         <a class="btn btn-primary" asp-action="EditRole"
                            asp-controller="Administration" asp-route-id="@role.Id">
                             Edit
                         </a>
-                    }
+                    @*}*@
                     <span id="confirmDeleteSpan_@role.Id" style="display:none">
                         <span>Are you sure you want to delete?</span>
                         <button type="submit" class="btn btn-danger">Yes</button>
@@ -60,7 +60,7 @@ else
             <h5 class="card-title">
                 Use the button below to create a role
             </h5>
-            <a class="btn btn-primary" style="width:auto"
+            <a class="btn btn-primary"
                asp-controller="administration" asp-action="CreateRole">
                 Create Role
             </a>
