@@ -55,7 +55,7 @@ namespace OnlineExaminationPortal.Controllers
                         if (examSubmissionResults == null || examSubmissionResults.Count == 0)
                         {
                             var candidateQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id).ToList();
-                            if (candidateQuestions.Count > 4)
+                            if (candidateQuestions.Count >= 4)
                             {
                                 candidateQuestions = candidateQuestions.Take(4).ToList();
                             }    
@@ -66,7 +66,7 @@ namespace OnlineExaminationPortal.Controllers
                                     CandidateId = candidate.Id,
                                     PositionId = question.PositionId,
                                     QuestionNumber = question.Id,
-                                    QuestionDescription = question.QuestionDescription,
+                                    QuestionDescription = question.QuestionDescription.Trim(),
                                     CreatedOn = DateTime.Now,
                                     CreatedBy = 1,
                                     LastUpdatedBy = 1,
@@ -98,10 +98,11 @@ namespace OnlineExaminationPortal.Controllers
         public IActionResult RenderQuestion(int pageNumber, int positionId, int candidateId)
         {
             ExamQuestionsViewModel model = new ExamQuestionsViewModel();
-            var allQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id);
+            //var allQuestions = queRepository.GetAll().Where(x => x.PositionId == positionId).OrderBy(q => q.Id);
+            var allQuestions = context.ExamSubmissionResults.Where(x => x.CandidateId == candidateId).OrderBy(x=>x.QuestionNumber).ToList();
             var question = allQuestions.Skip(pageNumber - 1).Take(1).FirstOrDefault();
             model.QuestionDescription = question.QuestionDescription;
-            model.QuestionNumber = question.Id;
+            model.QuestionNumber = question.QuestionNumber;
             model.PositionId = positionId;
             model.PageNumber = pageNumber;
             model.CandidateId = candidateId;

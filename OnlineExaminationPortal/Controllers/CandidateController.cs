@@ -162,6 +162,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult CheckCandidateDetailsToStartExam(string cid,string tkn)
         {
             if (!String.IsNullOrEmpty(cid) && !String.IsNullOrEmpty(tkn))
@@ -202,6 +203,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult CheckCandidateDetailsToStartExam(CheckCandidateDetailsToStartExamViewModel model)
         {
             if (ModelState.IsValid)
@@ -209,7 +211,7 @@ namespace OnlineExaminationPortal.Controllers
                 Candidate candidate = null;
                 if (model.Email != "")
                 {
-                    candidate = context.Candidates.Where(can => (can.Email.Trim().Equals(model.Email.Trim())) || (can.Mobile.Trim()==model.Mobile.Trim())).FirstOrDefault();
+                    candidate = context.Candidates.Where(can => (can.Email.Trim().Equals(model.Email.Trim())) && (can.Mobile.Trim()==model.Mobile.Trim())).FirstOrDefault();
                 }
                 if(candidate != null)
                 { 

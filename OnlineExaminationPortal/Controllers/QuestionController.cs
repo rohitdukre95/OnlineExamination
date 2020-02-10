@@ -68,7 +68,7 @@ namespace OnlineExaminationPortal.Controllers
                     try
                     {
                         question.PositionId = model.PositionId;
-                        question.QuestionDescription = model.QuestionDescription;
+                        question.QuestionDescription = model.QuestionDescription.Trim();
                         question.Marks = model.Marks;
                         question.IsActive = true;
                         question.LastUpdatedOn = DateTime.Now;
@@ -109,7 +109,7 @@ namespace OnlineExaminationPortal.Controllers
                 {
                     Question question = new Question
                     {
-                        QuestionDescription = model.QuestionDescription,
+                        QuestionDescription = model.QuestionDescription.Trim(),
                         PositionId = model.PositionId,
                         Marks = model.Marks,
                         CreatedBy = 1,

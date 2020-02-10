@@ -5,7 +5,7 @@ var examSubmissionService = new ExamSubmissionService();
 if (localStorage.getItem("total_seconds")) {
     var total_seconds = localStorage.getItem("total_seconds");
 } else {
-    var total_seconds = 2 * 10;
+     total_seconds = 10 * 60;
 }
 var minutes = parseInt(total_seconds / 60);
 var seconds = parseInt(total_seconds % 60);
@@ -89,6 +89,7 @@ function callonload() {
         var obj = JSON.parse(SubmissionData);
         sourceEditor.setValue(obj.sourceCode);
         stdoutEditor.setValue(obj.standardOutput);
+        stdinEditor.setValue(obj.standardInput);
     }
 }
 
@@ -115,6 +116,7 @@ function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId, r
     examSubmissionService.SaveExamSubmissionOfCandidate(CandidateQuestionData).then(function (response) {
         console.log(response);
         if (requestFrom == "SubmitTest") {
+            localStorage.clear();
             window.location.href = '/Exam/TestSubmit?canId=' + response.candidateId;
         }
         else if (requestFrom == "Save"){

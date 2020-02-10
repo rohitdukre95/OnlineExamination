@@ -15,9 +15,9 @@
 @Html.Hidden("CandidateId", Model.CandidateId, new { id = "candidate_id" })
 <div class="row">
     <div class="col-md-8">
-        <p class="text-info mt-2" style="font-size:30px">
+        <pre class="text-info mt-2" style="font-size:20px">
             @Model.PageNumber )@Model.QuestionDescription
-        </p>
+        </pre>
     </div>
     <div class="col-md-3 mt-2">
         <label style="font-size:20px" id="quiz-time-left"></label>
@@ -45,7 +45,7 @@
 
 
 @section Scripts {
-    <script src="~/js/ExamSubmission.js"></script>
+    <script asp-append-version="true" src="~/js/ExamSubmission.js"></script>
 }
 <script src="~/service/ExamSubmissionService.js"></script>
 <script src="~/commonModel/commonModel.js"></script>

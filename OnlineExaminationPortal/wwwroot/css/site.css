@@ -1,6 +1,8 @@
 ﻿.btn {
-    width:75px;
+    width: 75px;
+    cursor: pointer;
 }
+
 .imageThumbnail {
     height:200px;
     width:auto;
