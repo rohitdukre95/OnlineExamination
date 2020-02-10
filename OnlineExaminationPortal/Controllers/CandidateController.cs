@@ -126,6 +126,19 @@ namespace OnlineExaminationPortal.Controllers
             {
                 try
                 {
+                    var cand = candidateRepository.GetAll().Where(x => x.Email == model.Email).FirstOrDefault();
+                    if (cand != null)
+                    {
+                        if (cand.Email == model.Email)
+                        {
+                            ModelState.AddModelError("", "Candidate with provided email address is already exists");
+                        }
+                        if(cand.Mobile == model.Mobile)
+                        {
+                            ModelState.AddModelError("", "Candidate with provided mobile number is already exists");
+                        }
+                        return View(model);
+                    }
                     Candidate candidate = new Candidate
                     {
                         Name = model.Name,
