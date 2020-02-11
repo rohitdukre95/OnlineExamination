@@ -29,6 +29,11 @@ $(document).ready(function () {
                 }
             });
         }
+        else
+        {
+            $(this).html('');
+        }
+        
     });
     var table = $('#candidateList').DataTable({
         orderCellsTop: true,
@@ -37,25 +42,25 @@ $(document).ready(function () {
         "scrollX": true,
 
         buttons: [
-            {
-                extend: 'copy',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                }
-            },
-            {
-                extend: 'csv',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                }
-            },
-            {
-                extend: 'pdf',
-                orientation: 'landscape',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                }
-            },
+            //{
+            //    extend: 'copy',
+            //    exportOptions: {
+            //        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            //    }
+            //},
+            //{
+            //    extend: 'csv',
+            //    exportOptions: {
+            //        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            //    }
+            //},
+            //{
+            //    extend: 'pdf',
+            //    orientation: 'landscape',
+            //    exportOptions: {
+            //        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+            //    }
+            //},
             {
                 extend: 'excel',
                 exportOptions: {
@@ -196,3 +201,26 @@ function UpdateCandidateModal(actionName) {
         }
     });
 }
+
+
+function deleteCandidate(id) {
+    bootbox.confirm({
+        message: "Are you sure you want to delete this candidate?",
+        callback: function (result) {
+            if (result == true) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Candidate/DeleteCandidate?id=" + id,
+                    success: function (r) {
+                        location.reload(true);
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            }
+        }
+    });
+
+}
+

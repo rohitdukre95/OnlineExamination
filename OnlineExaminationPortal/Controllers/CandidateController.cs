@@ -317,5 +317,26 @@ namespace OnlineExaminationPortal.Controllers
             }
             return Json(new { success = true});
         }
+        public IActionResult DeleteCandidate(int id)
+        {
+            Candidate can = candidateRepository.Get(id);
+            if (can != null)
+            {
+                can.IsActive = false;
+                try
+                {
+                    candidateRepository.Update(can);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError($"Error while Editing Candidate with Id: {id} :{ex}");
+
+                    ViewBag.ErrorTitle = $"Update Error";
+                    ViewBag.ErrorMessage = $"Error while Editing Candidate with Id: {id}";
+                    return View("Error");
+                }
+            }
+            return Json(new { success = true });
+        }
     }
 }
