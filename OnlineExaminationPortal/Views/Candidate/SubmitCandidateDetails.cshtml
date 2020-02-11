@@ -1,3 +1,19 @@
-﻿<h3>Registration Successful</h3>
-@*<br/>
- <a asp-action="index" asp-controller="Candidate">Go to Candidate List</a>*@
+﻿@*<h3>Registration Successful</h3>*@
+@if (TempData["Success"] != null)
+{
+    <p class="alert alert-success w-100" id="successMessage">@TempData["Success"]</p>
+}
+@*<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Registration Success!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>*@
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {          
+            window.location.href = '/Home/Index';
+        }, 3000);
+    });
+</script>

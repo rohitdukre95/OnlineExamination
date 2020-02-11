@@ -4,9 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-$( document ).ready(function() {
-   window.history.forward();
-});
+    $(document).ready(function () {
+        setTimeout(function () {
+            window.location.href = '/Home/Index';
+        }, 3000);
+    });
 </script>
 
 <h1>Your Test Submitted Successfully</h1>

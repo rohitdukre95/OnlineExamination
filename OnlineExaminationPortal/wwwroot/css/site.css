@@ -264,3 +264,26 @@ nav {
             border: 2px solid #2dc997;
         }
 /*Hero css End*/
+/*Navbar css end*/
+
+legend {
+    background-color: #331f1d;
+    color: #fff;
+    padding: 1px 9px;
+}
+fieldset {
+    min-width: 0;
+    padding: 24px;
+    margin: 0;
+    border: 1px solid;
+}
+
+.slogan {
+    color: #34397b;
+    font-size: 14px;
+    line-height: 1.2;
+    text-align: center;
+    /* margin-top: 5px; */
+    display: inline-block;
+    vertical-align: bottom;
+}

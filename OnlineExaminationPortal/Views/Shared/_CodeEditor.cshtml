@@ -116,6 +116,17 @@
             </div>
             <div class="item no-left-padding borderless">
                 <button id="run-btn" class="ui primary labeled icon button"><i class="play icon"></i>Run (F9)</button>
+                <button class="btn btn-primary text-white  ml-3" onclick=SubmitAnswer(@ViewBag.backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</button>
+                @if (ViewBag.backPageNumber > 0)
+                {
+                    <button class="btn btn-info text-white ml-3" onclick=SubmitAnswer(@ViewBag.backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</button>
+                }
+
+                @if (ViewBag.nextPageNumber < 5)
+                {
+                    <button class="btn btn-info text-white ml-3" onclick=SubmitAnswer(@ViewBag.nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</button>
+                }
+
             </div>
             <div id="navigation-message" class="item borderless">
                 <span class="navigation-message-text"></span>

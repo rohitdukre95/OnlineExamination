@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -25,16 +26,18 @@ namespace OnlineExaminationPortal.Controllers
         private readonly AppDbContext context;
         private readonly IRepository<Position> posRepository;
         private readonly IRepository<CandidateStatus> canStatusRepository;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<CandidateController> logger;
      
         public CandidateController(IRepository<Candidate> candidateRepository, IRepository<Experience> expRepository, ILogger<CandidateController> logger, AppDbContext context, IRepository<Position> posRepository,
-            IRepository<CandidateStatus> canStatusRepository)
+            IRepository<CandidateStatus> canStatusRepository, SignInManager<ApplicationUser> signInManager)
         {
             this.candidateRepository = candidateRepository;
             this.expRepository = expRepository;
             this.context = context;
             this.posRepository = posRepository;
             this.canStatusRepository = canStatusRepository;
+            this.signInManager = signInManager;
             this.logger = logger;
         }
         public IActionResult Index()
@@ -160,7 +163,7 @@ namespace OnlineExaminationPortal.Controllers
 
                     candidateRepository.Insert(candidate);
                 }
-
+               
                 catch (Exception ex)
                 {
                     logger.LogError($"Error while adding candidate: {ex.StackTrace}");
@@ -168,7 +171,13 @@ namespace OnlineExaminationPortal.Controllers
                     ViewBag.ErrorMessage = $"Error while adding new candidate named : {model.Name}";
                     return View("Error");
                 }
-                return View("SubmitCandidateDetails");
+
+                if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index", "Candidate");
+                }
+                TempData["Success"] = "Registration Successful!";            
+                return View("SubmitCandidateDetails");              
             }
 
             return View(model);
