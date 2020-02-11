@@ -179,4 +179,17 @@ nav {
     }
 }
 
-/*Navbar css end*/ 
+/*Navbar css end*/
+
+legend {
+    background-color: #331f1d;
+    color: #fff;
+    padding: 1px 9px;
+}
+fieldset {
+    min-width: 0;
+    padding: 24px;
+    margin: 0;
+    border: 1px solid;
+}
+

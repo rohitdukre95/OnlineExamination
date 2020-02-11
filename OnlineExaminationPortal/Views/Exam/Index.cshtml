@@ -3,8 +3,21 @@
     ViewBag.Title = "Exam Start Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<a asp-controller="Exam" asp-action="StartExam"
-   class="btn btn-info mt-2" asp-route-pageNumber="1" asp-route-positionId="@ViewBag.PositionId" asp-route-candidateId="@ViewBag.CandidateId" >
-    Start Exam</a>
+<div class="mt-2">
+    <fieldset>
+        <legend>Instructions</legend>
+        <p><span style="color:red; font-size:16px;">*</span> There are 4 questions/programs and each question contains 4 marks.</p>
+        <p><span style="color:red; font-size:16px;">*</span> You have 1 hour and 15 minutes to complete your coding exam.</p>
+        <p><span style="color:red; font-size:16px;">*</span> Please execute each question's source code by clicking on <strong>Run</strong> button and submit that question by clicking on <strong>Save Question</strong> button before going to next question.</p>
+        <p><span style="color:red; font-size:16px;">*</span> Please click on <strong>Submit Test</strong> button to submit the exam.</p>
+        <p><span style="color:red; font-size:16px;">*</span> Select language to write program from the <strong>Select Language</strong> dropdown. You have options to write code in languages C, C++, C# and Java</p>
+        <p><span style="color:red; font-size:16px;">*</span> Click on below <strong>Start Exam</strong> button to start your exam.</p>
+    </fieldset>
+</div>
+<center>
+    <a asp-controller="Exam" asp-action="StartExam"
+       class="btn btn-success mt-2" asp-route-pageNumber="1" asp-route-positionId="@ViewBag.PositionId" asp-route-candidateId="@ViewBag.CandidateId">
+        Start Exam
+    </a>
+</center>
 
