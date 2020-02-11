@@ -193,3 +193,12 @@ fieldset {
     border: 1px solid;
 }
 
+.slogan {
+    color: #34397b;
+    font-size: 14px;
+    line-height: 1.2;
+    text-align: center;
+    /* margin-top: 5px; */
+    display: inline-block;
+    vertical-align: bottom;
+}
