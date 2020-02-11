@@ -3,109 +3,113 @@
     ViewBag.Title = "Registration";
 }
 
-<h1>Candidate Registration</h1>
-<form asp-action="AddCandidate" role="form">
-    @for (int idx = 0; idx < Model.PositionList.Count; idx++)
-    {    
-        @Html.HiddenFor(_ => Model.PositionList[idx].Text)     
-        @Html.HiddenFor(_ => Model.PositionList[idx].Value)      
-    }
-    @for (int idx = 0; idx < Model.ExperienceMonthList.Count; idx++)
-    {    
-        @Html.HiddenFor(_ => Model.ExperienceMonthList[idx].Text)         
-        @Html.HiddenFor(_ => Model.ExperienceMonthList[idx].Value)        
-    }
-    @for (int idx = 0; idx < Model.ExperienceYearList.Count; idx++)
-    {
-        @Html.HiddenFor(_ => Model.ExperienceYearList[idx].Text)           
-        @Html.HiddenFor(_ => Model.ExperienceYearList[idx].Value)               
-    }
-    @*@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"{(String.IsNullOrEmpty(Model.Id) ? "Add" : "Edit")} Question" })*@
-    <div class="modal-body form-horizontal">
-        <div class="row">
-            <div class="col-md-12">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Name"></label>
-                            <input asp-for="Name" class="form-control" placeholder="FirstName MiddleName LastName"/>
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="DateOfBirth"></label>
-                            <input type="date" asp-for="DateOfBirth" class="form-control" />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Mobile"></label>
-                            <input asp-for="Mobile" class="form-control" />
-                            <span asp-validation-for="Mobile" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
+    <div class="card">
+        <div class="card-header bg-primary text-white"><h4>Candidate Registration</h4></div>
+        <div class="card-body">
+            <form asp-action="AddCandidate" role="form">
+                @for (int idx = 0; idx < Model.PositionList.Count; idx++)
+                {
+                    @Html.HiddenFor(_ => Model.PositionList[idx].Text)
+                    @Html.HiddenFor(_ => Model.PositionList[idx].Value)
+                }
+                @for (int idx = 0; idx < Model.ExperienceMonthList.Count; idx++)
+                {
+                    @Html.HiddenFor(_ => Model.ExperienceMonthList[idx].Text)
+                    @Html.HiddenFor(_ => Model.ExperienceMonthList[idx].Value)
+                }
+                @for (int idx = 0; idx < Model.ExperienceYearList.Count; idx++)
+                {
+                    @Html.HiddenFor(_ => Model.ExperienceYearList[idx].Text)
+                    @Html.HiddenFor(_ => Model.ExperienceYearList[idx].Value)
+                }
+                @*@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"{(String.IsNullOrEmpty(Model.Id) ? "Add" : "Edit")} Question" })*@
+                <div class="modal-body form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Name"></label>
+                                        <input asp-for="Name" class="form-control" placeholder="[FirstName] [MiddleName] [LastName]" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Email"></label>
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="DateOfBirth"></label>
+                                        <input type="date" asp-for="DateOfBirth" class="form-control" />
+                                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Mobile"></label>
+                                        <input asp-for="Mobile" class="form-control" />
+                                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="ExperienceYear"></label>
-                            <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYearList" class="form-control">
-                                <option>Please select</option>
-                            </select>
-                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="ExperienceMonth"></label>
-                            <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonthList" class="form-control">
-                                <option>Please select</option>
-                            </select>
-                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ExperienceYear"></label>
+                                        <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYearList" class="form-control">
+                                            <option>Please select</option>
+                                        </select>
+                                        <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ExperienceMonth"></label>
+                                        <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonthList" class="form-control">
+                                            <option>Please select</option>
+                                        </select>
+                                        <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PositionId"></label>
+                                        <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
+                                            <option>Please select</option>
+                                        </select>
+                                        <span asp-validation-for="PositionId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="CurrentCompany"></label>
+                                        <input asp-for="CurrentCompany" class="form-control" value="N/A" />
+                                        <span asp-validation-for="CurrentCompany" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="PositionId"></label>
-                            <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
-                                <option>Please select</option>
-                            </select>
-                            <span asp-validation-for="PositionId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="CurrentCompany"></label>
-                            <input asp-for="CurrentCompany" class="form-control" value="N/A"/>
-                            <span asp-validation-for="CurrentCompany" class="text-danger"></span>
-                        </div>
+                <div class="form-group row">
+                    <div class="col-sm-12 center">
+                        <button type="submit" class="btn btn-primary mr-4">Register</button>
+                        @*<a asp-controller="home" asp-action="Index" @*onclick="history.back()"
+                        class="btn btn-danger ml-4 text-white">Cancel</a>*@
+                        <a asp-controller="home" asp-action="Index" class="btn btn-danger ml-4 text-white">Cancel</a>
                     </div>
                 </div>
-            </div>
+                @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { })*@
+            </form>
         </div>
     </div>
-    <div class="form-group row">
-        <div class="col-sm-12 center">
-            <button type="submit" class="btn btn-primary mr-4">Register</button>
-            @*<a asp-controller="home" asp-action="Index" @*onclick="history.back()"
-                class="btn btn-danger ml-4 text-white">Cancel</a>*@
-            <a asp-controller="home" asp-action="Index" class="btn btn-danger ml-4 text-white">Cancel</a>
-        </div>
-    </div>
-    @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { })*@
-</form>  
