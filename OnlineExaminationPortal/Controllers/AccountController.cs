@@ -336,7 +336,7 @@ namespace OnlineExaminationPortal.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("index", "home");
+                        return RedirectToAction("index", "candidate");
                     }
                 }
 
