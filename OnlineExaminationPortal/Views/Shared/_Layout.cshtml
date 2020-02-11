@@ -77,9 +77,9 @@
                 }
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
-                </li>
+                </li>*@
                 @if (signInManager.IsSignedIn(User))
                 {
                     @if ((User.IsInRole("Admin") || User.IsInRole("HR")))
