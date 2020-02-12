@@ -64,10 +64,10 @@
                             @if (@item.CandidateStatus == 1)
                             {
                                 <a id="allowForExam" asp-controller="Candidate" asp-action="SendExamLink" asp-route-canId="@item.Id"
-                                   class="btn btn-info" title="Send Exam Link" data-toggle="tooltip">
+                                   class="btn btn-info" title="Send Exam Link" data-toggle="tooltip" onclick="ShowLoader()">
                                     Send Link
                                 </a>
-                                <a id="deleteCandidate" class="btn btn-danger text-white" style="width:auto" onclick="deleteCandidate(@item.Id)" title="Delete User" data-toggle="tooltip">
+                                <a id="deleteCandidate" class="btn btn-danger text-white" style="width:auto" onclick="deleteCandidate(@item.Id)" title="Delete Candidate" data-toggle="tooltip">
                                     Delete
                                 </a>
                             }
@@ -128,7 +128,27 @@
         </div>
     </div>
 </div>
-
+<div id="loader" style="display: none;">
+    <img src="~/images/ZKZg.gif" height="100px" width="100px"/> 
+</div>
+<style>
+    #loader {
+        position: fixed;
+        left: 0;
+        right: 0;
+        background: #0020ff36;
+        z-index: 99;
+        text-align: center;
+        bottom: 0;
+        top: 0; 
+    }
+</style>
+<script>
+    function ShowLoader()
+    {       
+        $('#loader').show();
+    }
+</script>
 
 @section Scripts {
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
