@@ -33,7 +33,7 @@
         @foreach (var item in Model.ExamSubmissionResults)
         {
             counter = counter + 1;
-            <h5><b>@counter)</b><pre style="white-space:pre-wrap;">@item.QuestionDescription</pre></h5>
+            <h4><u>Question No.@counter</u></h4> @Html.Raw(item.QuestionDescription)
             <h4><u>Source Code:</u></h4>
             <pre>@item.SourceCode</pre>
             <h4><u>Output:</u></h4>
