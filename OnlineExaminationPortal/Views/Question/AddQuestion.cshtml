@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Add Question";
 }
-
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
 <h1>Add Question</h1>
 
 <form asp-action="AddQuestion" role="form">
@@ -13,8 +15,11 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="QuestionDescription"></label>
-                    @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
+                    <textarea asp-for="QuestionDescription" class="form-control"></textarea>
                     <span asp-validation-for="QuestionDescription" class="text-danger"></span>
+                    @*<label asp-for="QuestionDescription"></label>
+                        @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
+                        <span asp-validation-for="QuestionDescription" class="text-danger"></span>*@
                 </div>
                 <div class="form-group">
                     <label asp-for="Marks"></label>
@@ -39,4 +44,21 @@
         </div>
     </div>
     @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { })*@
-</form>  
+</form>
+
+<script>
+    $('#QuestionDescription').summernote({
+        placeholder: 'Write question here...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>

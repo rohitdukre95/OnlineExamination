@@ -30,7 +30,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.QuestionDescription</td>
+                        <td>@Html.Raw(item.QuestionDescription)</td>
                         <td>@item.Marks</td>
                         <td>@item.Position</td>
                         <td>
