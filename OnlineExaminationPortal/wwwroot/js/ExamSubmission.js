@@ -119,9 +119,10 @@ function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId, r
             localStorage.clear();
             window.location.href = '/Exam/TestSubmit?canId=' + response.candidateId;
         }
-        else if (requestFrom == "Save"){
-            window.location.href = '/Exam/RenderQuestion?pageNumber=' + (response.pageNumber-1) + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
-
+        else if (requestFrom == "Save") {    
+            if (response.pageNumber != "5") {
+                window.location.href = '/Exam/RenderQuestion?pageNumber=' + (response.pageNumber) + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
+            }
         }
         else {
             window.location.href = '/Exam/RenderQuestion?pageNumber=' + response.pageNumber + '&positionId=' + response.positionId + '&candidateId=' + response.candidateId;
