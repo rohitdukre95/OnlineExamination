@@ -220,7 +220,7 @@ namespace OnlineExaminationPortal.Controllers
             }
             logger.LogError($"Parameters are not valid for the action CheckCandidateDetailsToStartExam of CandidateController");
             ViewBag.ErrorTitle = $"Parameters are not valid";
-            ViewBag.ErrorMessage = $"Details propvided are not proper to start exam";
+            ViewBag.ErrorMessage = $"Details provided are not proper to start exam";
             return View("Error");
         }
 

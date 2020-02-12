@@ -97,15 +97,23 @@
                             <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
                         </li>
                     }
+                    <li class="nav-item nav-link">
+                        @{ var userObj = await userManager.FindByNameAsync(User.Identity.Name);}
+                        @*@userObj.FirstName @userObj.LastName*@
+                        <b>Hello  @userObj.FirstName</b>
+                    </li>
+                    <li class="nav-item dropdown">                                                                     
 
-                    <li class="nav-item">
-                        <form method="post" asp-action="logout" asp-controller="account">
-                            <button type="submit" class="nav-link btn btn-link py-0"
-                                   >
-                                @{ var userObj = await userManager.FindByNameAsync(User.Identity.Name);}
-                                Logout @userObj.FirstName @userObj.LastName
-                            </button>
-                        </form>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img style="width:32px;height:32px" src="~/images/logout.png" />
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="account"
+                                       asp-action="ChangePassword">Change Password</a>
+                                    <a class="dropdown-item" asp-controller="account"
+                                       asp-action="logout">Logout</a>                                  
+                                </div>                                     
                     </li>
                 }
                 else
