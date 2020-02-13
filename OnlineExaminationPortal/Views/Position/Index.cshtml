@@ -66,7 +66,8 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                     @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "AddModal_PositionDescription" })
+                        @Html.Label("Position Description")
+                        @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "AddModal_PositionDescription" })
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -89,8 +90,10 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                        @Html.Label("Position Id")
                         @Html.TextBox("Id", "", new { @class = "form-control", id = "EditModal_Id", disabled = "true" })
-                        <br />
+                        <br />   
+                        @Html.Label("Position Description")
                         @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "EditModal_PositionDescription" })
                     </p>
                 </div>
@@ -112,8 +115,10 @@
                 </div>
                 <div class="modal-body">
                     <p>
+                        @Html.Label("Position Id")
                         @Html.TextBox("Id", "", new { @class = "form-control", id = "DeleteModal_Id", disabled = "true" })
                         <br />
+                        @Html.Label("Position Description")
                         @Html.TextBox("PositionDescription", "", new { @class = "form-control", id = "DeleteModal_PositionDescription", disabled = "true" })
                     </p>
                 </div>
