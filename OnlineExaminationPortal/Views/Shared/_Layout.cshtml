@@ -111,8 +111,9 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-controller="account"
                                        asp-action="ChangePassword">Change Password</a>
-                                    <a class="dropdown-item" asp-controller="account"
-                                       asp-action="logout">Logout</a>                                  
+                                    <form method="post" asp-action="logout" asp-controller="account">
+                                       <a class="dropdown-item" style="cursor:pointer" onclick="this.parentElement.submit()">Logout</a>
+                                    </form>
                                 </div>                                     
                     </li>
                 }
