@@ -16,13 +16,13 @@
         </div>
         <div class="col-md-9 register-right">
             @*<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
-                </li>
-            </ul>*@
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
+                    </li>
+                </ul>*@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading"><b>Candidate Registration Form</b></h3>
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label asp-for="DateOfBirth">DateOfBirth<span class="star">*</span></label>
+                                    <label asp-for="DateOfBirth">Date Of Birth<span class="star">*</span></label>
                                     <input type="date" asp-for="DateOfBirth" class="form-control" />
                                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                                 </div>
@@ -76,41 +76,42 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="ExperienceYear">ExperienceYear<span class="star">*</span></label>
+                                    <label asp-for="ExperienceYear">Experience Year<span class="star">*</span></label>
                                     <select asp-for="ExperienceYear" asp-items="@Model.ExperienceYearList" class="form-control">
                                         <option>Please select</option>
                                     </select>
                                     <span asp-validation-for="ExperienceYear" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="ExperienceMonth">ExperienceMonth<span class="star">*</span></label>
+                                    <label asp-for="ExperienceMonth">Experience Month<span class="star">*</span></label>
                                     <select asp-for="ExperienceMonth" asp-items="@Model.ExperienceMonthList" class="form-control">
                                         <option>Please select</option>
                                     </select>
-                                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                                    <span asp-validation-for="ExperienceMonth" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="PositionId">PositionId<span class="star">*</span></label>
+                                    <label asp-for="PositionId">Position<span class="star">*</span></label>
                                     <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
                                         <option>Please select</option>
                                     </select>
                                     <span asp-validation-for="PositionId" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="CurrentCompany">CurrentCompany<span class="star">*</span></label>
+                                    <label asp-for="CurrentCompany">Current Company<span class="star">*</span></label>
                                     <input asp-for="CurrentCompany" class="form-control" value="N/A" />
                                     <span asp-validation-for="CurrentCompany" class="text-danger"></span>
-                                </div>                           
+                                </div>
                             </div>
 
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
 </div>
+@**@
 <link href="~/css/home.css" rel="stylesheet" />
-
-
+@*<script src="~/js/CustomScript.js"></script>*@
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>

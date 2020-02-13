@@ -9,23 +9,23 @@
 
 <div class="top-buffer"></div>
 <div class="card">
-    <div class="card-header bg-primary text-white" style="font-size:20px">
+    <div class="card-header bg-primary text-white" style="font-size:22px">
         Candidate List
         <a asp-action="AddCandidate" asp-controller="Candidate" class="btn btn-success ml-1 float-md-right">Register New Candidate</a>
     </div>
     <div class="card-body">
 
         <table id="candidateList" class="table table-bordered table-striped table-condensed mt-1">
-            <thead>
+            <thead style="background-color: lightyellow;">
                 <tr>
+                    <th>Application Date</th>
+                    <th>Applied Position</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Date of Birth</th>
                     <th>Mobile</th>
                     <th>Current Company</th>
                     <th>Experience</th>
-                    <th>Applied Position</th>
-                    <th>Application Date</th>
                     <th>Status</th>
                     <th>Exam Status</th>
                     <th>View/Download Result</th>
@@ -35,56 +35,59 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Email</td>
-                        <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
-                        <td>@item.Mobile</td>
-                        <td>@item.CurrentCompany</td>
-                        <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
-                        <td>@item.Position.PositionDescription</td>
-                        <td>@item.CreatedOn</td>
-                        <td>@item.StatusString</td>
-                        <td>
+                <tr>
+                    <td>@item.CreatedOn.ToString("dd-MMM-yyyy hh-mm-ss")</td>
+                    <td>@item.Position.PositionDescription</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.CurrentCompany</td>
+                    <td>@item.ExperienceYear Years @item.ExperienceMonth Months </td>
+                    <td>@item.StatusString</td>
+                    <td>
 
-                            @item.IsExamClearedString &nbsp;&nbsp;
-                            @{ if (item.CandidateStatus == 4)
-                                {
-                                    <a style="cursor:pointer" title="Change Result Status" data-toggle="tooltip" onclick="ShowCandidateModal(@item.Id,'EditModal')"><i class="material-icons" style="font-size:18px">&#xE254;</i></a>
-                                    <input type="hidden" value="@item.Id |@item.Marks |@item.IsExamCleared" id="@item.Id" />}
-                            }
-                        </td>
-                        <td>
-                            <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="Index" asp-route-canId="@item.Id" title="View Result" data-toggle="tooltip"
-                              ><i class="material-icons" style="font-size:20px">visibility</i></a>&nbsp;&nbsp;/&nbsp;&nbsp;
-                            <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="ConvertToPDF" asp-route-canId="@item.Id" title="Download Result as PDF" data-toggle="tooltip"
-                             ><i class="material-icons" style="font-size:20px">file_download</i></a>
-                        </td>
-                        <td>
-                            @if (@item.CandidateStatus == 1)
+                        @item.IsExamClearedString &nbsp;&nbsp;
+                        @{ if (item.CandidateStatus >= 4)
                             {
-                                <a id="allowForExam" asp-controller="Candidate" asp-action="SendExamLink" asp-route-canId="@item.Id"
-                                   class="btn btn-info" title="Send Exam Link" data-toggle="tooltip" onclick="ShowLoader()">
-                                    Send Link
-                                </a>
-                                <a id="deleteCandidate" class="btn btn-danger text-white" style="width:auto" onclick="deleteCandidate(@item.Id)" title="Delete Candidate" data-toggle="tooltip">
-                                    Delete
-                                </a>
-                            }
-                            else
+                                <a style="cursor:pointer" title="Change Result Status" data-toggle="tooltip" onclick="ShowCandidateModal(@item.Id,'EditModal')"><i class="material-icons" style="font-size:18px">edit</i></a>
+                                <input type="hidden" value="@item.Id |@item.Marks |@item.IsExamCleared" id="@item.Id" />}
+                        }
+                    </td>
+                    <td>
+                        @{ if (item.CandidateStatus >= 4)
                             {
-                                <a id="allowForExam" class="btn btn-info disabled" title="Send Exam Link" data-toggle="tooltip">
-                                    Send Link
-                                </a>
-                                <a id="deleteCandidate" class="btn btn-danger text-white" style="width:auto" onclick="deleteCandidate(@item.Id)" title="Delete User" data-toggle="tooltip">
-                                    Delete
-                                </a>
+                                <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="Index" asp-route-canId="@item.Id" title="View Result" data-toggle="tooltip"><i class="material-icons" style="font-size:20px">visibility</i></a>@Html.Raw("&nbsp&nbsp&nbsp");
+                                <a id="allowForExam" target="_blank" asp-controller="Pdf" asp-action="ConvertToPDF" asp-route-canId="@item.Id" title="Download Result as PDF" data-toggle="tooltip"><i class="material-icons" style="font-size:20px">file_download</i></a>
+                                }
                             }
-                            @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
-        <i class="glyphicon glyphicon-trash"></i>  Delete
-          </a>*@
-                        </td>
-                    </tr>
+                     </td>
+                    <td>
+                        @if (@item.CandidateStatus == 1)
+                        {
+                            <a id="allowForExam" asp-controller="Candidate" asp-action="SendExamLink" asp-route-canId="@item.Id"
+                               class="btn btn-info" title="Send Exam Link" data-toggle="tooltip" onclick="ShowLoader()">
+                                Send Link
+                            </a>
+                            <a id="deleteCandidate" class="btn btn-danger text-white" style="width:auto" onclick="deleteCandidate(@item.Id)" title="Delete Candidate" data-toggle="tooltip">
+                                Delete
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="allowForExam" class="btn btn-info disabled" title="Send Exam Link" data-toggle="tooltip">
+                                Send Link
+                            </a>
+                            <a id="deleteCandidate" class="btn btn-danger text-white" style="width: auto
+" onclick="deleteCandidate(@item.Id)" title="Delete User" data-toggle="tooltip">
+                                Delete
+                            </a>
+                        }
+                        @*<a id="deleteUserModal" asp-controller="Question" asp-action="DeleteQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>  Delete
+              </a>*@
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

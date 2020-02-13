@@ -302,6 +302,7 @@ namespace OnlineExaminationPortal.Controllers
             {
                 can.Marks = Int32.Parse(editData[1]);
                 can.IsExamCleared = Int32.Parse(editData[2]);
+                can.CandidateStatus = 5;
                 try
                 {
                     candidateRepository.Update(can);

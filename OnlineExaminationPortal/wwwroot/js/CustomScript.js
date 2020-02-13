@@ -38,8 +38,9 @@ $(document).ready(function () {
     var table = $('#candidateList').DataTable({
         orderCellsTop: true,
         fixedHeader: true,
-        dom: 'Bfrtip',
+        dom: '<lfB<t> ip>',
         "scrollX": true,
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 
         buttons: [
             //{

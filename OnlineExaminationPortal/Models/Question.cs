@@ -12,6 +12,7 @@ namespace OnlineExaminationPortal.Models
     public class Question : BaseEntity
     {
         [Required(ErrorMessage ="Question Description is required.")]
+        [Display(Name = "Question Description")]
         public string QuestionDescription { get; set; }
         [Required]
         public float? Marks { get; set; }
