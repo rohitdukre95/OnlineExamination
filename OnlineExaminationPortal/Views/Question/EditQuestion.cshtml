@@ -5,56 +5,59 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
-<h1>Edit Question</h1>
-
-<form asp-action="EditQuestion" role="form">
-    @*@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"{(String.IsNullOrEmpty(Model.Id) ? "Add" : "Edit")} Question" })*@
-    <div class="modal-body form-horizontal">
-        <div class="row">
-            <div class="col-md-12">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                @*<div class="form-group">
-            <label asp-for="QuestionDescription"></label>
-            @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
-            <span asp-validation-for="QuestionDescription" class="text-danger"></span>
-        </div>*@
-                <div class="form-group">
-                    <label asp-for="QuestionDescription"></label>
-                    <textarea asp-for="QuestionDescription" class="form-control"></textarea>
-                    <span asp-validation-for="QuestionDescription" class="text-danger"></span>
-                    @*<label asp-for="QuestionDescription"></label>
-            @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
-            <span asp-validation-for="QuestionDescription" class="text-danger"></span>*@
-                </div>
-                <div class="form-group">
-                    <label asp-for="Marks"></label>
-                    <input asp-for="Marks" class="form-control" />
-                    <span asp-validation-for="Marks" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PositionId"></label>
-                    <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
-                        <option>Please select</option>
-                    </select>
-                    <span asp-validation-for="PositionId" class="text-danger"></span>
+<div class="card">
+    <div class="card-header bg-primary text-white"><h3>Edit Question</h3></div>
+    <div class="card-body">
+        <form asp-action="EditQuestion" role="form">
+            @*@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"{(String.IsNullOrEmpty(Model.Id) ? "Add" : "Edit")} Question" })*@
+            <div class="modal-body form-horizontal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        @*<div class="form-group">
+                                <label asp-for="QuestionDescription"></label>
+                                @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
+                                <span asp-validation-for="QuestionDescription" class="text-danger"></span>
+                            </div>*@
+                        <div class="form-group">
+                            <label asp-for="QuestionDescription"></label>
+                            <textarea asp-for="QuestionDescription" class="form-control"></textarea>
+                            <span asp-validation-for="QuestionDescription" class="text-danger"></span>
+                            @*<label asp-for="QuestionDescription"></label>
+                                @Html.TextAreaFor(m => m.QuestionDescription, new { @class = "form-control", rows = "8" })
+                                <span asp-validation-for="QuestionDescription" class="text-danger"></span>*@
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Marks"></label>
+                            <input asp-for="Marks" class="form-control" />
+                            <span asp-validation-for="Marks" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PositionId"></label>
+                            <select asp-for="PositionId" asp-items="@Model.PositionList" class="form-control">
+                                <option>Please select</option>
+                            </select>
+                            <span asp-validation-for="PositionId" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-controller="Question" asp-action="index"
+                       class="btn btn-danger">Cancel</a>
+                </div>
+            </div>
+            @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { })*@
+        </form>
     </div>
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a asp-controller="Question" asp-action="index"
-               class="btn btn-danger">Cancel</a>
-        </div>
-    </div>
-    @*@await Html.PartialAsync("_ModalFooter", new ModalFooter { })*@
-</form> 
+</div>
 <script>
     $('#QuestionDescription').summernote({
         placeholder: 'Write question here...',
         tabsize: 2,
-        height: 120,
+        height: 200,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
@@ -65,4 +68,4 @@
             ['view', ['fullscreen', 'codeview', 'help']]
         ]
     });
-</script> 
+</script>
