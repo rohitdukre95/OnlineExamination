@@ -92,5 +92,43 @@ namespace OnlineExaminationPortal.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult DeleteMCQQuestion(int id)
+        {
+            MCQQuestions question = null;
+            if (id != 0)
+            {
+                question = mcqRepository.Get(id);
+            }
+            else
+            {
+                question = new MCQQuestions();
+            }         
+            return View(question);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteMCQQuestion(int id, MCQQuestions model)
+        {
+
+            MCQQuestions question = mcqRepository.Get(id);
+            if (question != null)
+            {
+                try
+                {
+                    question.IsActive = false;
+                    mcqRepository.Update(question);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError($"Error while deleting question: {ex}");
+                    ViewBag.ErrorTitle = $"Error deleting question";
+                    ViewBag.ErrorMessage = $"Error while deleting the question : {model.Question}";
+                    return View("Error");
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
