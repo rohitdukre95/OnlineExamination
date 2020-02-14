@@ -26,14 +26,12 @@ namespace OnlineExaminationPortal.Models
         public string StandardError { get; set; }
         public string CompileTimeOutput { get; set; }
         public string SandboxMessage { get; set; }
-        public string StatusLine { get; set; }
-        [ForeignKey("LanguageRef")]    
-        public int LanguageId { get; set; }         
-        public LanguageMaster LanguageRef { get; set; }
-     
+        public string StatusLine { get; set; }  
         [ForeignKey("PositionRef")]
         public int PositionId { get; set; }
         public Position PositionRef { get; set; }
+        public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
 
         public static implicit operator ExamSubmissionResult(ExamSubmissionViewModel v)
         {

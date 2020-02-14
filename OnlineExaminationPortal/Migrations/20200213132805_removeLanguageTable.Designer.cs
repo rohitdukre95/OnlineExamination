@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineExaminationPortal.Models;
 
 namespace OnlineExaminationPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200213132805_removeLanguageTable")]
+    partial class removeLanguageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,40 +270,40 @@ namespace OnlineExaminationPortal.Migrations
                         {
                             Id = 1,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 501, DateTimeKind.Local).AddTicks(7127),
+                            CreatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(1235),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2018),
+                            LastUpdatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6066),
                             Status = "Candidate Registered"
                         },
                         new
                         {
                             Id = 2,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2458),
+                            CreatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6499),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2464),
+                            LastUpdatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6506),
                             Status = "Allowed for Exam"
                         },
                         new
                         {
                             Id = 3,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2471),
+                            CreatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6512),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2471),
+                            LastUpdatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6512),
                             Status = "Exam In Progress"
                         },
                         new
                         {
                             Id = 4,
                             CreatedBy = 1,
-                            CreatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2471),
+                            CreatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6512),
                             IsActive = true,
                             LastUpdatedBy = 1,
-                            LastUpdatedOn = new DateTime(2020, 2, 13, 19, 7, 53, 502, DateTimeKind.Local).AddTicks(2471),
+                            LastUpdatedOn = new DateTime(2020, 2, 13, 18, 58, 5, 688, DateTimeKind.Local).AddTicks(6512),
                             Status = "Exam Completed"
                         });
                 });
@@ -347,10 +349,6 @@ namespace OnlineExaminationPortal.Migrations
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<bool>("IsActive");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<string>("LanguageName");
 
                     b.Property<int>("LastUpdatedBy");
 

@@ -327,11 +327,16 @@ button.dt-button{
     background: #28a745;
     color: white;
 }
-
+/*.dataTables_scroll table tr th input {
+    height: 30px;
+}*/
+table.dataTable thead tr:first-child {
+    background-color: lightyellow;   
+}
 /*End of Style for datatable*/
 
 
-}
+
 table input[type=text] {
     box-sizing: border-box;
     border: 2px solid #ccc;

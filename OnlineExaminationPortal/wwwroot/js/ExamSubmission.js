@@ -90,6 +90,7 @@ function callonload() {
         sourceEditor.setValue(obj.sourceCode);
         stdoutEditor.setValue(obj.standardOutput);
         stdinEditor.setValue(obj.standardInput);
+        $selectLanguage.dropdown("set selected", obj.languageId);
     }
 }
 
@@ -103,6 +104,7 @@ function SubmitAnswer(nextPageNumber, positionId, questionNumber, candidateId, r
     CandidateQuestionData.PositionId = positionId;
     CandidateQuestionData.SourceCode = sourceEditor.getValue();
     CandidateQuestionData.LanguageId = $selectLanguage.val();
+    CandidateQuestionData.LanguageName = $(".text").text();
     CandidateQuestionData.CompilerOptions = $compilerOptions.val();
     CandidateQuestionData.CommandLineArguments = $commandLineArguments.val();
     CandidateQuestionData.StandardInput = stdinEditor.getValue();

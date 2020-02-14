@@ -71,7 +71,8 @@ namespace OnlineExaminationPortal.Controllers
                                     CreatedBy = 1,
                                     LastUpdatedBy = 1,
                                     LastUpdatedOn = DateTime.Now,
-                                    LanguageId = 1
+                                    LanguageId = 0,
+                                    LanguageName = ""
                                 };
                                 submissionRepository.Insert(obj);
                             }
@@ -130,7 +131,8 @@ namespace OnlineExaminationPortal.Controllers
                         candidateCurQuestion.CommandLineArguments = model.CommandLineArguments;
                         candidateCurQuestion.CompilerOptions = model.CompilerOptions;
                         candidateCurQuestion.CompileTimeOutput = model.CompileTimeOutput;
-                        candidateCurQuestion.LanguageId = 1;
+                        candidateCurQuestion.LanguageId = model.LanguageId;
+                        candidateCurQuestion.LanguageName = model.LanguageName;
                         candidateCurQuestion.LastUpdatedBy = 1;
                         candidateCurQuestion.LastUpdatedOn = DateTime.Now;
                         submissionRepository.Update(candidateCurQuestion);

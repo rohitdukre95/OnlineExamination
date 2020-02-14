@@ -12,6 +12,7 @@ namespace OnlineExaminationPortal.ViewModels
         public string QuestionDescription { get; set; }
         public int CandidateId { get; set; }
         public int LanguageId { get; set; }
+        public string LanguageName { get; set; }
         public int ExperienceId { get; set; }
         public int PageNumber { get; set; }        
         public string SourceCode { get; set; }
