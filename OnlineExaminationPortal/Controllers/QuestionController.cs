@@ -88,7 +88,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpGet]
-        public ViewResult AddQuestion()
+        public ViewResult AddCodingQuestion()
         {
             Question model = new Question();
             var posList = posRepository.GetAll();
@@ -101,7 +101,7 @@ namespace OnlineExaminationPortal.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestion(Question model)
+        public IActionResult AddCodingQuestion(Question model)
         {
             if (ModelState.IsValid)
             {
