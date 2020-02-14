@@ -73,7 +73,7 @@ namespace OnlineExaminationPortal.Controllers
                         question.IsActive = true;
                         question.LastUpdatedOn = DateTime.Now;
                         question.LastUpdatedBy = 1;
-                        queRepository.Update(model);
+                        queRepository.Update(question);
                     }
                     catch(Exception ex)
                     {
