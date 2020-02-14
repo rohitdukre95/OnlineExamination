@@ -50,6 +50,8 @@
     <Compile Remove="Migrations\20200130140522_removecolumncodefromsubmission.Designer.cs" />
     <Compile Remove="Migrations\20200205062127_AddedcandidatestatusTable.cs" />
     <Compile Remove="Migrations\20200205062127_AddedcandidatestatusTable.Designer.cs" />
+    <Compile Remove="Migrations\20200214102452_AddTalesMCQQuestionsAndMCQSubmissionResult.cs" />
+    <Compile Remove="Migrations\20200214102452_AddTalesMCQQuestionsAndMCQSubmissionResult.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

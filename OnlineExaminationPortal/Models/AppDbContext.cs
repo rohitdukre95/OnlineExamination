@@ -22,6 +22,8 @@ namespace OnlineExaminationPortal.Models
         public DbSet<Position> Positions { get; set; }
         //public DbSet<LanguageMaster> LanguageList { get; set; }
         public DbSet<CandidateStatus> CandidateStatus { get; set; }
+        public DbSet<MCQQuestions> MCQQuestions { get; set; }
+        public DbSet<MCQSubmissionResult> MCQSubmissionResult { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
