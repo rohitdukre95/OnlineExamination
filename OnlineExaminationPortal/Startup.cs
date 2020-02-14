@@ -116,6 +116,7 @@ namespace OnlineExaminationPortal
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
             RotativaConfiguration.Setup(env);
+
         }
     }
 }
