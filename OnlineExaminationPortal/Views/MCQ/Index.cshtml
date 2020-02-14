@@ -1,3 +1,56 @@
-﻿
+﻿@model IEnumerable<MCQQuestions>
 
+@{
+    ViewBag.Title = "Question List";
+}
 
+<div class="top-buffer"></div>
+<div class="card">
+    <div class="card-header bg-primary text-white"><h4>Questions</h4></div>
+    <div class="card-body">
+        <div class="btn-group">
+
+            <a id="createEditQuestionModal" asp-action="AddMCQQuestion" class="btn btn-primary">
+                <i class="material-icons" style="font-size:18px;">add</i>  Add MCQ Question
+            </a>
+
+        </div>
+
+        @*// <div class="top-buffer"></div>*@
+        <table class="table table-bordered table-striped table-condensed mt-1">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Option 1</th>
+                    <th>Option 2</th>
+                    <th>Option 2</th>
+                    <th>Option 2</th>
+                    <th>Correct Answer</th>
+                    <th width="13%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@Html.Raw(item.Question)</td>
+                    <td>@item.Option1</td>
+                    <td>@item.Option2</td>
+                    <td>@item.Option3</td>
+                    <td>@item.Option4</td>
+                    <td>@item.CorrectAnswer</td>
+                    <td>
+                        <a id="editUserModal" asp-controller="Question" asp-action="EditMCQQuestion" asp-route-id="@item.Id"
+                           class="btn btn-info">
+                            <i class="material-icons" style="font-size:18px">&#xE254;</i>  Update
+                        </a>
+                        <a id="deleteUserModal" asp-controller="Question" asp-action="DeleteMCQQuestion" asp-route-id="@item.Id" class="btn btn-danger">
+                            <i class="material-icons" style="font-size:18px;">delete</i>  Delete
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>  
