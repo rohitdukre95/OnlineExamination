@@ -80,8 +80,8 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 @*<li class="nav-item">
-                    <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
-                </li>*@
+            <a asp-action="AddCandidate" asp-controller="Candidate" class="nav-link">Candidate Registration</a>
+        </li>*@
                 @if (signInManager.IsSignedIn(User))
                 {
                     @if ((User.IsInRole("Admin") || User.IsInRole("HR")))
@@ -93,8 +93,20 @@
                             <a asp-action="Index" asp-controller="Position" class="nav-link">Positions</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
+                        @*<li class="nav-item">
+                    <a asp-action="Index" asp-controller="Question" class="nav-link">Questions</a>
+                </li>*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownQuestion" style="padding-top:2px"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Questions<i class="material-icons" style="font-size:24px">arrow_drop_down</i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownQuestion">
+                                <a class="dropdown-item" asp-controller="MCQ"
+                                   asp-action="Index">MCQ Question</a>
+                                <a class="dropdown-item" asp-controller="Question"
+                                   asp-action="Index">Coding Question</a>                            
+                            </div>
                         </li>
                     }
                     <li class="nav-item nav-link">
@@ -102,19 +114,19 @@
                         @*@userObj.FirstName @userObj.LastName*@
                         <b>Hello  @userObj.FirstName</b>
                     </li>
-                    <li class="nav-item dropdown">                                                                     
+                    <li class="nav-item dropdown">
 
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img style="width:32px;height:32px" src="~/images/logout.png" />
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="account"
-                                       asp-action="ChangePassword">Change Password</a>
-                                    <form method="post" asp-action="logout" asp-controller="account">
-                                       <a class="dropdown-item" style="cursor:pointer" onclick="this.parentElement.submit()">Logout</a>
-                                    </form>
-                                </div>                                     
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img style="width:32px;height:32px" src="~/images/logout.png" />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="account"
+                               asp-action="ChangePassword">Change Password</a>
+                            <form method="post" asp-action="logout" asp-controller="account">
+                                <a class="dropdown-item" style="cursor:pointer" onclick="this.parentElement.submit()">Logout</a>
+                            </form>
+                        </div>
                     </li>
                 }
                 else

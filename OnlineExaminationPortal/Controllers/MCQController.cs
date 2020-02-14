@@ -25,7 +25,7 @@ namespace OnlineExaminationPortal.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var mcqQuestionsList = mcqRepository.GetAll();
+            var mcqQuestionsList = mcqRepository.GetAll().Where(ques => ques.IsActive == true);
             return View(mcqQuestionsList);
         }
 
@@ -40,6 +40,11 @@ namespace OnlineExaminationPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.IsActive = true;
+                model.CreatedBy = 1;
+                model.CreatedOn = DateTime.Now;
+                model.LastUpdatedBy = 1;
+                model.LastUpdatedOn = DateTime.Now;
                 mcqRepository.Insert(model);
             }
             return RedirectToAction("Index");

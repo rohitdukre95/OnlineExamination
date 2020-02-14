@@ -10,6 +10,6 @@ namespace OnlineExaminationPortal.ViewModels
     public class MCQQuestionsViewModel
     {
         public int CandidateId { get; set; }
-        public List<MCQQuestions> MCQQuestionsLst { get; set; }
+        public List<MCQQuestions> MCQQuestionsList { get; set; }
     }
 }

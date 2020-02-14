@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Edit MCQ Question";
 }
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
 <div class="card">
     <div class="card-header bg-primary text-white"><h3>Edit MCQ Question</h3></div>
     <div class="card-body">
@@ -61,38 +61,14 @@
         </form>
     </div>
 </div>
-<script>
-    $('#Question').summernote({
-                placeholder: 'Write question here...',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-            var OptionSummerNote =summernote({
-                placeholder: 'Write question here...',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+<script src="~/commonModel/summernote.js"></script>
 
-    $("#Option1").OptionSummerNote;
-    $("#Option2").OptionSummerNote;
-    $("#Option3").OptionSummerNote;
-    $("#Option4").OptionSummerNote;
+<script>
+    getSummerNote("Question", 120);
+    getSummerNote("Option1", 70);
+    getSummerNote("Option2", 70);
+    getSummerNote("Option3", 70);
+    getSummerNote("Option4", 70);
 </script>
