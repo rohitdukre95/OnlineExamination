@@ -38,19 +38,6 @@
 @{await Html.RenderPartialAsync("_CodeEditor"); }
 
 
-@*<div class="row ml-0">
-    @if (backPageNumber > 0)
-    {     
-        <a class="btn btn-info text-white m-1" onclick=SubmitAnswer(@backPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Previous")> Previous Question</a>
-    }
-    <a class="btn btn-primary text-white ml-auto m-1" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Save")>Save Question</a>
-    @if (nextPageNumber < 5)
-    {
-        <a class="btn btn-info text-white ml-auto m-1" onclick=SubmitAnswer(@nextPageNumber,@Model.PositionId,@Model.QuestionNumber,@Model.CandidateId,"Next")> Next Question</a>
-    }
-</div>*@
-
-
 @section Scripts {
     <script asp-append-version="true" src="~/js/ExamSubmission.js"></script>
 }
