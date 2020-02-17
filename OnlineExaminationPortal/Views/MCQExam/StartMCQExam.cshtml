@@ -1,19 +1,25 @@
 ﻿@model MCQQuestionsViewModel
 
+@{ 
+    var questionNo=0;
+}
 <div class="container">
+    <h2 class="center font-weight-bold">Atidan IQ Test</h2>
     <form method="post" asp-action="SubmitMCQTest" asp-controller="MCQExam">
         <input type="hidden" asp-for="@Model.CandidateId" />
         @for (int i = 0; i < Model.MCQQuestionsList.Count; i++)
         {
+        <div class="shadow p-3 mb-5 rounded" style="background-color:lightyellow">
             <input type="hidden" asp-for="@Model.MCQQuestionsList[i].Id" />
             <input type="hidden" asp-for="@Model.MCQQuestionsList[i].MCQSubmissionResultId" />
-            var questionNo = i + 1;
-            <span>Question No. @questionNo  @Html.Raw(Model.MCQQuestionsList[i].Question)</span>
+            @{questionNo = i + 1;}
+            <span class="font-weight-bold" style="font-size:26px">Question No. @questionNo  @Html.Raw(Model.MCQQuestionsList[i].Question)</span>
 
-            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="1" /> <label>@Html.Raw(Model.MCQQuestionsList[i].Option1)</label><br />
-            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="2" /><label>@Html.Raw(Model.MCQQuestionsList[i].Option2)</label><br />
-            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="3" /><label> @Html.Raw(Model.MCQQuestionsList[i].Option3)</label><br />
-            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="4" /><label>@Html.Raw(Model.MCQQuestionsList[i].Option4)</label><br />
+            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="1" /> <label> @Html.Raw(Model.MCQQuestionsList[i].Option1)</label><br />
+            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="2" /> <label> @Html.Raw(Model.MCQQuestionsList[i].Option2)</label><br />
+            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="3" /> <label> @Html.Raw(Model.MCQQuestionsList[i].Option3)</label><br />
+            <input type="radio" asp-for="MCQQuestionsList[i].SelectedAnswer" value="4" /> <label> @Html.Raw(Model.MCQQuestionsList[i].Option4)</label><br />
+        </div>
         }
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Submit Test</button>
