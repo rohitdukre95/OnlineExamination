@@ -71,7 +71,6 @@ namespace OnlineExaminationPortal.Controllers
                             obj.LastUpdatedOn = DateTime.Now;
                             obj.IsActive = true;
                             mcqSubmissionRepository.Insert(obj);
-
                         }
                         var submittionResultQuestions = context.MCQSubmissionResult.Where(x => x.CandidateId == candId).ToList();
                         foreach (var item in submittionResultQuestions)
@@ -115,19 +114,28 @@ namespace OnlineExaminationPortal.Controllers
         {
             if (model != null)
             {
-                //List<MCQSubmissionResult> finalList = model.MCQQuestionsList.Select(a => new MCQSubmissionResult()
-                //{
-                //    Id=a.MCQSubmissionResultId,
-                //    SelectedAnswer = a.SelectedAnswer                    
-                //}).ToList();
-                foreach (var item in model.MCQQuestionsList)
+                try
                 {
-                    MCQSubmissionResult mCQSubmissionResult = mcqSubmissionRepository.Get(item.MCQSubmissionResultId);
-                    if (mCQSubmissionResult != null)
+                    List<MCQSubmissionResult> resultList = new List<MCQSubmissionResult>();
+                    foreach (var item in model.MCQQuestionsList)
                     {
-                        mCQSubmissionResult.SelectedAnswer = item.SelectedAnswer;
-                        mcqSubmissionRepository.Update(mCQSubmissionResult);
+                        MCQSubmissionResult mCQSubmissionResult = mcqSubmissionRepository.Get(item.MCQSubmissionResultId);
+                        if (mCQSubmissionResult != null)
+                        {
+                            mCQSubmissionResult.SelectedAnswer = item.SelectedAnswer;
+                            resultList.Add(mCQSubmissionResult);
+                            // mcqSubmissionRepository.Update(mCQSubmissionResult);
+                        }
                     }
+                    context.MCQSubmissionResult.UpdateRange(resultList);
+                    context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    logger.LogError($"Error while Submitting MCQ exam: {ex}");
+                    ViewBag.ErrorTitle = $"Error";
+                    ViewBag.ErrorMessage = $"Error while Submitting MCQ exam";
+                    return View("Error");
                 }
             }
             return View("TestSubmit");
