@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineExaminationPortal.Models;
@@ -10,6 +11,7 @@ using OnlineExaminationPortal.ViewModels;
 
 namespace OnlineExaminationPortal.Controllers
 {
+    [AllowAnonymous]
     public class MCQExamController : Controller
     {
         private readonly IRepository<Candidate> candidateRepository;
@@ -67,16 +69,24 @@ namespace OnlineExaminationPortal.Controllers
                             obj.CreatedOn = DateTime.Now;
                             obj.LastUpdatedBy = 1;
                             obj.LastUpdatedOn = DateTime.Now;
+                            obj.IsActive = true;
                             mcqSubmissionRepository.Insert(obj);
 
                         }
-                        model.MCQQuestionsList = candidateMCQQuestions;
+                        var submittionResultQuestions = context.MCQSubmissionResult.Where(x => x.CandidateId == candId).ToList();
+                        foreach (var item in submittionResultQuestions)
+                        {
+                            var mcqQuestion = mcqQueRepository.Get(item.QuestionId);
+                            mcqQuestion.MCQSubmissionResultId = item.Id;
+                            model.MCQQuestionsList.Add(mcqQuestion);
+                        }
                     }
                     else
                     {
                         foreach (var item in mcqExamSubmissionResults)
                         {
                             var questionDetail = context.MCQQuestions.Where(x => x.Id == item.QuestionId).FirstOrDefault();
+                            questionDetail.MCQSubmissionResultId = item.Id;
                             model.MCQQuestionsList.Add(questionDetail);
                         }
                     }
@@ -99,33 +109,26 @@ namespace OnlineExaminationPortal.Controllers
             return View(model);
         }
 
-        //public IActionResult RenderQuestion(int candId)
-        //{
-        //    MCQQuestionsViewModel model = new MCQQuestionsViewModel();
-        //    List<MCQSubmissionResult> candidateQuestions = null ;
-        //    if (candId!=0)
-        //    {
-        //        candidateQuestions = context.MCQSubmissionResult.Where(x => x.CandidateId == candId).OrderBy(x => x.QuestionId).ToList();
-
-        //        if(candidateQuestions.Count>0)
-        //        {
-        //            foreach(var item in candidateQuestions)
-        //            {
-        //                var questionDetail = context.MCQQuestions.Where(x => x.Id == item.QuestionId).FirstOrDefault();
-        //                model.MCQQuestionsList.Add(questionDetail);
-        //            }
-        //        }
-        //        model.CandidateId = candId;
-        //    }     
-        //    return View("RenderQuestion", model);
-        //}
 
         [HttpPost]
-        public IActionResult SubmitMCQTest([FromBody] MCQQuestionsViewModel model)
+        public IActionResult SubmitMCQTest(MCQQuestionsViewModel model)
         {
             if (model != null)
             {
-
+                //List<MCQSubmissionResult> finalList = model.MCQQuestionsList.Select(a => new MCQSubmissionResult()
+                //{
+                //    Id=a.MCQSubmissionResultId,
+                //    SelectedAnswer = a.SelectedAnswer                    
+                //}).ToList();
+                foreach (var item in model.MCQQuestionsList)
+                {
+                    MCQSubmissionResult mCQSubmissionResult = mcqSubmissionRepository.Get(item.MCQSubmissionResultId);
+                    if (mCQSubmissionResult != null)
+                    {
+                        mCQSubmissionResult.SelectedAnswer = item.SelectedAnswer;
+                        mcqSubmissionRepository.Update(mCQSubmissionResult);
+                    }
+                }
             }
             return View();
 
