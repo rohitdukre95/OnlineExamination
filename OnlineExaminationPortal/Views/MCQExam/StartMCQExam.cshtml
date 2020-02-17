@@ -1,14 +1,19 @@
 ﻿@model MCQQuestionsViewModel
 
-<form method="post">
-    @for (int i = 0; i < Model.MCQQuestionsList.Count; i++)
-    {
-    <label asp-for="MCQQuestionsList[i].Question">@Html.Raw(Model.MCQQuestionsList[i].Question)</label>
-        
-        <input type="radio" asp-for="MCQQuestionsList[i].Option1" value="1" />@Model.MCQQuestionsList[i].Option1<br />
-        <input type="radio" asp-for="MCQQuestionsList[i].Option2" value="2" />@Model.MCQQuestionsList[i].Option2<br />
-        <input type="radio" asp-for="MCQQuestionsList[i].Option3" value="3" />@Model.MCQQuestionsList[i].Option3<br />
-        <input type="radio" asp-for="MCQQuestionsList[i].Option4" value="4" />@Model.MCQQuestionsList[i].Option4<br />
-    }
-    <input type="submit" />
-</form>
+<div class="container">
+    <form method="post">
+        @for (int i = 0; i < Model.MCQQuestionsList.Count; i++)
+        {
+            <p> @Html.Raw(Model.MCQQuestionsList[i].Question)</p>
+            <input type="radio" name="@Model.MCQQuestionsList[i].Id" asp-for="MCQQuestionsList[i].Option1" value="1" /><label asp-for="@Model.MCQQuestionsList[i].Id">@Html.Raw(Model.MCQQuestionsList[i].Option1)</label><br />
+            <input type="radio" name="@Model.MCQQuestionsList[i].Id" asp-for="MCQQuestionsList[i].Option2" value="2" /><label asp-for="@Model.MCQQuestionsList[i].Id">@Html.Raw(Model.MCQQuestionsList[i].Option2)</label><br />
+            <input type="radio" name="@Model.MCQQuestionsList[i].Id" asp-for="MCQQuestionsList[i].Option3" value="3" /><label asp-for="@Model.MCQQuestionsList[i].Id">
+                @Html.Raw(Model.MCQQuestionsList[i].Option3)
+            </label><br />
+            <input type="radio" name="@Model.MCQQuestionsList[i].Id" asp-for="MCQQuestionsList[i].Option4" value="4" /><label asp-for="@Model.MCQQuestionsList[i].Id">
+                @Html.Raw(Model.MCQQuestionsList[i].Option4)
+            </label><br />
+        }
+        <input type="submit" />
+    </form>
+    </div>

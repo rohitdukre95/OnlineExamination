@@ -35,11 +35,14 @@ namespace OnlineExaminationPortal.Controllers
         [HttpGet]
         public IActionResult StartMCQExam(int candId)
         {
+            MCQQuestionsViewModel model = new MCQQuestionsViewModel();
+            Candidate candidate=null;
             try
-            {
-                var candidate = candidateRepository.Get(candId);
+            {              
+                candidate = candidateRepository.Get(candId);
                 if (candidate != null)
                 {
+                    model.CandidateId = candidate.Id;
                     //if (candidate.CandidateStatus != 4 && candidate.IsConsumed == 0)
                     //{
                     //    candidate.CandidateStatus = 3;
@@ -54,27 +57,20 @@ namespace OnlineExaminationPortal.Controllers
                         //}
                         foreach (var question in candidateMCQQuestions)
                         {
-                            MCQQuestionsViewModel obj = new MCQQuestionsViewModel
-                            {
-                                CandidateId = candidate.Id,
-                                MCQQuestionsList = candidateMCQQuestions                              
-                            };
-                            foreach(var mcq in obj.MCQQuestionsList)
-                            {
-                                MCQSubmissionResult model = new MCQSubmissionResult();
-                                model.CandidateId = obj.CandidateId;
-                                model.QuestionId = mcq.Id;
-                                model.SelectedAnswer = mcq.SelectedAnswer;
-                                model.CorrectAnswer = mcq.CorrectAnswer;
-                                model.CreatedBy = 1;
-                                model.CreatedOn = DateTime.Now;
-                                model.LastUpdatedBy = 1;
-                                model.LastUpdatedOn = DateTime.Now;
-                                mcqSubmissionRepository.Insert(model);
-                            }
-                            
+                            MCQSubmissionResult obj = new MCQSubmissionResult();
+                            obj.CandidateId = candidate.Id;
+                            obj.QuestionId = question.Id;
+                            obj.SelectedAnswer = question.SelectedAnswer;
+                            obj.CorrectAnswer = question.CorrectAnswer;
+                            obj.CreatedBy = 1;
+                            obj.CreatedOn = DateTime.Now;
+                            obj.LastUpdatedBy = 1;
+                            obj.LastUpdatedOn = DateTime.Now;
+                            mcqSubmissionRepository.Insert(obj);
+
                         }
-                    }
+                        model.MCQQuestionsList = candidateMCQQuestions;
+                    }                  
                 }
                 //else
                 //{
@@ -90,9 +86,29 @@ namespace OnlineExaminationPortal.Controllers
                 ViewBag.ErrorMessage = $"Error while adding starting the exam";
                 return View("Error");
             }
-            //return RedirectToAction("RenderQuestion", new { pageNumber = pageNumber, positionId = positionId, candidateId = candidateId });
-            return View();
+          // return RedirectToAction("RenderQuestion", new { candId = candidate.Id });
+            return View(model);
         }
 
+        //public IActionResult RenderQuestion(int candId)
+        //{
+        //    MCQQuestionsViewModel model = new MCQQuestionsViewModel();
+        //    List<MCQSubmissionResult> candidateQuestions = null ;
+        //    if (candId!=0)
+        //    {
+        //        candidateQuestions = context.MCQSubmissionResult.Where(x => x.CandidateId == candId).OrderBy(x => x.QuestionId).ToList();
+
+        //        if(candidateQuestions.Count>0)
+        //        {
+        //            foreach(var item in candidateQuestions)
+        //            {
+        //                var questionDetail = context.MCQQuestions.Where(x => x.Id == item.QuestionId).FirstOrDefault();
+        //                model.MCQQuestionsList.Add(questionDetail);
+        //            }
+        //        }
+        //        model.CandidateId = candId;
+        //    }     
+        //    return View("RenderQuestion", model);
+        //}
     }
 }
