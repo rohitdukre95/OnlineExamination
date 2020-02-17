@@ -3,14 +3,29 @@
     ViewData["Title"] = "TestSubmit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
-    $(document).ready(function () {
-        setTimeout(function () {
-            window.location.href = '/Home/Index';
-        }, 3000);
-    });
-</script>
+
 
 <h1>Your Test Submitted Successfully</h1>
+<h5>Redirecting to Home Page in <span id="seconds">5</span> Seconds.</h5>
+
+<script>
+    $(document).ready(function () {
+        //setTimeout(function () {
+        //    window.location.href = '/Home/Index';
+        //}, 3000);
+        var timeleft = 5;
+        var downloadTimer = setInterval(function () {
+            if (timeleft <= 1) {
+                clearInterval(downloadTimer);
+                window.location.href = '/Home/Index';
+            }
+            $("#seconds").html(timeleft);
+            timeleft -= 1;
+        }, 1000);
+
+    });
+
+</script>
+
 
 
