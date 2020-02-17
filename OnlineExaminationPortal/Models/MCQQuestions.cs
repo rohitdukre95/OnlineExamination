@@ -20,5 +20,7 @@ namespace OnlineExaminationPortal.Models
         public int CorrectAnswer { get; set; }
         [NotMapped]
         public int SelectedAnswer { get; set; }
+        [NotMapped]
+        public int MCQSubmissionResultId { get; set; }
     }
 }
