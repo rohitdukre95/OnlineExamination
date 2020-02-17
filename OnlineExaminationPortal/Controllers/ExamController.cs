@@ -184,7 +184,7 @@ namespace OnlineExaminationPortal.Controllers
                     return View("Error");
                 }
             }
-            return View();
+            return View("TestSubmit");
         }
     }
 }

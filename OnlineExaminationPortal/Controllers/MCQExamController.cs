@@ -130,7 +130,7 @@ namespace OnlineExaminationPortal.Controllers
                     }
                 }
             }
-            return View();
+            return View("TestSubmit");
 
         }
     }
