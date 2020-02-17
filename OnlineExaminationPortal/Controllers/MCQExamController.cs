@@ -36,9 +36,10 @@ namespace OnlineExaminationPortal.Controllers
         public IActionResult StartMCQExam(int candId)
         {
             MCQQuestionsViewModel model = new MCQQuestionsViewModel();
-            Candidate candidate=null;
+            model.MCQQuestionsList = new List<MCQQuestions>();
+            Candidate candidate = null;
             try
-            {              
+            {
                 candidate = candidateRepository.Get(candId);
                 if (candidate != null)
                 {
@@ -70,7 +71,15 @@ namespace OnlineExaminationPortal.Controllers
 
                         }
                         model.MCQQuestionsList = candidateMCQQuestions;
-                    }                  
+                    }
+                    else
+                    {
+                        foreach (var item in mcqExamSubmissionResults)
+                        {
+                            var questionDetail = context.MCQQuestions.Where(x => x.Id == item.QuestionId).FirstOrDefault();
+                            model.MCQQuestionsList.Add(questionDetail);
+                        }
+                    }
                 }
                 //else
                 //{
@@ -86,7 +95,7 @@ namespace OnlineExaminationPortal.Controllers
                 ViewBag.ErrorMessage = $"Error while adding starting the exam";
                 return View("Error");
             }
-          // return RedirectToAction("RenderQuestion", new { candId = candidate.Id });
+            // return RedirectToAction("RenderQuestion", new { candId = candidate.Id });
             return View(model);
         }
 
@@ -110,5 +119,16 @@ namespace OnlineExaminationPortal.Controllers
         //    }     
         //    return View("RenderQuestion", model);
         //}
+
+        [HttpPost]
+        public IActionResult SubmitMCQTest([FromBody] MCQQuestionsViewModel model)
+        {
+            if (model != null)
+            {
+
+            }
+            return View();
+
+        }
     }
 }
