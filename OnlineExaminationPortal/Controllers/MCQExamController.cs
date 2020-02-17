@@ -57,9 +57,9 @@ namespace OnlineExaminationPortal.Controllers
                             MCQQuestionsViewModel obj = new MCQQuestionsViewModel
                             {
                                 CandidateId = candidate.Id,
-                                MCQQuestionsLst = candidateMCQQuestions                              
+                                MCQQuestionsList = candidateMCQQuestions                              
                             };
-                            foreach(var mcq in obj.MCQQuestionsLst)
+                            foreach(var mcq in obj.MCQQuestionsList)
                             {
                                 MCQSubmissionResult model = new MCQSubmissionResult();
                                 model.CandidateId = obj.CandidateId;
