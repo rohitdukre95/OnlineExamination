@@ -44,7 +44,12 @@
 
                         <div class="form-group">
                             <label asp-for="CorrectAnswer"></label>
-                            <input asp-for="CorrectAnswer" class="form-control" />
+                            <select asp-for="CorrectAnswer" class="form-control">
+                                <option class="form-control" value="1">Option 1</option>
+                                <option class="form-control" value="2">Option 2</option>
+                                <option class="form-control" value="3">Option 3</option>
+                                <option class="form-control" value="4">Option 4</option>
+                            </select>
                             <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
                         </div>
                     </div>
